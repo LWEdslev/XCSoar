@@ -35,7 +35,7 @@
 static inline size_t
 StringLength(const wchar_t *p) noexcept
 {
-	return wcslen(p);
+	return (p == nullptr) ? 0 : wcslen(p);  // August2111: nullptr has length 0 too!
 }
 
 [[gnu::pure]] [[gnu::nonnull]]
