@@ -544,7 +544,8 @@ list(APPEND SCRIPT_FILES
     CMakeSource.cmake
     VERSION.txt
     NEWS.txt
-    meson.build  # August2111 add if available 
+    meson.build
+    "TaskList MSVC.md"
 )
 
 if (ANDROID)  # library!
