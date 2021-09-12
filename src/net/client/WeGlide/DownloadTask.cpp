@@ -1,5 +1,5 @@
 /*
-  Copyright_License {
+Copyright_License {
 
   XCSoar Glide Computer - http://www.xcsoar.org/
   Copyright (C) 2000-2021 The XCSoar Project
@@ -22,65 +22,55 @@
 */
 
 #include "DownloadTask.hpp"
-#include "Settings.hpp"
-#include "Task/Ordered/OrderedTask.hpp"
-#include "Task/Deserialiser.hpp"
-#include "XML/DataNodeXML.hpp"
-#include "XML/Node.hpp"
-#include "XML/Parser.hpp"
+
+#if 0  // TODO(August2111)!!!!
+#include "net/http/CoStreamRequest.hxx"
+#include "net/http/Easy.hxx"
+#include "net/http/Mime.hxx"
 #include "net/http/Progress.hpp"
-#include "lib/curl/CoStreamRequest.hxx"
-#include "lib/curl/Easy.hxx"
-#include "lib/curl/Setup.hxx"
-#include "io/StringOutputStream.hxx"
-#include "util/ConvertString.hpp"
-
-#include <cassert>
-
-using std::string_view_literals::operator""sv;
+#include "net/http/Setup.hxx"
+#include "Formatter/TimeFormatter.hpp"
+#include "json/ParserOutputStream.hxx"
+#endif
 
 namespace WeGlide {
+#if 0  // TODO(August2111)!!!!
+    static Co::InvokeTask UpdateTask(const char *uri,
+                                 const Pilot &pilot,
+                                 UploadResponse &response,
+                                 ProgressListener &progress) noexcept {
+  boost::json::value json = co_await UploadFlight(
+      *Net::curl, uri, pilot, glider_id, igc_path, progress);
 
-Co::Task<std::unique_ptr<OrderedTask>>
-DownloadDeclaredTask(CurlGlobal &curl, const WeGlideSettings &settings,
-                     const TaskBehaviour &task_behaviour,
-                     const Waypoints *waypoints,
-                     ProgressListener &progress)
-{
-  assert(settings.pilot_id != 0);
+  auto json_value = json.get_array().at(0);
+  response.scoring_date = UTF8ToWideConverter(
+      Json::Lookup(json_value, "scoring_date")->get_string().c_str());
+  response.flight_id = Json::Lookup(json_value, "id")->get_int64();
+  response.registration = UTF8ToWideConverter(
+      Json::Lookup(json_value, "registration")->get_string().c_str());
+  response.competition_id = UTF8ToWideConverter(
+      Json::Lookup(json_value, "competition_id")->get_string().c_str());
+  auto user = Json::Lookup(json_value, "user")->as_object();
 
-  char url[256];
-  snprintf(url, sizeof(url), "%s/task/declaration/%u?cup=false&tsk=true",
-           settings.default_url, settings.pilot_id);
+  response.pilot.id = Json::Lookup(user, "id")->get_int64();
+  response.pilot.name =
+      UTF8ToWideConverter(Json::Lookup(user, "name")->get_string().c_str());
 
-  CurlEasy easy{url};
-  Curl::Setup(easy);
-  const Net::ProgressAdapter progress_adapter{easy, progress};
-  easy.SetFailOnError();
+  auto aircraft = Json::Lookup(json_value, "aircraft")->as_object();
 
-  StringOutputStream sos;
-  const auto response =
-    co_await Curl::CoStreamRequest(curl, std::move(easy), sos);
+  response.glider.id = Json::Lookup(aircraft, "id")->get_int64();
+  response.glider.name =
+      UTF8ToWideConverter(Json::Lookup(aircraft, "name")->get_string().c_str());
+  response.glider.kind =
+      UTF8ToWideConverter(Json::Lookup(aircraft, "kind")->get_string().c_str());
+  response.glider.sc_class = UTF8ToWideConverter(
+      Json::Lookup(aircraft, "sc_class")->get_string().c_str());
+}
+#endif
 
-  if (const auto i = response.headers.find("content-type"sv);
-      i != response.headers.end() && i->second == "application/json"sv)
-    /* on error, WeGlide returns a JSON document, and if a user does
-       not have a declared task (or if the user does not exist), it
-       returns a JSON "null" value */
-    co_return nullptr;
-
-  /* XCSoar task files are returned with
-     "Content-Type:application/octet-stream", and we could verify
-     that, but it's not the correct MIME type, and may change
-     eventually, so let's just ignore the Content-Type for now and
-     hope the XML parser catches syntax errors */
-
-  const auto xml_node = XML::ParseString(UTF8ToWideConverter{sos.GetValue().c_str()});
-  const ConstDataNodeXML data_node{xml_node};
-
-  auto task = std::make_unique<OrderedTask>(task_behaviour);
-  LoadTask(*task, data_node, waypoints);
-  co_return task;
+bool DownloadTask(uint_least32_t pilot_id) {
+  
+  return true; 
 }
 
 } // namespace WeGlide
