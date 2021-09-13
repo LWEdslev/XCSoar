@@ -23,7 +23,7 @@ Copyright_License {
 
 #pragma once
 
-#include "time/BrokenDate.hpp"
+#include "WeGlideObjects.hpp"
 
 #include <cstdint>
 
@@ -54,8 +54,7 @@ struct WeGlideSettings {
   static constexpr char gliderlist_uri[] = "https://raw.githubusercontent.com/"
     "weglide/GliderList/master/gliderlist.csv";
 
-  uint32_t pilot_id;
-  BrokenDate pilot_birthdate;
+  WeGlide::User pilot;
 
   void SetDefaults() noexcept {
     pilot_id = 0;
@@ -65,3 +64,5 @@ struct WeGlideSettings {
     automatic_upload = true; // after enabling WeGlide!
   }
 };
+
+// removed from Max: static_assert(std::is_trivial<WeGlideSettings>::value, "type is not trivial");

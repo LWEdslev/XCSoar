@@ -29,4 +29,7 @@ ContainerWindow::ScrollTo(const PixelRect &rc) noexcept
   /* forward the request to the client */
   if (auto *parent = GetParent())
     parent->ScrollTo(ToParentCoordinates(rc));
+  // aug? pilot.Clear();
+  // aug? enabled = false;
+  // aug? automatic_upload = true;  // after enabling WeGlide!
 }
