@@ -44,6 +44,10 @@ Copyright_License {
 #include "net/client/WeGlide/DownloadTask.hpp"
 #include "co/InvokeTask.hxx"
 
+#include "LocalPath.hpp"
+#include "system/FileUtil.hpp"
+#include "net/http/DownloadManager.hpp"
+
 TaskActionsPanel::TaskActionsPanel(TaskManagerDialog &_dialog,
                                    TaskMiscPanel &_parent,
                                    std::unique_ptr<OrderedTask> &_active_task,
@@ -108,45 +112,21 @@ TaskActionsPanel::OnDeclareClicked()
   ExternalLogger::Declare(decl, way_points.GetHome().get());
 }
 
-static Co::InvokeTask
-DownloadWeGlideTask(std::unique_ptr<OrderedTask> &task,
-                    CurlGlobal &curl, const WeGlideSettings &settings,
-                    const TaskBehaviour &task_behaviour,
-                    const Waypoints *waypoints,
-                    ProgressListener &progress)
-{
-  task = co_await WeGlide::DownloadDeclaredTask(curl, settings,
-                                                task_behaviour, waypoints,
-                                                progress);
-}
-
 inline void
-TaskActionsPanel::OnDownloadClicked() noexcept
-try {
-  const auto &settings = CommonInterface::GetComputerSettings();
+TaskActionsPanel::OnDownloadClicked()
+{
+  const ComputerSettings &settings = CommonInterface::GetComputerSettings();
+  char url[256];
+  char id[20];
 
-  std::unique_ptr<OrderedTask> task;
-  PluggableOperationEnvironment env;
-  if (!ShowCoDialog(dialog.GetMainWindow(), GetLook(),
-                    _("Download"),
-                    DownloadWeGlideTask(task, *Net::curl, settings.weglide,
-                                        settings.task,
-                                        &way_points, env),
-                    &env))
-    return;
-
-  if (!task) {
-    ShowMessageBox(_("No task"), _("Error"), MB_OK|MB_ICONEXCLAMATION);
-    return;
-  }
-
-  active_task = task->Clone(settings.task);
-  *task_modified = true;
-  dialog.ResetTaskView();
-
-  dialog.SwitchToEditTab();
-} catch (const std::runtime_error &e) {
-  ShowError(std::current_exception(), _("Download"));
+  strcpy(id, settings.logger.pilot_weglide_id.c_str());
+  snprintf(url, sizeof(url),"https://api.weglide.org/v1/task/declaration/%s?cup=false&tsk=true",id);
+  
+  const auto cache_path = MakeLocalPath(_T("weglide"));
+  File::Delete(LocalPath(_T("weglide/weglide_declared.tsk")));
+  Net::DownloadManager::Enqueue(url, Path(_T("weglide/weglide_declared.tsk")));
+  
+  DirtyTaskListPanel();
 }
 
 void
@@ -165,6 +145,7 @@ TaskActionsPanel::Prepare([[maybe_unused]] ContainerWindow &parent,
   AddButton(_("Declare"), [this](){ OnDeclareClicked(); });
   AddButton(_("Browse"), [this](){ OnBrowseClicked(); });
   AddButton(_("Save"), [this](){ SaveTask(); });
+  AddButton(_("Download WeGlide"), [this](){ OnDownloadClicked(); });
 
   if (settings.weglide.pilot_id != 0)
     AddButton(_("Download WeGlide task"),
