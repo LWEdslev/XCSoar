@@ -98,7 +98,7 @@ Profile::Load(const ProfileMap &map, WeGlideSettings &settings)
   if (date != nullptr) {
     unsigned day, month, year;
     if (sscanf(date, "%04u-%02u-%02u", &year, &month, &day) == 3)
-      settings.pilot_birthdate = {year, month, day};
+      settings.pilot.birthdate = {year, month, day};
   }
 }
 
