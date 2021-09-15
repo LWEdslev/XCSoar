@@ -25,10 +25,8 @@ Copyright_License {
 #include "TaskMiscPanel.hpp"
 #include "TaskListPanel.hpp"
 #include "Internal.hpp"
-#include "../dlgTaskHelpers.hpp"
-#include "Dialogs/CoDialog.hpp"
-#include "Dialogs/Error.hpp"
 #include "Dialogs/Message.hpp"
+#include "Dialogs/Task/dlgTaskHelpers.hpp"
 #include "Components.hpp"
 #include "Logger/ExternalLogger.hpp"
 #include "Simulator.hpp"
@@ -39,14 +37,11 @@ Copyright_License {
 #include "Engine/Task/Ordered/OrderedTask.hpp"
 #include "Engine/Task/Factory/AbstractTaskFactory.hpp"
 #include "Engine/Waypoint/Waypoints.hpp"
-#include "Operation/PluggableOperationEnvironment.hpp"
-#include "net/http/Init.hpp"
-#include "net/client/WeGlide/DownloadTask.hpp"
-#include "co/InvokeTask.hxx"
+#include "system/Path.hpp"
 
-#include "LocalPath.hpp"
-#include "system/FileUtil.hpp"
-#include "net/http/DownloadManager.hpp"
+#include "Cloud/weglide/DownloadTask.hpp"
+#include "Cloud/weglide/WeGlideObjects.hpp"
+// August2111:  #include "Dialogs/Cloud/WeGlideTaskDialog.hpp"
 
 TaskActionsPanel::TaskActionsPanel(TaskManagerDialog &_dialog,
                                    TaskMiscPanel &_parent,
@@ -113,20 +108,23 @@ TaskActionsPanel::OnDeclareClicked()
 }
 
 inline void
-TaskActionsPanel::OnDownloadClicked()
+TaskActionsPanel::OnOwnWeGlideClicked()
 {
-  const ComputerSettings &settings = CommonInterface::GetComputerSettings();
-  char url[256];
-  char id[20];
+  // August2111:    if (WeGlide::DownloadTaskDialog()) {
+  Path path(WeGlide::DownloadTaskFile(WeGlide::User(0)));
+  //  if (File::Exist(path))
+    DirtyTaskListPanel();
+//  }
+}
 
-  strcpy(id, settings.logger.pilot_weglide_id.c_str());
-  snprintf(url, sizeof(url),"https://api.weglide.org/v1/task/declaration/%s?cup=false&tsk=true",id);
-  
-  const auto cache_path = MakeLocalPath(_T("weglide"));
-  File::Delete(LocalPath(_T("weglide/weglide_declared.tsk")));
-  Net::DownloadManager::Enqueue(url, Path(_T("weglide/weglide_declared.tsk")));
-  
-  DirtyTaskListPanel();
+inline void
+TaskActionsPanel::OnUserWeGlideClicked()
+{
+  // August2111:    if (WeGlide::DownloadTaskDialog()) {
+  Path path(WeGlide::DownloadTaskFile(WeGlide::User(0)));
+  //  if (File::Exist(path))
+    DirtyTaskListPanel();
+//  }
 }
 
 void
@@ -145,7 +143,8 @@ TaskActionsPanel::Prepare([[maybe_unused]] ContainerWindow &parent,
   AddButton(_("Declare"), [this](){ OnDeclareClicked(); });
   AddButton(_("Browse"), [this](){ OnBrowseClicked(); });
   AddButton(_("Save"), [this](){ SaveTask(); });
-  AddButton(_("Download WeGlide"), [this](){ OnDownloadClicked(); });
+  AddButton(_("Own WeGlide Task"), [this]() { OnOwnWeGlideClicked(); });
+  AddButton(_("User WeGlide Task"), [this]() { OnUserWeGlideClicked(); });
 
   if (settings.weglide.pilot_id != 0)
     AddButton(_("Download WeGlide task"),
