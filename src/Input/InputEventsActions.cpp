@@ -88,6 +88,7 @@ doc/html/advanced/input/ALL		http://xcsoar.sourceforge.net/advanced/input/
 #include "Form/DataField/File.hpp"
 #include "Dialogs/FilePicker.hpp"
 #include "Dialogs/Contest/WeGlide/FlightUploadDialog.hpp"
+#include "Cloud/weglide/DownloadTask.hpp"
 
 #include <cassert>
 #include <tchar.h>
@@ -752,4 +753,10 @@ InputEvents::eventUploadIGCFile(const TCHAR *misc)
   if (WeGlide::FlightUploadDialog()) {
       // success!
   }
+}
+
+void 
+InputEvents::eventDownloadTask(const TCHAR *misc)
+{
+  WeGlide::DownloadTaskFile(WeGlide::User());
 }
