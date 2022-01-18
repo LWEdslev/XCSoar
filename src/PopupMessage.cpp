@@ -363,3 +363,12 @@ PopupMessage::AddMessage(const TCHAR* text, const TCHAR *data) noexcept
     AddMessage(msg.delay, MSG_USERINTERFACE, msgcache);
   }
 }
+
+void 
+PopupMessage::AddMessage(const TCHAR* text,
+  std::chrono::steady_clock::duration delay)
+{
+  std::lock_guard<Mutex> lock(mutex);
+
+  AddMessage(delay, MSG_USERINTERFACE, text);
+}

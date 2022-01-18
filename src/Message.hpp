@@ -30,4 +30,7 @@ namespace Message {
 void
 AddMessage(const TCHAR *text, const TCHAR *data=nullptr) noexcept;
 
+// TODO(August2111): 
+// void AddMessage(const TCHAR *data, long long  ms_delay) noexcept; // TODO(August2111)-2022-10-02
+
 } // namespace Message

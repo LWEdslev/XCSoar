@@ -32,3 +32,15 @@ Message::AddMessage(const TCHAR *text, const TCHAR *data) noexcept
   if (CommonInterface::main_window->popup != nullptr)
     CommonInterface::main_window->popup->AddMessage(text, data);
 }
+
+#if 0 // TODO(August2111): welches ist das richtige???
+// #else
+void
+Message::AddMessage(const TCHAR *data, long long ms_delay)
+{
+  if (CommonInterface::main_window->popup != nullptr)
+    CommonInterface::main_window->popup->AddMessage(
+      data, std::chrono::milliseconds(ms_delay));
+}
+
+#endif

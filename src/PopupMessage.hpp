@@ -142,6 +142,8 @@ protected:
 public:
   void AddMessage(const TCHAR* text, const TCHAR *data=nullptr) noexcept;
 
+  void AddMessage(const TCHAR* text, std::chrono::steady_clock::duration tshow);
+
   /**
    * Repeats last non-visible message of specified type
    * (or any message type=MSG_UNKNOWN).
