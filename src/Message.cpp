@@ -34,7 +34,6 @@ Message::AddMessage(const TCHAR *text, const TCHAR *data) noexcept
 }
 
 #if 0 // TODO(August2111): welches ist das richtige???
-// #else
 void
 Message::AddMessage(const TCHAR *data, long long ms_delay)
 {
