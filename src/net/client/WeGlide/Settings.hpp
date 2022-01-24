@@ -50,7 +50,11 @@ struct WeGlideSettings {
    * The documentation of the WeGlide API you can find:
    * https://api.weglide.org/docs
   */
+#if defined(_DEBUG) && defined(__MSVC__)  && 0
+  static constexpr char default_url[] = "https://api.devs.glidercheck.com/v1";
+#else
   static constexpr char default_url[] = "https://api.weglide.org/v1";
+#endif
   static constexpr char gliderlist_uri[] = "https://raw.githubusercontent.com/"
     "weglide/GliderList/master/gliderlist.csv";
 
