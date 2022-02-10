@@ -14,4 +14,11 @@ LIBNET_SOURCES = \
 	$(SRC)/net/SocketAddress.cxx \
 	$(SRC)/net/SocketDescriptor.cxx
 
+
+# HAVE_WIFI is a creation from August2111 to support the WiFi dialog in general
+ifeq ($(HAVE_WIFI),y)
+LIBNET_SOURCES += \
+	$(SRC)/net/wifi/WPASupplicant.cpp
+endif
+
 $(eval $(call link-library,libnet,LIBNET))

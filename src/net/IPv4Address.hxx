@@ -234,7 +234,8 @@ public:
 				   GetPort() & other.GetPort());
 	}
 
-#if !defined(_WIN32) && !defined(__BIONIC__)
+// TODO(August2111): WITH_OV_WIFI!
+#if !defined(_WIN32) && !defined(__BIONIC__) && !defined(WITH_OV_WIFI)
 	/**
 	 * Returns a StaticSocketAddress for the specified device. Caller
 	 * should check for validity of returned StaticSocketAddress.

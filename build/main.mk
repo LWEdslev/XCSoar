@@ -163,6 +163,11 @@ DIALOG_SOURCES += \
 	$(SRC)/Dialogs/Weather/NOAADetails.cpp
 endif
 
+ifeq ($(HAVE_WIFI),y)
+DIALOG_SOURCES += \
+	$(SRC)/Dialogs/Net/WifiDialog.cpp
+endif
+
 XCSOAR_SOURCES := \
 	$(IO_SRC_DIR)/MapFile.cpp \
 	$(IO_SRC_DIR)/ConfiguredFile.cpp \
