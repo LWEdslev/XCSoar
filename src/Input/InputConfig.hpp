@@ -37,7 +37,7 @@ Copyright_License {
 struct InputConfig {
   // Sensible maximums
 
-  static constexpr std::size_t MAX_MODE = 32;
+  static constexpr std::size_t MAX_MODE = 40;
   static constexpr std::size_t MAX_MODE_STRING = 24;
 #ifdef ENABLE_SDL
   static constexpr std::size_t MAX_KEY = 400;
