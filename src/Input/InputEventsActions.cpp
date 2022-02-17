@@ -631,7 +631,9 @@ InputEvents::eventBrightness([[maybe_unused]] const TCHAR *misc)
 void
 InputEvents::eventExit([[maybe_unused]] const TCHAR *misc)
 {
-  UIActions::SignalShutdown(false);
+  auto force = StringIsEqualIgnoreCase(misc, _T("force"));
+  force |= StringIsEqualIgnoreCase(misc, _T("all"));
+   UIActions::SignalShutdown(force);
 }
 
 void
