@@ -658,6 +658,7 @@ XCSOAR_SOURCES += \
 	$(SRC)/Dialogs/Contest/WeGlide/FlightUploadDialog.cpp \
 	$(SRC)/Dialogs/Contest/WeGlide/FlightUploadResponse.cpp \
 	$(SRC)/Cloud/weglide/UploadFlight.cpp \
+	$(SRC)/Cloud/weglide/DownloadTask.cpp \
 	$(SRC)/Cloud/weglide/GetJsonString.cpp \
 	$(SRC)/Tracking/SkyLines/Client.cpp \
 	$(SRC)/Tracking/SkyLines/Assemble.cpp \
