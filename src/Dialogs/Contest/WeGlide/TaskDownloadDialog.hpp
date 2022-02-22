@@ -23,20 +23,11 @@ Copyright_License {
 
 #pragma once
 
-#include "WeGlideObjects.hpp"
-#include "co/Task.hxx"
-
-#include <boost/json/fwd.hpp>
-#include <boost/json/value.hpp>
-
-#include <cstdint>
-
-class AllocatedPath;
+#include "Cloud/weglide/WeGlideObjects.hpp"
 
 namespace WeGlide {
 
-AllocatedPath DownloadTaskFile(User user);
+int TaskDownloadDialog(const User &user, const TCHAR *message);
 
-AllocatedPath TaskToFile(User user) noexcept;
+}
 
-} // namespace WeGlide

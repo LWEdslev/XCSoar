@@ -213,17 +213,20 @@ DownloadToFile(const char *url, Path path, ProgressListener &progress)
 
 namespace WeGlide {
 
-Path
+AllocatedPath
 TaskToFile(User user) noexcept
 try {
-  bool result = false;
+//  bool result = false;
 
   if (user.IsValid()) {
-    const auto cache_path = MakeLocalPath(_T("cache/weglide"));
+//    const auto cache_path = MakeCacheDirectory(_T("weglide"));
     NarrowString<0x100> url(WeGlideSettings::default_url);
-    url.AppendFormat("/task/declaration/%d?cup=false&tsk=true", user.id);
+//    url.AppendFormat("/task/declaration/%d?cup=false&tsk=true", user.id);
+    url.AppendFormat("/task/declaration/%d", user.id);
 
-    Path path = cache_path + _T("/weglide.tsk");
+    //Path path = cache_path;
+    // path += _T("/weglide.tsk");
+    auto path = AllocatedPath::Build(MakeCacheDirectory(_T("weglide")), _T("weglide.tsk")); 
     FileTransaction transaction(path);
     PluggableOperationEnvironment env;
 
@@ -231,21 +234,21 @@ try {
                       _("Download WeGlide Task"),
                       DownloadToFile(url, transaction.GetTemporaryPath(), env),
                       &env))
-      return Path(); // -> dialog with failure!
+      return AllocatedPath(); // -> dialog with failure!
 
     transaction.Commit();
     return path;
   } else {
     // user is invalid!
-    return Path();
+    return AllocatedPath();
   }
 } catch (...) {
   // prevent a general exception in Download
   ShowError(std::current_exception(), _T("WeGlide Task to File"));
-  return Path();
+  return AllocatedPath();
 }
 
-Path
+AllocatedPath
 DownloadTaskFile(User user)
 {
   if (!user.IsValid()) {

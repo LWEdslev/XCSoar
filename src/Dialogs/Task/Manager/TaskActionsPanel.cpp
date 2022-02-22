@@ -38,10 +38,11 @@ Copyright_License {
 #include "Engine/Task/Factory/AbstractTaskFactory.hpp"
 #include "Engine/Waypoint/Waypoints.hpp"
 #include "system/Path.hpp"
+#include "system/FileUtil.hpp"
 
 #include "Cloud/weglide/DownloadTask.hpp"
 #include "Cloud/weglide/WeGlideObjects.hpp"
-// August2111:  #include "Dialogs/Cloud/WeGlideTaskDialog.hpp"
+#include "Dialogs/Contest/WeGlide/TaskDownloadDialog.hpp"
 
 TaskActionsPanel::TaskActionsPanel(TaskManagerDialog &_dialog,
                                    TaskMiscPanel &_parent,
@@ -110,21 +111,21 @@ TaskActionsPanel::OnDeclareClicked()
 inline void
 TaskActionsPanel::OnOwnWeGlideClicked()
 {
-  // August2111:    if (WeGlide::DownloadTaskDialog()) {
-  Path path(WeGlide::DownloadTaskFile(WeGlide::User(0)));
-  //  if (File::Exist(path))
-    DirtyTaskListPanel();
-//  }
+  auto pilot =  CommonInterface::GetComputerSettings().weglide.pilot; // the preset value
+  TaskDownloadDialog(pilot, nullptr);
+//  const auto task_file = WeGlide::DownloadTaskFile(pilot);
+//  // August2111:    if (WeGlide::DownloadTaskDialog()) {
+//  if (File::Exists(task_file))
+//    DirtyTaskListPanel();
 }
 
 inline void
 TaskActionsPanel::OnUserWeGlideClicked()
 {
-  // August2111:    if (WeGlide::DownloadTaskDialog()) {
-  Path path(WeGlide::DownloadTaskFile(WeGlide::User(0)));
-  //  if (File::Exist(path))
+  const auto task_file = WeGlide::DownloadTaskFile(WeGlide::User(1752)); // zum Test: Thomas Melde...
+// August2111:    if (WeGlide::DownloadTaskDialog()) {
+  if (File::Exists(task_file))
     DirtyTaskListPanel();
-//  }
 }
 
 void
