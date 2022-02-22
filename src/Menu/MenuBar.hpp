@@ -39,7 +39,7 @@ class ContainerWindow;
  */
 class MenuBar {
 public:
-  static constexpr unsigned MAX_BUTTONS = 32;
+  static constexpr unsigned MAX_BUTTONS = 40;  // 32;
 
 protected:
   class Button : public ::Button {
