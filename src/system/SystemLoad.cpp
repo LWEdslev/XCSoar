@@ -46,15 +46,18 @@ SystemLoadCPU() noexcept
 
   unsigned tick = ::GetTickCount();
 
-  userTime /= 10000;
-  kernelTime /= 10000;
+#ifndef __MSVC__
+    // resolution on MSVC is 100 nanosecond
+    userTime /= 10000;
+    kernelTime /= 10000;
+#endif
 
   OptionalPercent retval = std::nullopt;
   if (tick && (tick_last>0)) {
     unsigned dt_user = userTime-userTime_last;
     unsigned dt_kernel = kernelTime-kernelTime_last;
     unsigned dt = tick-tick_last;
-    retval = (100*(dt_user+dt_kernel))/dt;
+    retval = (dt < 1) ? 0 : (100 * (dt_user + dt_kernel)) / dt;
   }
 
   tick_last = tick;
