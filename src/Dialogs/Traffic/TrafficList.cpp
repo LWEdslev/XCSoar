@@ -577,11 +577,13 @@ TrafficListWidget::OnPaintItem(Canvas &canvas, PixelRect rc,
   assert(index < items.size());
   Item &item = items[index];
 
+#ifdef __MSVC__
   // MSVC don't like this Macro extension used in else branch
-#ifdef HAVE_SKYLINES_TRACKING
+# ifdef HAVE_SKYLINES_TRACKING
   assert(item.IsFlarm() || item.IsSkyLines());
-#else
+# else
   assert(item.IsFlarm());
+# endif
 #endif
 
   item.AutoLoad();
