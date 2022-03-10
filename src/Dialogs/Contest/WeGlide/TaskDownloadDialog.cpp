@@ -102,7 +102,8 @@ TaskDownloadWidget::OnModified(DataField &df) noexcept
   user.id = df.GetAsInteger();
   user = WeGlide::GetUserInfo(user.id);
 
-  _stprintf(buffer, _T("%s (id: %u, club: %s)"), user.name, user.id, user.club);
+  _stprintf(buffer, _T("%s (id: %u, club: %s)"), user.name.c_str(), user.id,
+            user.club.c_str());
   SetText(1, buffer);
   SetText(4, user.club);
   SetText(5, _T("Label!!!"));

@@ -61,6 +61,7 @@ doc/html/advanced/input/ALL		http://xcsoar.sourceforge.net/advanced/input/
 #include "Dialogs/dlgAnalysis.hpp"
 #include "Dialogs/FileManager.hpp"
 #include "Dialogs/ReplayDialog.hpp"
+#include "Dialogs/Contest/WeGlide/TaskDownloadDialog.hpp"
 #include "Message.hpp"
 #include "Markers/Markers.hpp"
 #include "MainWindow.hpp"
@@ -88,7 +89,6 @@ doc/html/advanced/input/ALL		http://xcsoar.sourceforge.net/advanced/input/
 #include "Form/DataField/File.hpp"
 #include "Dialogs/FilePicker.hpp"
 #include "Dialogs/Contest/WeGlide/FlightUploadDialog.hpp"
-#include "Cloud/weglide/DownloadTask.hpp"
 
 #include <cassert>
 #include <tchar.h>
@@ -758,5 +758,6 @@ InputEvents::eventUploadIGCFile(const TCHAR *misc)
 void 
 InputEvents::eventDownloadTask(const TCHAR *misc)
 {
-  WeGlide::DownloadTaskFile(WeGlide::User());
+  const auto settings = CommonInterface::GetComputerSettings();
+  WeGlide::TaskDownloadDialog(settings.weglide.pilot, _T("Event Load Task"));
 }
