@@ -22,14 +22,14 @@
 */
 
 #include "UploadIGCFile.hpp"
-#include "UploadFlight.hpp"
-#include "Settings.hpp"
+#include "PatchIGCFile.hpp"
 #include "Interface.hpp"
 #include "UIGlobals.hpp"
 #include "LogFile.hpp"
 #include "Cloud/weglide/UploadFlight.hpp"
 #include "Cloud/weglide/WeGlideSettings.hpp"
 #include "Cloud/weglide/HttpResponse.hpp"
+#include "Cloud/weglide/GetJsonString.hpp"
 #include "co/InvokeTask.hxx"
 #include "Dialogs/Message.hpp"
 #include "Dialogs/CoDialog.hpp"
@@ -46,20 +46,6 @@
 #include "util/ConvertString.hpp"
 
 #include <cinttypes>
-
-// Wrapper for getting converted string values of a json string
-static const StaticString<0x40>
-GetJsonString(boost::json::standalone::value json_value,
-              std::string_view key) noexcept {
-  StaticString<0x40> str;
-  auto value = json_value.as_object().if_contains(key);
-  if (value != nullptr)
-    str = UTF8ToWideConverter(value->get_string().c_str());
-  else
-    str.Format(_T("'%s' %s"), UTF8ToWideConverter(key.data()).c_str(),
-               _("not found"));
-  return str;
-}
 
 namespace WeGlide {
 
@@ -133,7 +119,7 @@ try {
   const auto settings = CommonInterface::GetComputerSettings();
   if (aircraft_id == 0)
     aircraft_id = settings.plane.weglide_glider_type;
-  if (user.id == 0)
+  if (user.id == 0 || user.id == settings.weglide.pilot.id)
     user = settings.weglide.pilot;
 
   PluggableOperationEnvironment env;
@@ -174,13 +160,27 @@ UploadIGCFile(Path igc_path, const User &user,
               uint_least32_t aircraft_id) noexcept
 try {
   StaticString<0x1000> msg;
-  auto flight_data = UploadFile(igc_path, user, aircraft_id, msg);
-  if (flight_data.IsValid()) {
+  auto flightdata = UploadFile(igc_path, user, aircraft_id, msg);
+  if (flightdata.IsValid()) {
     // upload successful!
-    FlightUploadResponse(flight_data, msg.c_str());
+    Json::ParserOutputStream parser;
+    std::stringstream ss;
+    ss << "{";
+    ss << "\"comment\": \"Uploaded via XCSoar!\", ";
+    ss << "\"competition_id\": \"T81\", ";
+//    ss << "\"co_user_name\": \"Copilot No1\", ";
+    ss << "\"rescore\": false ";
+    ss << "}";
+    parser.Write(ss.str().c_str(), ss.str().length());
+    boost::json::value json = parser.Finish();
+//    PatchIGCFile(flightdata.user, flightdata.flight_id, json);
+    if (!user.token.empty())
+      flightdata = PatchIGCFlight(flightdata, json, msg);
+    FlightUploadResponse(flightdata, msg.c_str());
     return true;
   } else {
     // upload failed!
+    // PatchFlight();
     LogFormat(_T("%s: %s!"), _("WeGlide Upload Error"), msg.c_str());
     ShowMessageBox(msg.c_str(), _("WeGlide Upload Error"), MB_ICONEXCLAMATION);
   }
