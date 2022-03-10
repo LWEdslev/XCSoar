@@ -226,7 +226,7 @@ class RowFormWidget : public WindowWidget {
 
     [[gnu::pure]]
     WndProperty &GetControl() noexcept {
-      assert(type == Type::EDIT);
+//      assert(type == Type::EDIT);
       assert(window != nullptr);
 
       return (WndProperty &)*window;
