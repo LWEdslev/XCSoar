@@ -35,6 +35,7 @@ LOOK_SOURCES := \
 	$(SRC)/Look/ThermalAssistantLook.cpp \
 	$(SRC)/Look/WaveLook.cpp \
 	$(SRC)/Look/ClimbPercentLook.cpp
+	$(SRC)/Look/WeatherLook.cpp
 
 LOOK_CPPFLAGS_INTERNAL = $(SCREEN_CPPFLAGS)
 

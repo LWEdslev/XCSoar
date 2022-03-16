@@ -29,6 +29,8 @@ Copyright_License {
 #include "NMEA/MoreData.hpp"
 
 class DeviceBlackboard;
+class WeatherWidget;
+
 
 /**
  * The MergeThread collects new data from the DeviceBlackboard, merges
@@ -51,6 +53,7 @@ class MergeThread final : public WorkerThread {
 
   BasicComputer computer;
   FlarmComputer flarm_computer;
+  WeatherWidget *weather = nullptr;
 
 public:
   MergeThread(DeviceBlackboard &_device_blackboard);
@@ -73,8 +76,14 @@ public:
     SetLowPriority();
   }
 
+
+  void SetWeatherWidget(WeatherWidget *pointer) {
+    weather = pointer;
+  }
+
 private:
   void Process();
+
 
 protected:
   void Tick() noexcept override;

@@ -195,6 +195,7 @@ PageLayoutEditWidget::Prepare([[maybe_unused]] ContainerWindow &parent, [[maybe_
     { PageLayout::Main::FLARM_RADAR, N_("FLARM radar") },
     { PageLayout::Main::THERMAL_ASSISTANT, N_("Thermal assistant") },
     { PageLayout::Main::HORIZON, N_("Horizon") },
+    { PageLayout::Main::WEATHER, N_("Weather") },
     nullptr
   };
   AddEnum(_("Main area"),
@@ -377,6 +378,10 @@ PageListWidget::OnPaintItem(Canvas &canvas, const PixelRect rc,
 
   case PageLayout::Main::HORIZON:
     buffer = _("Horizon");
+    break;
+
+  case PageLayout::Main::WEATHER:
+    buffer = _("Weather");
     break;
 
   case PageLayout::Main::MAX:

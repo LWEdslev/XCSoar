@@ -41,6 +41,7 @@ Copyright_License {
 #include "IconLook.hpp"
 #include "ThermalAssistantLook.hpp"
 #include "ClimbPercentLook.hpp"
+#include "WeatherLook.hpp"
 
 struct UISettings;
 class Font;
@@ -67,6 +68,7 @@ struct Look {
   ThermalAssistantLook thermal_assistant_gauge;
   ThermalAssistantLook thermal_assistant_dialog;
   ClimbPercentLook circling_percent;
+  WeatherLook weather;
 
   void Initialise(const Font &map_font);
   void InitialiseConfigured(const UISettings &settings,

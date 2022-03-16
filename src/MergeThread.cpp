@@ -29,6 +29,13 @@ Copyright_License {
 #include "Audio/VarioGlue.hpp"
 #include "Device/MultipleDevices.hpp"
 
+
+#include "Widget/WeatherWidget.hpp"
+
+// void TriggerInternetUpdate() { 
+// }
+
+
 MergeThread::MergeThread(DeviceBlackboard &_device_blackboard)
   :WorkerThread("MergeThread",
 #ifdef KOBO
@@ -125,4 +132,8 @@ MergeThread::Tick() noexcept
     TriggerCalculatedUpdate();
 
   TriggerVarioUpdate();
+
+  // TriggerInternetUpdate();
+  if (weather)
+    weather->InternetUpdate();
 }

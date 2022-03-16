@@ -29,6 +29,7 @@ WIDGET_SOURCES = \
 	$(SRC)/Widget/QuestionWidget.cpp \
 	$(SRC)/Widget/KeyboardWidget.cpp \
 	$(SRC)/Widget/ViewImageWidget.cpp
+	$(SRC)/Widget/WeatherWidget.cpp
 
 WIDGET_CPPFLAGS_INTERNAL = $(SCREEN_CPPFLAGS)
 

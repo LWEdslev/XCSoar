@@ -77,6 +77,8 @@ struct PageLayout
 
     HORIZON,
 
+    WEATHER,
+
     /**
      * A dummy entry that is used for validating profile values.
      */
