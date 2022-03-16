@@ -42,4 +42,6 @@ namespace UIActions {
   void ShowThermalAssistant();
 
   void ShowHorizon();
+
+  void ShowWeather();
 };

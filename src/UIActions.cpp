@@ -32,7 +32,10 @@ Copyright_License {
 #include "Gauge/BigTrafficWidget.hpp"
 #include "Gauge/BigThermalAssistantWidget.hpp"
 #include "Look/Look.hpp"
-#include "HorizonWidget.hpp"
+#include "Widget/HorizonWidget.hpp"
+#include "Widget/WeatherWidget.hpp"
+
+#include "Widget/ViewImageWidget.hpp"
 
 static bool force_shutdown = false;
 
@@ -89,3 +92,40 @@ UIActions::ShowHorizon()
   CommonInterface::main_window->SetWidget(widget);
   InputEvents::SetFlavour(_T("Horizon"));
 }
+
+
+#include "system/Path.hpp"
+// #include "Dialogs/Weather/PCMetDialog.hpp"
+
+void
+UIActions::ShowWeather()
+{
+//  if (InputEvents::IsFlavour(_T("Weather")))
+//    return;
+
+ // auto widget = new WeatherWidget();
+  Bitmap *bitmap = new Bitmap();
+  bitmap->LoadFile(AllocatedPath( _T("D:/XCSoarData/cache/pc_met/nb_ir_rgb_mdl_2109071600_sat.jpg")));
+//  bitmap.LoadFile(AllocatedPath( _T("cache/pc_met/nb_ir_rgb_mdl_2109071600_sat.jpg")));
+  //  BitmapDialog(bitmap);
+//  BitmapDialog(bitmap);
+//  TWidgetDialog<ViewImageWidget> dialog(
+//      WidgetDialog::Full{}, UIGlobals::GetMainWindow(),
+//      UIGlobals::GetDialogLook(), _T("pc_met"), new ViewImageWidget(bitmap));
+//  dialog.AddButton(_("Close"), mrOK);
+//  //  dialog.SetWidget();
+//  dialog.ShowModal();
+
+  auto widget = new ViewImageWidget(*bitmap);
+  CommonInterface::main_window->SetWidget(widget);
+  // PixelRect rc(0, 0, bitmap->GetWidth(), bitmap->GetHeight());
+  // widget->Prepare(nullptr, rc);
+  CommonInterface::main_window->Show();
+  // bitmap.
+  // widget->Initialise();
+  // widget->Show(rc);
+  // InputEvents::SetFlavour(_T("Weather"));
+  InputEvents::SetFlavour(nullptr);
+  // delete bitmap;
+}
+
