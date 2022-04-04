@@ -26,9 +26,13 @@ Copyright_License {
 #include "Cloud/weglide/WeGlideObjects.hpp"
 #include <tchar.h>
 
+// class OrderedTask;
+
 namespace WeGlide {
 
-int TaskDownloadDialog(const User &user, const TCHAR *message);
+int 
+// std::unique_ptr<OrderedTask> 
+TaskDownloadDialog(const User &user, const TCHAR *message);
 
 }
 

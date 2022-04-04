@@ -40,6 +40,8 @@ Copyright_License {
 #include "system/FileUtil.hpp"
 #include "system/Path.hpp"
 
+#include "Task/Ordered/OrderedTask.hpp"
+
 class TaskResponseDialog final : public WidgetDialog {
 
 public:
@@ -125,7 +127,8 @@ try {
   WeGlide::Aircraft aircraft = WeGlide::GetAircraftInfo(62);
   AddReadOnly(_("Aircraft"), nullptr, aircraft.name);        // Field 4
 #endif
-  _stprintf(buffer, _T("%s (id = %u)\n%s (%6.2f km)"), update_message,
+  _stprintf(buffer, _T("%s (id = %u)\n%s (%6.2f km)"),
+            update_message ? update_message : _T(""),
             json_task.at("id").to_number<uint32_t>(),
             GetJsonString(json_task, "name").c_str(),
             json_task.contains("distance")
@@ -193,8 +196,12 @@ TaskResponseDialog::OnAnyKeyDown(unsigned key_code)
 namespace WeGlide {
 
 int 
+// std::unique_ptr<OrderedTask>
 TaskDownloadDialog(const User &user, const TCHAR *msg) {
-  LogFormat(_T("%s: %s"), _("WeGlide Upload"), msg);
+  // std::unique_ptr<OrderedTask> task;
+  int task = 0;
+  LogFormat(_T("%s: %s"), _("WeGlide Upload"),
+                                         msg);
 #if 1
   TaskDownloadWidget widget(UIGlobals::GetDialogLook(), user, msg);
 
@@ -219,7 +226,8 @@ TaskDownloadDialog(const User &user, const TCHAR *msg) {
     default:
       break;
   }
-  return result;
+    return task;
+     // result;
 #else
   const auto task_file // = DownloadTaskFile(user);
    = TaskToFile(user);
