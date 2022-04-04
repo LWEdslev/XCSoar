@@ -32,7 +32,8 @@ Copyright_License {
 #include "Gauge/BigTrafficWidget.hpp"
 #include "Gauge/BigThermalAssistantWidget.hpp"
 #include "Look/Look.hpp"
-#include "Widget/HorizonWidget.hpp"
+// is not here yet: #include "Widget/HorizonWidget.hpp"
+#include "HorizonWidget.hpp"  // TODO(August2111): remove this
 #include "Widget/WeatherWidget.hpp"
 
 #include "Widget/ViewImageWidget.hpp"
