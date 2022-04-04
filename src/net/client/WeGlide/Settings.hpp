@@ -50,7 +50,7 @@ struct WeGlideSettings {
    * The documentation of the WeGlide API you can find:
    * https://api.weglide.org/docs
   */
-  static constexpr char test_url[] = "https://api.devs.glidercheck.com/v1";
+//  static constexpr char test_url[] = "https://api.devs.glidercheck.com/v1";
 #if defined(_DEBUG) && defined(__MSVC__) && 0
   static constexpr char default_url[] = "https://api.devs.glidercheck.com/v1";
 #else

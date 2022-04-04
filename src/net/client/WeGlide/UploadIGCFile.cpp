@@ -46,6 +46,7 @@
 #include "util/ConvertString.hpp"
 
 #include <cinttypes>
+#include <sstream>
 
 namespace WeGlide {
 

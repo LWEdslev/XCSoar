@@ -219,9 +219,11 @@ try {
 //  bool result = false;
 
   if (user.IsValid()) {
+  NarrowString<0x100> url;
 //    const auto cache_path = MakeCacheDirectory(_T("weglide"));
-    NarrowString<0x100> url(WeGlideSettings::default_url);
-//    url.AppendFormat("/task/declaration/%d?cup=false&tsk=true", user.id);
+    url.Format("%s/igcfile", WeGlideSettings::default_url);
+//    NarrowString<0x100> url(WeGlideSettings::default_url);
+    //    url.AppendFormat("/task/declaration/%d?cup=false&tsk=true", user.id);
     url.AppendFormat("/task/declaration/%d", user.id);
 
     //Path path = cache_path;

@@ -232,7 +232,13 @@ XCSOAR_SOURCES := \
 	$(SRC)/Atmosphere/Pressure.cpp \
 	$(SRC)/Atmosphere/AirDensity.cpp \
 	$(SRC)/Atmosphere/CuSonde.cpp \
-	$(SRC)/net/client/WeGlide/UploadIGCFile.cpp \
+	# TODO(August2111) move:
+	# net/client/WeGlide...
+	# Max!!!!  $(SRC)/net/client/WeGlide/UploadIGCFile.cpp \
+	$(SRC)/Cloud/weglide/WeGlideSettings.cpp \
+	$(SRC)/contest/weglide/DeleteIGCFile.cpp \
+	$(SRC)/contest/weglide/PatchIGCFile.cpp \
+	$(SRC)/contest/weglide/UploadIGCFile.cpp \
 	$(SRC)/Plane/PlaneGlue.cpp \
 	$(SRC)/Plane/PlaneFileGlue.cpp \
 	$(SRC)/FLARM/FlarmId.cpp \
@@ -665,6 +671,9 @@ XCSOAR_SOURCES += \
 	$(SRC)/Cloud/weglide/UploadFlight.cpp \
 	$(SRC)/Cloud/weglide/DownloadTask.cpp \
 	$(SRC)/Cloud/weglide/GetJsonString.cpp \
+	$(SRC)/Cloud/weglide/GetObjectInfo.cpp \
+	$(SRC)/Cloud/weglide/DeleteFlight.cpp \
+	$(SRC)/Cloud/weglide/PatchFlight.cpp \
 	$(SRC)/Tracking/SkyLines/Client.cpp \
 	$(SRC)/Tracking/SkyLines/Assemble.cpp \
 	$(SRC)/Tracking/SkyLines/Key.cpp \
