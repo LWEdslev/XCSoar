@@ -761,8 +761,16 @@ void
 InputEvents::eventPatchIGCFile(const TCHAR *misc)
 {
   if (WeGlide::FlightPatchDialog()) {
-      // success!
+    // success!
   }
+}
+
+
+#include "Dialogs/Weather/PCMetDialog.hpp"
+
+
+void InputEvents::eventAugustTest(const TCHAR *misc) {
+  TIM::PCMet::DownloadImage(0);
 }
 
 void

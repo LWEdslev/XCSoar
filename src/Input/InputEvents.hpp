@@ -213,6 +213,7 @@ void eventUploadIGCFile(const TCHAR *misc);
 void eventPatchIGCFile(const TCHAR *misc);
 void eventDeleteIGCFile(const TCHAR *misc);
 void eventDownloadTask(const TCHAR *misc);
+void eventAugustTest(const TCHAR *misc);
 // -------
 
 } // namespace InputEvents
