@@ -46,8 +46,9 @@ struct ImageType {
 };
 
 extern const ImageType image_types[];
+// extern const ImageArea sat_areas[];
 
-/**
+    /**
  * Throws on error.
  */
 Co::Task<::AllocatedPath>

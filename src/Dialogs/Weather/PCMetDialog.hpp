@@ -23,9 +23,16 @@ Copyright_License {
 
 #pragma once
 
+// #include "Weather/PCMet/Images.hpp"
 #include <memory>
 
 class Widget;
 
 std::unique_ptr<Widget>
 CreatePCMetWidget();
+
+namespace TIM {
+namespace PCMet {
+void DownloadImage(uint32_t type = 0);
+} // namespace PCMet
+} // namespace TIM

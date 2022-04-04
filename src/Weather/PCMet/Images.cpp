@@ -82,6 +82,7 @@ static constexpr PCMet::ImageArea rad_areas[] = {
 };
 
 static constexpr PCMet::ImageArea sat_areas[] = {
+// const PCMet::ImageArea sat_areas[] = {
   { "vis_hrv_eu", _T("Mitteleuropa HRV") },
   { "ir_rgb_eu", _T("Mitteleuropa RGB") },
   { "ir_108_eu", _T("Mitteleuropa IR") },
@@ -166,6 +167,7 @@ PCMet::DownloadLatestImage(const char *type, const char *area,
   const auto cache_path = MakeCacheDirectory(_T("pc_met"));
   auto path = AllocatedPath::Build(cache_path,
                                    UTF8ToWideConverter(name.c_str()));
+//  auto path = AllocatedPath::Build(cache_path, _T("latest.img"));
 
   if (!File::Exists(path)) {
     // URI for a single page of a selected 'Satellitenbilder"-page with link

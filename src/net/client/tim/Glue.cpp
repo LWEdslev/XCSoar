@@ -38,9 +38,18 @@ Glue::Glue(CurlGlobal &_curl) noexcept
 
 Glue::~Glue() noexcept = default;
 
+#ifdef _AUG_MSC // August2111
+#  include "Dialogs/Weather/PCMetDialog.hpp"
+#endif  // _AUG_MSC // August2111
+
+
 void
 Glue::OnTimer(const NMEAInfo &basic) noexcept
 {
+#ifdef _AUG_MSC // August2111
+//   TIM::PCMet::DownloadImage(0);
+#endif
+
   if (!basic.gps.real || !basic.location_available)
     /* we need a real GPS location */
     return;

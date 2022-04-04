@@ -46,6 +46,8 @@ Copyright_License {
 #include "system/Path.hpp"
 #include "Interface.hpp"
 
+void BitmapDialog(const PCMet::ImageType &type, const PCMet::ImageArea &area);
+
 static void
 BitmapDialog(const Bitmap &bitmap)
 {
@@ -67,7 +69,7 @@ DownloadTask(AllocatedPath &path, const char *type, const char *area,
                                              curl, progress);
 }
 
-static void
+void
 BitmapDialog(const PCMet::ImageType &type, const PCMet::ImageArea &area)
 {
   const auto &settings = CommonInterface::GetComputerSettings().weather.pcmet;
@@ -184,6 +186,80 @@ CreatePCMetWidget()
   return std::make_unique<TwoWidgets>(std::move(type_widget),
                                       std::move(area_widget),
                                       false);
+}
+
+#include "event/Loop.hxx"
+#include "event/DeferEvent.hxx"
+#include "util/PrintException.hxx"
+#include <exception>
+
+class CoInstance {
+  EventLoop event_loop;
+
+  Co::InvokeTask invoke_task;
+
+  DeferEvent defer_start{event_loop, BIND_THIS_METHOD(OnDeferredStart)};
+
+  std::exception_ptr error;
+
+public:
+  auto &GetEventLoop() noexcept { return event_loop; }
+
+  void Run(Co::InvokeTask &&_task) {
+    invoke_task = std::move(_task);
+    defer_start.Schedule();
+    event_loop.Run();
+    if (error)
+      std::rethrow_exception(error);
+  }
+
+private:
+  void OnCompletion(std::exception_ptr _error) noexcept {
+    error = std::move(_error);
+    event_loop.Break();
+  }
+
+  void OnDeferredStart() noexcept {
+    invoke_task.Start(BIND_THIS_METHOD(OnCompletion));
+  }
+};
+
+struct Instance : CoInstance {
+  const Net::ScopeInit net_init{GetEventLoop()};
+};
+
+namespace TIM {
+namespace PCMet {
+void DownloadImage(uint32_t type) {
+
+#if 1
+#ifdef _AUG_MSC // TODO(August2111)
+  //  !!! hidden in Linux
+  // August2111???  static uint64_t timer = 0;
+  //  if (!(timer++ % (2 * 60 * 15))) {  // aller 15 min!
+#endif
+  if (1) {
+  const auto &settings = CommonInterface::GetComputerSettings().weather.pcmet;
+
+  Instance instance;
+  // StdioOutputStream sos(stdout);
+  AllocatedPath path;
+  PluggableOperationEnvironment env;
+  instance.Run(DownloadTask(path, "sat/index.htm", "ir_rgb_ndl", settings,
+                            *Net::curl, env));
+
+//  if (!ShowCoDialog(nullptr, UIGlobals::GetDialogLook(),
+//                    _("Download"),
+//                    DownloadTask(path, "sat/index.htm", "ir_rgb_ndl", settings,
+//                                 *Net::curl, env),
+//                    &env))    ;
+  //  BitmapDialog(PCMet::image_types[2], PCMet::sat_areas[10]);
+  // extern const ImageArea sat_areas[];
+  // extern const ImageType image_types[];
+  #endif
+  }
+}
+} // namespace PCMet
 }
 
 #endif  // HAVE_PCMET
