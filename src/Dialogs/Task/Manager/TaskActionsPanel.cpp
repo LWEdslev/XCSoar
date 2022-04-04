@@ -113,8 +113,14 @@ inline void
 TaskActionsPanel::OnOwnWeGlideClicked()
 {
   auto pilot =  CommonInterface::GetComputerSettings().weglide.pilot; // the preset value
-  TaskDownloadDialog(pilot, nullptr);
-//  const auto task_file = WeGlide::DownloadTaskFile(pilot);
+#ifdef _AUG_MSC  // TODO(August2111)
+  //  !!! hidden in Linux
+  // active_task =
+
+  int task =
+#endif
+    TaskDownloadDialog(pilot, _T("Weglide Task"));
+  //  const auto task_file = WeGlide::DownloadTaskFile(pilot);
 //  // August2111:    if (WeGlide::DownloadTaskDialog()) {
 //  if (File::Exists(task_file))
 //    DirtyTaskListPanel();
