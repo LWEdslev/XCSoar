@@ -31,10 +31,10 @@ Copyright_License {
 #include "Operation/PopupOperationEnvironment.hpp"
 #include "Widget/RowFormWidget.hpp"
 
-class ResponseDialog final : public WidgetDialog {
+class SelectionResponseDialog final : public WidgetDialog {
 
 public:
-  ResponseDialog(Auto style, UI::SingleWindow &parent,
+  SelectionResponseDialog(Auto style, UI::SingleWindow &parent,
                        const DialogLook &look, const TCHAR *caption,
                        Widget *widget) noexcept
       : WidgetDialog(style, parent, look, caption, widget) {}
@@ -77,7 +77,7 @@ UserSelectionWidget::Prepare(ContainerWindow &parent,
 bool
 UserSelectionWidget::ShowSuccessDialog()
 {
-  ResponseDialog dialog(WidgetDialog::Auto{},
+  SelectionResponseDialog dialog(WidgetDialog::Auto{},
                         UIGlobals::GetMainWindow(),
                         UIGlobals::GetDialogLook(),
                         _("Get User Info"), this);
@@ -92,7 +92,7 @@ UserSelectionWidget::ShowSuccessDialog()
 }
 
 bool
-ResponseDialog::OnAnyKeyDown(unsigned key_code)
+SelectionResponseDialog::OnAnyKeyDown(unsigned key_code)
 {
   // any key is closing the dialog! 
   WndForm::SetModalResult(mrOK);
