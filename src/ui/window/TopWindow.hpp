@@ -327,11 +327,7 @@ public:
   void Refresh() noexcept;
 
   void Close() noexcept {
-#ifndef USE_WINUSER
     OnClose();
-#else
-    ::SendMessage(hWnd, WM_CLOSE, 0, 0);
-#endif
   }
 
 #if defined(ANDROID) || defined(USE_POLL_EVENT)
