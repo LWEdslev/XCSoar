@@ -296,4 +296,37 @@ FlarmDevice::BinaryReset(OperationEnvironment &env,
   // Send request and wait for positive answer
   SendStartByte();
   SendFrameHeader(header, env, timeout.GetRemainingOrZero());
+
+  if (config.baud_rate != config.bulk_baud_rate)
+    port.SetBaudrate(config.baud_rate);
+}
+
+void
+FlarmDevice::SetBinaryBaudrate(OperationEnvironment &env,
+                         std::chrono::steady_clock::duration _timeout,
+                         unsigned baudrate)
+{
+  TimeoutClock timeout(_timeout);
+
+  // Create header for sending a binary ... request
+  uint8_t index = 0;
+  for (; index < sizeof(binary_baudrates); index++) {
+    if (baudrate == binary_baudrates[index])
+      break;
+  }
+  FLARM::FrameHeader header = PrepareFrameHeader(FLARM::MT_SETBAUDRATE,
+    &index, sizeof(index));
+
+  // Send request and wait for positive answer
+  SendStartByte();
+  SendFrameHeader(header, env, timeout.GetRemainingOrZero());
+  SendEscaped(&index, sizeof(index), env, timeout.GetRemainingOrZero());
+  auto result =
+      WaitForACK(header.sequence_number, env, timeout.GetRemainingOrZero());
+
+  if (result == true)
+  // after setting in Flarm change the baudrate of port!
+    port.SetBaudrate(baudrate);
+  else
+    port.SetBaudrate(baudrate);
 }
