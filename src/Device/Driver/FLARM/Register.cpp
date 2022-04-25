@@ -32,6 +32,7 @@ FlarmCreateOnPort([[maybe_unused]] const DeviceConfig &config, Port &com_port)
 
 const struct DeviceRegister flarm_driver = {
   _T("FLARM"), _T("FLARM"),
-  DeviceRegister::DECLARE | DeviceRegister::LOGGER | DeviceRegister::MANAGE,
+  DeviceRegister::DECLARE | DeviceRegister::LOGGER |
+  DeviceRegister::MANAGE | DeviceRegister::BULK_BAUD_RATE,
   FlarmCreateOnPort,
 };
