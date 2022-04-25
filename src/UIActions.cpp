@@ -38,7 +38,12 @@ Copyright_License {
 
 #include "Widget/ViewImageWidget.hpp"
 
+#ifdef _WIN32
+// On Windows the default option should be forced!
+static bool force_shutdown = true;
+#else
 static bool force_shutdown = false;
+#endif
 
 void
 UIActions::SignalShutdown(bool force)
