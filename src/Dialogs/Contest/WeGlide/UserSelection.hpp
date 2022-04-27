@@ -25,6 +25,8 @@ Copyright_License {
 
 #include "Cloud/weglide/WeGlideObjects.hpp"
 
+#include <tchar.h>
+
 namespace WeGlide {
 
 int UserSelection(User &user, const TCHAR *message);
