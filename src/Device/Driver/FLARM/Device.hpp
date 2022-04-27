@@ -329,4 +329,7 @@ public:
    */
   bool DownloadFlight(const RecordedFlightInfo &flight, Path path,
                       OperationEnvironment &env) override;
+
+  static constexpr unsigned binary_baudrates[] = {
+      4800, 9600, 19200, 28800, 38400, 57600, 115200, 230400, 460800, 921600};
 };
