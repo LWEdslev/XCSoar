@@ -27,7 +27,7 @@ Copyright_License {
 static Device *
 FlarmCreateOnPort([[maybe_unused]] const DeviceConfig &config, Port &com_port)
 {
-  return new FlarmDevice(com_port);
+  return new FlarmDevice(config, com_port);
 }
 
 const struct DeviceRegister flarm_driver = {

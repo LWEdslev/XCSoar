@@ -64,10 +64,13 @@ class FlarmDevice: public AbstractDevice
    */
   DeviceSettingsMap<std::string> settings;
 
+  const DeviceConfig &config;
+
 public:
+  FlarmDevice(const DeviceConfig &_config, Port &_port)
+    :config(_config), port(_port) {}
   FlarmDevice(Port &_port)
     :port(_port) {}
-
   /**
    * Write a setting to the FLARM.
    */
