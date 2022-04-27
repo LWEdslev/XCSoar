@@ -3,8 +3,8 @@
 #include "util/StaticString.hxx"
 #include "time/BrokenDate.hpp"
 
-#include <cinttypes>
-#include <tchar.h>
+// #include <cinttypes>
+// #include <tchar.h>
 
 
 namespace WeGlide {
