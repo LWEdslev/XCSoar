@@ -24,6 +24,7 @@ Copyright_License {
 #pragma once
 
 #include "Cloud/weglide/WeGlideObjects.hpp"
+#include <tchar.h>
 
 namespace WeGlide {
 
