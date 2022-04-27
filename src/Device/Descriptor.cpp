@@ -1097,7 +1097,7 @@ static bool
 DeclareToFLARM(const struct Declaration &declaration, Port &port,
                const Waypoint *home, OperationEnvironment &env)
 {
-  return FlarmDevice(port).Declare(declaration, home, env);
+  return FlarmDevice(DeviceConfig(), port).Declare(declaration, home, env);
 }
 
 static bool
