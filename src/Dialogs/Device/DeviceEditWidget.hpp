@@ -29,6 +29,8 @@
 
 #include <cassert>
 
+class DataFieldEnum;
+
 class DeviceEditWidget : public RowFormWidget, DataFieldListener {
 public:
   struct Listener {
@@ -66,6 +68,8 @@ public:
   bool Save(bool &changed) noexcept override;
 
 private:
+  DataFieldEnum *baud_rate_df = nullptr;
+    
   /* virtual methods from DataFieldListener */
   void OnModified(DataField &df) noexcept override;
 };

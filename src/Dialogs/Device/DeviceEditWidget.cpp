@@ -44,9 +44,16 @@ enum ControlIndex {
   K6Bt,
 };
 
-static void
-FillBaudRates(DataFieldEnum &dfe) noexcept
+static void 
+FillBaudRates(DataFieldEnum &dfe, const uint32_t baud_rates[]) noexcept
 {
+  // for (auto baudrate : baud_rates)
+  for (int b = 0; baud_rates[b] > 0; b++) {
+    StaticString<10> s;
+    s.Format(_T("%u"), baud_rates[b]);
+    dfe.addEnumText(s.c_str(), baud_rates[b]);
+  }
+  /*
   dfe.addEnumText(_T("1200"), 1200);
   dfe.addEnumText(_T("2400"), 2400);
   dfe.addEnumText(_T("4800"), 4800);
@@ -55,6 +62,11 @@ FillBaudRates(DataFieldEnum &dfe) noexcept
   dfe.addEnumText(_T("38400"), 38400);
   dfe.addEnumText(_T("57600"), 57600);
   dfe.addEnumText(_T("115200"), 115200);
+
+  dfe.addEnumText(_T("230400"), 230400);
+  dfe.addEnumText(_T("460800"), 460800);
+  dfe.addEnumText(_T("921600"), 921600);
+*/
 }
 
 static void
@@ -210,6 +222,31 @@ DeviceEditWidget::UpdateVisibilities() noexcept
   const bool uses_speed = DeviceConfig::UsesSpeed(type) || k6bt;
 
   SetRowAvailable(BaudRate, uses_speed);
+  if (uses_speed) {
+    const uint32_t baud_rates_VL[] = {1200,  2400,  4800,   9600, 19200,
+                                      38400, 57600, 115200, 0};
+    const uint32_t baud_rates_Flarm[] = {4800,  9600,   19200, 38400,
+                                         57600, 115200, 0};
+    const uint32_t baud_rates_std[] = {1200,  2400,  4800,   9600, 19200,
+                                       38400, 57600, 115200, 0};
+
+    const uint32_t *baud_rates;
+    switch (1) {
+    case 0:
+      baud_rates = baud_rates_VL;
+      break;
+    case 1:
+      baud_rates = baud_rates_Flarm;
+      break;
+    default:
+      baud_rates = baud_rates_std;
+      break;
+    }
+    auto value = baud_rate_df->GetAsInteger();
+    baud_rate_df->ClearChoices();
+    FillBaudRates(*baud_rate_df, baud_rates);
+    baud_rate_df->SetAsInteger(value);
+  }
   SetRowAvailable(BulkBaudRate, uses_speed &&
                   DeviceConfig::UsesDriver(type));
   SetRowVisible(BulkBaudRate, uses_speed &&
@@ -236,10 +273,8 @@ DeviceEditWidget::UpdateVisibilities() noexcept
   SetRowAvailable(K6Bt, maybe_bluetooth);
 }
 
-void
-DeviceEditWidget::Prepare(ContainerWindow &parent,
-                          const PixelRect &rc) noexcept
-{
+void DeviceEditWidget::Prepare(ContainerWindow &parent,
+                               const PixelRect &rc) noexcept {
   RowFormWidget::Prepare(parent, rc);
 
   DataFieldEnum *port_df = new DataFieldEnum(this);
@@ -247,14 +282,22 @@ DeviceEditWidget::Prepare(ContainerWindow &parent,
   auto *port_control = Add(_("Port"), nullptr, port_df);
   port_control->SetEditCallback(EditPortCallback);
 
-  DataFieldEnum *baud_rate_df = new DataFieldEnum(this);
-  FillBaudRates(*baud_rate_df);
+  //DataFieldEnum *baud_rate_df = new DataFieldEnum(this);
+  baud_rate_df = new DataFieldEnum(this);
+  /**/
+  const uint32_t baud_rates1[] = {1200,  2400,  4800,   9600, 19200,
+                            38400, 57600, 115200, 0};
+  FillBaudRates(*baud_rate_df, baud_rates1);
+  /**/
   baud_rate_df->SetValue(config.baud_rate);
   Add(_("Baud rate"), nullptr, baud_rate_df);
 
   DataFieldEnum *bulk_baud_rate_df = new DataFieldEnum(this);
+  const uint32_t baud_rates2[] = {1200,  2400,  4800,   9600, 19200,
+                            38400, 57600, 115200,
+                            230400, 460800, 921600, 0};
   bulk_baud_rate_df->addEnumText(_T("Default"), 0u);
-  FillBaudRates(*bulk_baud_rate_df);
+  FillBaudRates(*bulk_baud_rate_df, baud_rates2);
   bulk_baud_rate_df->SetValue(config.bulk_baud_rate);
   Add(_("Bulk baud rate"),
       _("The baud rate used for bulk transfers, such as task declaration or flight download."),
