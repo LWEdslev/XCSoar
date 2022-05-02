@@ -226,7 +226,7 @@ class RowFormWidget : public WindowWidget {
 
     [[gnu::pure]]
     WndProperty &GetControl() noexcept {
-//      assert(type == Type::EDIT);
+      assert(type == Type::EDIT);
       assert(window != nullptr);
 
       return (WndProperty &)*window;
@@ -457,6 +457,13 @@ public:
     return AddFile(label, help, profile_key, filters, FileType::UNKNOWN,
                    nullable);
   }
+
+  /**
+   * Add a label panel control, not editable, only for some explanations,
+   *  descriptions or messages. You can use SetText() to update its text.
+   * the parameter lines controls the height if this panel!
+   */
+  void AddLabel(const TCHAR *label, unsigned lines = 1) noexcept;
 
   /**
    * Add a read-only multi-line control.  You can use
