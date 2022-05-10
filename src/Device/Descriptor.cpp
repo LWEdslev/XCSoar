@@ -471,7 +471,8 @@ try {
 
     LogError(e, WideToUTF8Converter(name));
 
-    StaticString<256> msg;
+    constexpr size_t MSG_LENGTH = 256;
+    StaticString<MSG_LENGTH> msg;
 
     const auto _msg = GetFullMessage(e);
     const UTF8ToWideConverter what(_msg.c_str());
@@ -483,7 +484,14 @@ try {
     msg.Format(_T("%s: %s (%s)"), _("Unable to open port"), name,
                (const TCHAR *)what);
 
-    env.SetErrorMessage(msg);
+    try {
+	    if (msg.length() > MSG_LENGTH-1)
+	      msg.Truncate(MSG_LENGTH-1);
+      env.SetErrorMessage(msg);
+    } catch (const std::exception &e) {
+      // August2111: das kann laut Max nicht sein und ' Nothing of this makes any sense.'
+	  return false;
+    }
     return false;
   }
 
