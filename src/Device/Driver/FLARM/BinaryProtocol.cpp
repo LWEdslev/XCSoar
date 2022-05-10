@@ -26,6 +26,7 @@ Copyright_License {
 #include "Device/Error.hpp"
 #include "Device/Port/Port.hpp"
 #include "time/TimeoutClock.hpp"
+#include "LogFile.hpp"
 
 [[gnu::pure]]
 static const uint8_t *
@@ -281,6 +282,9 @@ try {
   SendFrameHeader(header, env, timeout.GetRemainingOrZero());
   return WaitForACK(header.sequence_number, env, timeout.GetRemainingOrZero());
 } catch (const DeviceTimeout &) {
+  return false;
+} catch (const std::exception &e) {
+  LogFormat("%s Exception: %s", __func__, e.what());    
   return false;
 }
 
