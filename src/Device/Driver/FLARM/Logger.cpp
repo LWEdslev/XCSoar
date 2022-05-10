@@ -24,13 +24,17 @@
 #include "Device.hpp"
 #include "Device/Error.hpp"
 #include "Device/RecordedFlight.hpp"
+// #include "Device/Port/Port.hpp"
 #include "io/FileOutputStream.hxx"
 #include "io/BufferedOutputStream.hxx"
 #include "system/Path.hpp"
 #include "Operation/Operation.hpp"
+#include "LogFile.hpp"
 
 #include <cstdlib>
 #include <cstring>
+
+#define FLARMFLIGHTLIST_MAX 20
 
 static bool
 ParseDate(const char *str, BrokenDate &date)
@@ -256,7 +260,7 @@ FlarmDevice::ReadFlightInfo(RecordedFlightInfo &flight,
 
 FLARM::MessageType
 FlarmDevice::SelectFlight(uint8_t record_number, OperationEnvironment &env)
-{
+try {
   // Create header for selecting a log record
   uint8_t data[1] = { record_number };
   FLARM::FrameHeader header = PrepareFrameHeader(FLARM::MT_SELECTRECORD,
@@ -270,6 +274,16 @@ FlarmDevice::SelectFlight(uint8_t record_number, OperationEnvironment &env)
   // Wait for an answer
   return WaitForACKOrNACK(header.sequence_number,
                           env, std::chrono::seconds(1));
+} catch (const DeviceTimeout &) {
+  return FLARM::MT_ERROR;
+#if MSC_AUG   // AUGUST2111
+} catch (std::exception &e) {
+  // overwrite the last message:
+#ifdef _DEBUG
+  LogFormat("%s", e.what());
+  return FLARM::MT_ERROR;
+#endif
+#endif  // AUGUST2111
 }
 
 bool
@@ -279,26 +293,47 @@ FlarmDevice::ReadFlightList(RecordedFlightList &flight_list,
   if (!BinaryMode(env))
     return false;
 
+  env.SetProgressRange(FLARMFLIGHTLIST_MAX);
   // Try to receive flight information until the list is full
+  FLARM::MessageType ack_result = FLARM::MT_ERROR;
   for (uint8_t i = 0; !flight_list.full(); ++i) {
-    try {
-      FLARM::MessageType ack_result = SelectFlight(i, env);
-
-      // Last record reached -> bail out and return list
-      if (ack_result == FLARM::MT_NACK)
+    env.SetProgressPosition(i + 1);
+    // try at least 3 times to get a flight information
+    for (uint8_t t = 0; t < 3; t++) {
+      ack_result = SelectFlight(i, env);
+      if (ack_result != FLARM::MT_ERROR)
         break;
+    }
+    if (ack_result == FLARM::MT_ERROR) {
+      // ...and Flarm is in binary mode -> reset this!
+      EnableNMEA(env);
+      return false;
+    }
 
-      // If neither ACK nor NACK was received
-      if (ack_result != FLARM::MT_ACK) {
-        mode = Mode::UNKNOWN;
-        return false;
+    if (i >= FLARMFLIGHTLIST_MAX)
+      break;
+
+    // Last record reached -> bail out and return list
+    if (ack_result == FLARM::MT_NACK)
+      // break;
+      ;
+
+    // If neither ACK nor NACK was received
+    else if (ack_result != FLARM::MT_ACK) {
+      mode = Mode::UNKNOWN;
+      return false;
+    } else {
+      try {
+        RecordedFlightInfo flight_info;
+        flight_info.internal.flarm = i;
+        if (ReadFlightInfo(flight_info, env))
+          flight_list.append(flight_info);
+      } catch (const DeviceTimeout &) {
+      } catch (std::exception &e) {
+        LogFormat("%s: Read flight Exception: %s",
+          __func__, e.what());
       }
-
-      RecordedFlightInfo flight_info;
-      flight_info.internal.flarm = i;
-      if (ReadFlightInfo(flight_info, env))
-        flight_list.append(flight_info);
-    } catch (const DeviceTimeout &) {  }
+    }
   }
 
   return true;
@@ -313,7 +348,8 @@ FlarmDevice::DownloadFlight(Path path, OperationEnvironment &env)
   env.SetProgressRange(100);
   while (true) {
     // Create header for getting IGC file data
-    FLARM::FrameHeader header = PrepareFrameHeader(FLARM::MT_GETIGCDATA);
+    FLARM::FrameHeader header =
+        PrepareFrameHeader(FLARM::MT_GETIGCDATA);
 
     // Send request
     SendStartByte();
