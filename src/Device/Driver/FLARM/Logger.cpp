@@ -33,6 +33,7 @@
 
 #include <cstdlib>
 #include <cstring>
+#include <span>
 
 #define FLARMFLIGHTLIST_MAX 20
 
@@ -346,7 +347,9 @@ FlarmDevice::DownloadFlight(Path path, OperationEnvironment &env)
   BufferedOutputStream os(fos);
 
   env.SetProgressRange(100);
-  while (true) {
+
+  bool is_last_packet = false; 
+  do {
     // Create header for getting IGC file data
     FLARM::FrameHeader header =
         PrepareFrameHeader(FLARM::MT_GETIGCDATA);
@@ -358,32 +361,30 @@ FlarmDevice::DownloadFlight(Path path, OperationEnvironment &env)
     // Wait for an answer and save the payload for further processing
     AllocatedArray<uint8_t> data;
     uint16_t length;
+    // the timeout of 10 seconds is mainly for the last sentence with G record!
     bool ack = WaitForACKOrNACK(header.sequence_number, data,
                                 length, env, std::chrono::seconds(10)) == FLARM::MT_ACK;
 
     // If no ACK was received
     if (!ack || length <= 3)
-      return false;
+      return false;  // the download was wrong...
 
-    length -= 3;
 
-    // Read progress (in percent)
-    uint8_t progress = *(data.begin() + 2);
-    env.SetProgressPosition(std::min((unsigned)progress, 100u));
+    // set progress (in percent)
+    env.SetProgressPosition(std::min(data[2], (uint8_t)100));
 
-    const char last_char = (char)data.back();
-    bool is_last_packet = (last_char == 0x1A);
-    if (is_last_packet)
-      length--;
+    is_last_packet = data[length - 1] == 0x1A;
 
-    // Read IGC data
-    const char *igc_data = (const char *)data.data() + 3;
-    os.Write(igc_data, length);
+    // length of data has to be reduced with 3 byte header
+    // and possibly 1 byte for last packet 
+    length -= (is_last_packet) ? 4 : 3;
 
-    if (is_last_packet)
-      break;
-  }
+    // write the received data to the stream
+    os.Write(&data[3], length);
 
+  } while (!is_last_packet);
+
+  // Flush the stream  - and save
   os.Flush();
   fos.Commit();
 
