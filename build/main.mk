@@ -657,6 +657,8 @@ endif
 XCSOAR_SOURCES += \
 	$(SRC)/net/client/tim/Glue.cpp \
 	$(SRC)/Dialogs/Contest/WeGlide/FlightUploadDialog.cpp \
+	$(SRC)/Dialogs/Contest/WeGlide/FlightPatchDialog.cpp \
+	$(SRC)/Dialogs/Contest/WeGlide/FlightDeleteDialog.cpp \
 	$(SRC)/Dialogs/Contest/WeGlide/FlightUploadResponse.cpp \
 	$(SRC)/Dialogs/Contest/WeGlide/TaskDownloadDialog.cpp \
 	$(SRC)/Dialogs/Contest/WeGlide/UserSelection.cpp \
