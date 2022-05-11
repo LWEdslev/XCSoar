@@ -22,7 +22,7 @@ Copyright_License {
 */
 
 #include "StartupDialog.hpp"
-#include "Error.hpp"
+#include "Dialogs/Error.hpp"
 #include "ProfilePasswordDialog.hpp"
 #include "ProfileListDialog.hpp"
 #include "WidgetDialog.hpp"

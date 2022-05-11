@@ -22,7 +22,7 @@ Copyright_License {
 */
 
 #include "DownloadFilePicker.hpp"
-#include "Error.hpp"
+#include "Dialogs/Error.hpp"
 #include "WidgetDialog.hpp"
 #include "ProgressDialog.hpp"
 #include "Message.hpp"

@@ -21,8 +21,8 @@ Copyright_License {
 }
 */
 
-#include "Error.hpp"
-#include "Message.hpp"
+#include "Dialogs/Error.hpp"
+#include "Dialogs/Message.hpp"
 #include "util/ConvertString.hpp"
 #include "util/Exception.hxx"
 #include "util/StaticString.hxx"

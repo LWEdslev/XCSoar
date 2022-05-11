@@ -24,7 +24,7 @@ Copyright_License {
 #include "ProfilePasswordDialog.hpp"
 #include "TextEntry.hpp"
 #include "Message.hpp"
-#include "Error.hpp"
+#include "Dialogs/Error.hpp"
 #include "Profile/Map.hpp"
 #include "Profile/File.hpp"
 #include "Profile/ProfileKeys.hpp"
