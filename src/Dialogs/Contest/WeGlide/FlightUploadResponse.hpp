@@ -25,6 +25,8 @@ Copyright_License {
 
 #include "Cloud/weglide/WeGlideObjects.hpp"
 
+#include <tchar.h>
+
 namespace WeGlide {
 
 int FlightUploadResponse(const Flight &flightdata, const TCHAR *message);

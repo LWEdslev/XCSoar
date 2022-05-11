@@ -24,12 +24,16 @@ Copyright_License {
 #include "FlightUploadResponse.hpp"
 #include "LogFile.hpp"
 #include "UIGlobals.hpp"
+#include "Contest/weglide/PatchIGCFile.hpp"
+#include "Contest/weglide/DeleteIGCFile.hpp"
 #include "Dialogs/WidgetDialog.hpp"
 #include "Dialogs/Error.hpp"
 #include "Language/Language.hpp"
 #include "Operation/Cancelled.hpp"
 #include "Operation/PopupOperationEnvironment.hpp"
 #include "Widget/RowFormWidget.hpp"
+
+#include "json/ParserOutputStream.hxx"
 
 class ResponseDialog final : public WidgetDialog {
 
@@ -54,7 +58,7 @@ public:
   /* virtual methods from Widget */
   void Prepare(ContainerWindow &parent,
                const PixelRect &rc) noexcept override;
-  bool ShowSuccessDialog();
+  int ShowSuccessDialog();
   
 private:
   WeGlide::Flight flightdata;
@@ -77,26 +81,30 @@ UploadResponseWidget::Prepare(ContainerWindow &parent,
   _stprintf(buffer, _T("%s, %s =  %s"), flightdata.registration.c_str(),
       _("cid"), flightdata.competition_id.c_str());
   AddReadOnly(_("Glider"), NULL, buffer);
-
+  // TODO(August2111): Editfield for personale messages:
+  // AddMultiLine(_T("Das ist ein Test"));
+  AddText(_T("Comment"), nullptr, _T("Direct Upload via XCSoar!"));
   AddSpacer();
   AddLabel(update_message);
 }
 
-bool
+int
 UploadResponseWidget::ShowSuccessDialog()
 {
   ResponseDialog dialog(WidgetDialog::Auto{},
                               UIGlobals::GetMainWindow(),
                               UIGlobals::GetDialogLook(),
                               _("Upload Flight"), this);
-  // only one 'Close' button
+  // only one "Close" button
   dialog.AddButton(_("Close"), mrOK);
-  dialog.ShowModal();
+  dialog.AddButton(_("Patch"), 98);
+  dialog.AddButton(_("Delete"), 99);
+  auto result = dialog.ShowModal();
 
   /* the caller manages the Widget */
   dialog.StealWidget();
 
-  return true;
+  return result;
 }
 
 bool
@@ -109,13 +117,44 @@ ResponseDialog::OnAnyKeyDown(unsigned key_code)
 
 namespace WeGlide {
 
-int 
+int
 FlightUploadResponse(const WeGlide::Flight &flightdata, const TCHAR *msg)
 {
   LogFormat(_T("%s: %s"), _("WeGlide Upload"), msg);
   UploadResponseWidget widget(UIGlobals::GetDialogLook(), flightdata, msg);
 
-  return widget.ShowSuccessDialog();
+  auto button = widget.ShowSuccessDialog();
+  switch (button) {
+  case 98: try {
+    DeleteIGCFile(flightdata.user, flightdata.flight_id-1);
+    Json::ParserOutputStream parser;
+    std::stringstream ss;
+    ss << "{";
+    ss << "\"comment\": \"Uploaded via XCSoar\", ";
+    ss << "\"competition_id\": \"T81\", ";
+//    ss << "\"co_user_name\": \"Lou Reed\", ";
+    ss << "\"rescore\": false ";
+    ss << "}";
+    parser.Write(ss.str().c_str(), ss.str().length());
+    boost::json::value json = parser.Finish();
+    PatchIGCFile(flightdata.user, flightdata.flight_id, json);
+    } catch (...) {
+      DeleteIGCFile(flightdata.user, flightdata.flight_id);
+    }
+    break;
+  case 99:
+    DeleteIGCFile(flightdata.user, flightdata.flight_id);
+#ifdef _DEBUG
+# ifdef TEST_DOUBLE_DELETE
+    // To test a non valid flight no (flight is removed!)
+    DeleteIGCFile(flightdata.user, flightdata.flight_id - 1);
+# endif
+#endif
+    break;
+  default:
+    break;
+  }
+  return mrOK;
 }
 
 } // namespace WeGlide
