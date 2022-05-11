@@ -201,8 +201,11 @@ public:
 		SetOption(CURLOPT_MIMEPOST, mime);
 	}
 #if 1  // August2111
-  void Delete() {
+	void DeleteRequest() {
 		SetOption(CURLOPT_CUSTOMREQUEST, "DELETE");
+	}
+	void PatchRequest() {
+		SetOption(CURLOPT_CUSTOMREQUEST, "PATCH");
 	}
 #endif
 
