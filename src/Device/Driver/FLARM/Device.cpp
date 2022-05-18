@@ -278,8 +278,70 @@ FlarmDevice::SetConfig(const char *setting, const TCHAR *value,
 
 #endif
 
+#if defined(AUG_TEST) && (AUG_TEST & 1)
+void FlarmDevice::ResetBaudrate(OperationEnvironment &env)
+{
+  unsigned baud = 0;
+  GetBaudRate(baud, env);
+  if (baud)
+    port.SetBaudrate(binary_baudrates[baud]);
+}
+#endif
+
+#if defined(AUG_TEST) && (AUG_TEST & 2)
+void FlarmDevice::SetFlarmBaudrate(unsigned baudrate,
+                              OperationEnvironment &env) {
+  // uint32_t 
+  PortState state = port.GetState(); // only test!
+  unsigned index = 0; // only test!
+  DeviceConfig &config = CommonInterface::SetSystemSettings().devices[index];
+  if (config.port_type != DeviceConfig::PortType::DISABLED) {
+    Profile::GetDeviceConfig(Profile::map, index, config);
+    config.baud_rate = baudrate;
+    Profile::SetDeviceConfig(Profile::map, index, config);
+    Profile::Save();
+    port.SetBaudrate(baudrate);
+  }
+}
+#endif  // AUG_TEST == 2
+
+#if defined(AUG_TEST) && (AUG_TEST & 0x10)
+void FlarmDevice::SetPortBaudrate(unsigned baudrate) {
+   port.SetBaudrate(baudrate);
+}
+#endif  // AUG_TEST == 0x10
+
+void
+FlarmDevice::DownloadMemory(OperationEnvironment &env)
+{
+#if defined(AUG_TEST) && (AUG_TEST & 8)
+  // Only August2111
+  SetFlarmBaudrate(0, env);
+#else
+  // not built up to now
+#endif
+}
+
+void
+FlarmDevice::ClearFlightMemory(OperationEnvironment &env)
+{
+#if defined(AUG_TEST) && (AUG_TEST & 16)
+  auto s = GetSetting("BAUD");
+  s = GetSetting("LOGINT");
+  auto test = settings.find("BAUD");
+#else
+  // not built up to now
+#endif
+}
+
 void
 FlarmDevice::Restart(OperationEnvironment &env)
 {
   Send("PFLAR,0", env);
+}
+
+bool 
+FlarmDevice::StartRxThread(void)
+{ 
+  return port.StartRxThread();
 }

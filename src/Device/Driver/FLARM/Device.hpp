@@ -33,6 +33,8 @@ Copyright_License {
 #include <optional>
 #include <string>
 
+#define AUG_TEST 0x12
+
 class Port;
 struct Declaration;
 class OperationEnvironment;
@@ -130,6 +132,20 @@ public:
   bool SetBaudRate(unsigned baud_id, OperationEnvironment &env);
 
   void Restart(OperationEnvironment &env);
+
+#ifdef _AUG_MSC  // Only for August2111 on Windows
+#if (AUG_TEST & 1)
+  void ResetBaudrate(OperationEnvironment &env);
+#endif
+#if (AUG_TEST & 2)
+  void SetFlarmBaudrate(unsigned baudrate, OperationEnvironment &env);
+#endif
+#if (AUG_TEST & 0x10)
+  void SetPortBaudrate(unsigned baudrate);
+#endif
+#endif
+
+  bool StartRxThread(void);
 
 private:
   /**
@@ -260,6 +276,13 @@ private:
    */
   void BinaryReset(OperationEnvironment &env,
                    std::chrono::steady_clock::duration timeout);
+
+  /**
+   * "Sets the device baud rate in binary mode."
+   */
+  void SetBinaryBaudrate(OperationEnvironment &env,
+                         std::chrono::steady_clock::duration timeout,
+                          unsigned baudrate);
 
   /**
    * Sends a SelectRecord message to the Flarm
