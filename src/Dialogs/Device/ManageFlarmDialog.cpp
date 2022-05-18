@@ -55,20 +55,55 @@ void
 ManageFLARMWidget::Prepare([[maybe_unused]] ContainerWindow &parent,
                            [[maybe_unused]] const PixelRect &rc) noexcept
 {
+  MessageOperationEnvironment env;
+//   device.RequestSetting("DEVTYPE", env);
+//   device.RequestSetting("HWVER", env);
+//   device.RequestSetting("SWVER", env);
+//   device.RequestSetting("SWEXP", env);
+//   device.RequestSetting("RADIOID", env);
+// 
+//   WaitForSetting(device, "DEVTYPE", 500);
+//   WaitForSetting(device, "HWVER",   500);
+//   WaitForSetting(device, "SWVER",   500);
+//   WaitForSetting(device, "SWEXP",   500);
+//   WaitForSetting(device, "RADIOID", 500);
+  device.TextMode(env);
+  TCHAR text_buffer[0x40];
+  if (device.GetConfig("DEVTYPE", text_buffer, sizeof(text_buffer), env))
+    AddReadOnly(_("Device Type"), nullptr, text_buffer);
+
+  if (device.GetConfig("HWVER", text_buffer, sizeof(text_buffer), env))
+    AddReadOnly(_("Hardware Version"), nullptr, text_buffer);
+
+  if (device.GetConfig("SWVER", text_buffer, sizeof(text_buffer), env))
+    AddReadOnly(_("Firmware Version"), nullptr, text_buffer);
+
+  if (device.GetConfig("SWEXP", text_buffer, sizeof(text_buffer), env))
+    AddReadOnly(_("FW Expiry Date"), nullptr, text_buffer);
+
+  if (device.GetConfig("RADIOID", text_buffer, 0x40, env))
+    AddReadOnly(_("Radio ID"), nullptr, text_buffer);
+
+  if (device.GetConfig("SER", text_buffer, 0x40, env))
+    AddReadOnly(_("Serial ID"), nullptr, text_buffer);
+// ??
+  device.EnableNMEA(env);
+  device.StartRxThread();
+  
   if (version.available) {
     StaticString<64> buffer;
 
-    if (!version.hardware_version.empty()) {
-      buffer.clear();
-      buffer.UnsafeAppendASCII(version.hardware_version.c_str());
-      AddReadOnly(_("Hardware version"), NULL, buffer.c_str());
-    }
-
-    if (!version.software_version.empty()) {
-      buffer.clear();
-      buffer.UnsafeAppendASCII(version.software_version.c_str());
-      AddReadOnly(_("Firmware version"), NULL, buffer.c_str());
-    }
+////    if (!version.hardware_version.empty()) {
+////      buffer.clear();
+////      buffer.UnsafeAppendASCII(version.hardware_version.c_str());
+////      AddReadOnly(_("Hardware version"), NULL, buffer.c_str());
+////    }
+////
+////    if (!version.software_version.empty()) {
+////      buffer.clear();
+////      buffer.UnsafeAppendASCII(version.software_version.c_str());
+////      AddReadOnly(_("Firmware version"), NULL, buffer.c_str());
+////    }
 
     if (!version.obstacle_version.empty()) {
       buffer.clear();
@@ -104,4 +139,7 @@ ManageFlarmDialog(Device &device, const FlarmVersion &version)
                                             (FlarmDevice &)device, version));
   dialog.AddButton(_("Close"), mrCancel);
   dialog.ShowModal();
+
+//   MessageOperationEnvironment env;
+//   device.EnableNMEA(env);
 }
