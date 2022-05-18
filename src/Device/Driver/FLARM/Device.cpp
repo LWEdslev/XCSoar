@@ -337,11 +337,71 @@ FlarmDevice::ClearFlightMemory(OperationEnvironment &env)
 void
 FlarmDevice::Restart(OperationEnvironment &env)
 {
-  Send("PFLAR,0", env);
+  switch (mode) {
+  case Mode::NMEA:
+  case Mode::TEXT:
+    Send("PFLAR,0", env);
+    break;
+  case Mode::BINARY:
+  case Mode::UNKNOWN:
+  default:
+    // In case of binary or unknown mode this restarts the device
+    EnableNMEA(env);
+    break;
+  }
+  // flarm_info.clear();
 }
 
-bool 
-FlarmDevice::StartRxThread(void)
-{ 
-  return port.StartRxThread();
+bool FlarmDevice::CollectDeviceInformation(FLARM::DeviceInformation &flarm_info,
+                                           OperationEnvironment &env) { 
+  bool result = true;
+  TCHAR text_buffer[0x40];
+
+  TextMode(env);
+
+  if (GetConfig("DEVTYPE", text_buffer, sizeof(text_buffer), env)) {
+    flarm_info.device_type = text_buffer;
+  } else {
+    result = false;
+  }
+
+  if (GetConfig("SWVER", text_buffer, sizeof(text_buffer), env)) {
+    flarm_info.software_version = text_buffer;
+  } else {
+    result = false;
+  }
+
+  if (GetConfig("SWEXP", text_buffer, sizeof(text_buffer), env)) {
+    flarm_info.fw_expiry_date = text_buffer;
+  } else {
+    result = false;
+  }
+
+  if (GetConfig("RADIOID", text_buffer, sizeof(text_buffer), env)) {
+    flarm_info.radio_id = text_buffer;
+  } else {
+    result = false;
+  }
+
+  if (GetConfig("SER", text_buffer, sizeof(text_buffer), env)) {
+    flarm_info.serial_id = text_buffer;
+  } else {
+    result = false;
+  }
+
+  if (GetConfig("OBSTDB", text_buffer, sizeof(text_buffer), env)) {
+    flarm_info.obstacle_version = text_buffer;
+  } else {
+    result = false;
+  }
+
+  if (GetConfig("FLARMVER", text_buffer, sizeof(text_buffer), env)) {
+    flarm_info.bootloader_version = text_buffer;
+  } else {
+    result = false;
+  }
+
+  EnableNMEA(env);
+  port.StartRxThread();
+  return result;
 }

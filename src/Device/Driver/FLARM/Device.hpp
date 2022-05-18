@@ -28,6 +28,8 @@ Copyright_License {
 #include "tchar.h"
 #include "Device/Driver.hpp"
 #include "Device/SettingsMap.hpp"
+#include "Device/Config.hpp"
+#include "FLARM/DeviceInformation.hpp"
 
 #include <cstdint>
 #include <optional>
@@ -146,6 +148,8 @@ public:
 #endif
 
   bool StartRxThread(void);
+  bool CollectDeviceInformation(FLARM::DeviceInformation &flarm_info,
+                                OperationEnvironment & env);
 
 private:
   /**
