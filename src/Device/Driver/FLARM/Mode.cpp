@@ -47,6 +47,8 @@ FlarmDevice::EnableNMEA(OperationEnvironment &env)
     /* no real difference between NMEA and TEXT; in mode==TEXT, the
        Port thread is stopped, but the caller is responsible for
        restarting it, which means there's nothing to do for us */
+    /* August2111: The function TextMode(env) stops the Port thread - and for reactivating
+       I need a special function StartRxThread() in FlarmDevice???? */
     mode = Mode::NMEA;
     return true;
 
