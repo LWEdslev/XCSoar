@@ -307,7 +307,7 @@ void
 FlarmDevice::SetBinaryBaudrate(OperationEnvironment &env,
                          std::chrono::steady_clock::duration _timeout,
                          unsigned baudrate)
-{
+try {
   TimeoutClock timeout(_timeout);
 
   // Create header for sending a binary ... request
@@ -331,4 +331,10 @@ FlarmDevice::SetBinaryBaudrate(OperationEnvironment &env,
     port.SetBaudrate(baudrate);
   else
     port.SetBaudrate(baudrate);
+}
+catch (const DeviceTimeout &e) {
+  LogFormat("%s Exception: %s", __func__, e.what());
+}
+catch (const std::exception &e) {
+  LogFormat("%s Exception: %s", __func__, e.what());
 }
