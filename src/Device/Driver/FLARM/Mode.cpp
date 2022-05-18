@@ -38,7 +38,6 @@ FlarmDevice::EnableNMEA(OperationEnvironment &env)
 
     /* request self-test results and version information from FLARM */
     Send("PFLAE,R", env);
-    Send("PFLAV,R", env);
     return true;
 
   case Mode::NMEA:
@@ -53,9 +52,16 @@ FlarmDevice::EnableNMEA(OperationEnvironment &env)
 
   case Mode::BINARY:
     mode = Mode::UNKNOWN;
-    BinaryReset(env, std::chrono::milliseconds(500));
-    mode = Mode::NMEA;
-    return true;
+    try {
+      BinaryReset(env, std::chrono::milliseconds(500));
+      mode = Mode::NMEA;
+      Send("PFLAE,R", env);
+      return true;
+    } catch (const std::exception &) {
+      // why is BinaryReset wrong?
+      mode = Mode::UNKNOWN;
+      return false;
+    }
   }
 
   gcc_unreachable();
