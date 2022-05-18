@@ -31,6 +31,7 @@ Copyright_License {
 #include "Operation/MessageOperationEnvironment.hpp"
 #include "Device/Driver/FLARM/Device.hpp"
 #include "FLARM/Version.hpp"
+#include "FLARM/DeviceInformation.hpp"
 
 class ManageFLARMWidget final
   : public RowFormWidget {
@@ -40,12 +41,14 @@ class ManageFLARMWidget final
   };
 
   FlarmDevice &device;
-  const FlarmVersion version;
+  const FlarmVersion version;  // TODO: delete this! and call with DeviceInformation
+  FLARM::DeviceInformation flarm_info;
 
 public:
   ManageFLARMWidget(const DialogLook &look, FlarmDevice &_device,
                     const FlarmVersion &version)
-    :RowFormWidget(look), device(_device), version(version) {}
+//      : RowFormWidget(look), device(_device) /*, version(version)*/ {}
+      : RowFormWidget(look), device(_device), version(version) {}
 
   /* virtual methods from Widget */
   void Prepare(ContainerWindow &parent, const PixelRect &rc) noexcept override;
@@ -56,61 +59,39 @@ ManageFLARMWidget::Prepare([[maybe_unused]] ContainerWindow &parent,
                            [[maybe_unused]] const PixelRect &rc) noexcept
 {
   MessageOperationEnvironment env;
-//   device.RequestSetting("DEVTYPE", env);
-//   device.RequestSetting("HWVER", env);
-//   device.RequestSetting("SWVER", env);
-//   device.RequestSetting("SWEXP", env);
-//   device.RequestSetting("RADIOID", env);
-// 
-//   WaitForSetting(device, "DEVTYPE", 500);
-//   WaitForSetting(device, "HWVER",   500);
-//   WaitForSetting(device, "SWVER",   500);
-//   WaitForSetting(device, "SWEXP",   500);
-//   WaitForSetting(device, "RADIOID", 500);
-  device.TextMode(env);
-  TCHAR text_buffer[0x40];
-  if (device.GetConfig("DEVTYPE", text_buffer, sizeof(text_buffer), env))
-    AddReadOnly(_("Device Type"), nullptr, text_buffer);
+  device.CollectDeviceInformation(flarm_info, env);
 
-  if (device.GetConfig("HWVER", text_buffer, sizeof(text_buffer), env))
-    AddReadOnly(_("Hardware Version"), nullptr, text_buffer);
-
-  if (device.GetConfig("SWVER", text_buffer, sizeof(text_buffer), env))
-    AddReadOnly(_("Firmware Version"), nullptr, text_buffer);
-
-  if (device.GetConfig("SWEXP", text_buffer, sizeof(text_buffer), env))
-    AddReadOnly(_("FW Expiry Date"), nullptr, text_buffer);
-
-  if (device.GetConfig("RADIOID", text_buffer, 0x40, env))
-    AddReadOnly(_("Radio ID"), nullptr, text_buffer);
-
-  if (device.GetConfig("SER", text_buffer, 0x40, env))
-    AddReadOnly(_("Serial ID"), nullptr, text_buffer);
-// ??
-  device.EnableNMEA(env);
-  device.StartRxThread();
-  
-  if (version.available) {
-    StaticString<64> buffer;
-
-////    if (!version.hardware_version.empty()) {
-////      buffer.clear();
-////      buffer.UnsafeAppendASCII(version.hardware_version.c_str());
-////      AddReadOnly(_("Hardware version"), NULL, buffer.c_str());
-////    }
-////
-////    if (!version.software_version.empty()) {
-////      buffer.clear();
-////      buffer.UnsafeAppendASCII(version.software_version.c_str());
-////      AddReadOnly(_("Firmware version"), NULL, buffer.c_str());
-////    }
-
-    if (!version.obstacle_version.empty()) {
-      buffer.clear();
-      buffer.UnsafeAppendASCII(version.obstacle_version.c_str());
-      AddReadOnly(_("Obstacle database"), NULL, buffer.c_str());
-    }
+  if (!flarm_info.device_type.empty()) {
+    AddReadOnly(_("Device Type"), nullptr, flarm_info.device_type.c_str());
   }
+
+  if (!flarm_info.bootloader_version.empty()) {
+    AddReadOnly(_("Flarm Version"), nullptr,
+                flarm_info.bootloader_version.c_str());
+  }
+
+  if (!flarm_info.software_version.empty()) {
+    AddReadOnly(_("Firmware Version"), nullptr,
+                flarm_info.software_version.c_str());
+  }
+
+  if (!flarm_info.fw_expiry_date.empty()) {
+    AddReadOnly(_("FW Expiry Date"), nullptr,
+                flarm_info.fw_expiry_date.c_str());
+  }
+
+  if (!flarm_info.radio_id.empty()) {
+    AddReadOnly(_("Radio ID"), nullptr, flarm_info.radio_id.c_str());
+  }
+
+  if (!flarm_info.serial_id.empty()) {
+    AddReadOnly(_("Serial ID"), nullptr, flarm_info.serial_id.c_str());
+  }
+
+  if (!flarm_info.obstacle_version.empty()) {
+    AddReadOnly(_("Obstacle database"), nullptr, flarm_info.obstacle_version.c_str());
+  }
+
 
   AddButton(_("Setup"), [this](){
     FLARMConfigWidget widget(GetLook(), device);
