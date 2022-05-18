@@ -90,7 +90,6 @@ FlarmDevice::BinaryMode(OperationEnvironment &env)
 
       // Change to binary transfer baudrate
       if (config.bulk_baud_rate != port.GetBaudrate()) {
-
         SetBinaryBaudrate(env, std::chrono::milliseconds(1000),
                             config.bulk_baud_rate);
       }
@@ -99,7 +98,7 @@ FlarmDevice::BinaryMode(OperationEnvironment &env)
   }
 
   // Apparently the switch to binary mode didn't work
-  EnableNMEA(env);  // set back to normal mode with normal baudrate!
+  EnableNMEA(env);  // set back to normal mode with normal baud rate!
   // TODO(August2111): Check it!!!!
   return false;
 }
