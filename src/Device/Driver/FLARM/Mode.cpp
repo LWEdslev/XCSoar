@@ -85,25 +85,32 @@ FlarmDevice::BinaryMode(OperationEnvironment &env)
 
   mode = Mode::UNKNOWN;
 
-  // "After switching, connection should again be checked by issuing a ping."
-  // Testing has revealed that switching the protocol takes a certain amount
-  // of time (around 1.5 sec). Due to that it is recommended to issue new pings
-  // for a certain time until the ping is ACKed properly or a timeout occurs.
-  for (unsigned i = 0; i < 10; ++i) {
-    if (BinaryPing(env, std::chrono::milliseconds(500))) {
-      // We are now in binary mode and have verified that with a binary ping
-      // this throws an exception in error case - so you have to catch it 
-      // before the next trial 
-      mode = Mode::BINARY;
+try { // TODO(August2111): Only Test!
+    // "After switching, connection should again be checked by issuing a ping."
+    // Testing has revealed that switching the protocol takes a certain amount
+    // of time (around 1.5 sec). Due to that it is recommended to issue new
+    // pings for a certain time until the ping is ACKed properly or a timeout
+    // occurs.
+    for (unsigned i = 0; i < 10; ++i) {
+      if (BinaryPing(env, std::chrono::milliseconds(500))) {
+        // We are now in binary mode and have verified that with a binary ping
+        // this throws an exception in error case - so you have to catch it
+        // before the next trial
+        mode = Mode::BINARY;
 
-      // Change to binary transfer baudrate
-      if (config.bulk_baud_rate != port.GetBaudrate()) {
-        SetBinaryBaudrate(env, std::chrono::milliseconds(1000),
+        // Change to binary transfer baud rate
+        if (config.bulk_baud_rate != port.GetBaudrate()) {
+
+          SetBinaryBaudrate(env, std::chrono::milliseconds(1000),
                             config.bulk_baud_rate);
+        }
+        return true; // switch to binary mode successful
       }
-      return true;  // switch to binary mode successful
     }
-  }
+  } 
+catch (...) { // TODO(August2111): Only Test!
+  mode = Mode::BINARY;
+}
 
   // Apparently the switch to binary mode didn't work
   EnableNMEA(env);  // set back to normal mode with normal baud rate!
