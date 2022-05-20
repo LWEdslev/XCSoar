@@ -288,50 +288,26 @@ void FlarmDevice::ResetBaudrate(OperationEnvironment &env)
 }
 #endif
 
-#if defined(AUG_TEST) && (AUG_TEST & 2)
-void FlarmDevice::SetFlarmBaudrate(unsigned baudrate,
-                              OperationEnvironment &env) {
-  // uint32_t 
-  PortState state = port.GetState(); // only test!
-  unsigned index = 0; // only test!
-  DeviceConfig &config = CommonInterface::SetSystemSettings().devices[index];
-  if (config.port_type != DeviceConfig::PortType::DISABLED) {
-    Profile::GetDeviceConfig(Profile::map, index, config);
-    config.baud_rate = baudrate;
-    Profile::SetDeviceConfig(Profile::map, index, config);
+
+bool FlarmDevice::SetFlarmBaudrate(const unsigned baudrate_index,
+                                   const unsigned device_index,
+                                   OperationEnvironment &env) {
+  DeviceConfig &set_config =
+      CommonInterface::SetSystemSettings().devices[device_index];
+  unsigned baudrate = binary_baudrates[baudrate_index];
+  if ((set_config.port_type == DeviceConfig::PortType::SERIAL ||
+       set_config.port_type == DeviceConfig::PortType::ANDROID_USB_SERIAL) &&
+      StringIsEqual(set_config.driver_name, _T("FLARM"))) {  
+    NarrowString<3> buffer;
+    buffer.UnsafeFormat("%u", baudrate_index);
+    SendSetting("BAUD", buffer, env);
+    set_config.baud_rate = baudrate;
+    Profile::SetDeviceConfig(Profile::map, device_index, set_config);
     Profile::Save();
     port.SetBaudrate(baudrate);
+    return true;
   }
-}
-#endif  // AUG_TEST == 2
-
-#if defined(AUG_TEST) && (AUG_TEST & 0x10)
-void FlarmDevice::SetPortBaudrate(unsigned baudrate) {
-   port.SetBaudrate(baudrate);
-}
-#endif  // AUG_TEST == 0x10
-
-void
-FlarmDevice::DownloadMemory(OperationEnvironment &env)
-{
-#if defined(AUG_TEST) && (AUG_TEST & 8)
-  // Only August2111
-  SetFlarmBaudrate(0, env);
-#else
-  // not built up to now
-#endif
-}
-
-void
-FlarmDevice::ClearFlightMemory(OperationEnvironment &env)
-{
-#if defined(AUG_TEST) && (AUG_TEST & 16)
-  auto s = GetSetting("BAUD");
-  s = GetSetting("LOGINT");
-  auto test = settings.find("BAUD");
-#else
-  // not built up to now
-#endif
+  return false;
 }
 
 void

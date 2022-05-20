@@ -71,6 +71,7 @@ public:
     :config(_config), port(_port) {}
   FlarmDevice(Port &_port)
     :port(_port) {}
+	
   /**
    * Write a setting to the FLARM.
    */
@@ -135,20 +136,12 @@ public:
   bool SetRange(unsigned range, OperationEnvironment &env);
   bool GetBaudRate(unsigned &baud_id, OperationEnvironment &env);
   bool SetBaudRate(unsigned baud_id, OperationEnvironment &env);
+  bool SetFlarmBaudrate(const unsigned baudrate, const unsigned device_index,
+                        OperationEnvironment &env);
+  void SetPortBaudrate(unsigned baudrate);
 
   void Restart(OperationEnvironment &env);
 
-#ifdef _AUG_MSC  // Only for August2111 on Windows
-#if (AUG_TEST & 1)
-  void ResetBaudrate(OperationEnvironment &env);
-#endif
-#if (AUG_TEST & 2)
-  void SetFlarmBaudrate(unsigned baudrate, OperationEnvironment &env);
-#endif
-#if (AUG_TEST & 0x10)
-  void SetPortBaudrate(unsigned baudrate);
-#endif
-#endif
 
   bool StartRxThread(void);
   bool CollectDeviceInformation(FLARM::DeviceInformation &flarm_info,
@@ -334,5 +327,5 @@ public:
                       OperationEnvironment &env) override;
 
   static constexpr unsigned binary_baudrates[] = {
-      4800, 9600, 19200, 28800, 38400, 57600, 115200, 230400, 460800, 921600};
+      4800, 9600, 19200, 28800, 38400, 57600, 115200, 230400, 460800, 921600, 0};
 };
