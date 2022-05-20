@@ -43,10 +43,12 @@ class FLARMConfigWidget final : public RowFormWidget {
   unsigned baud, thre, range, acft, log_int;
 
   bool priv, notrack;
+  const unsigned device_index;
 
 public:
-  FLARMConfigWidget(const DialogLook &look, FlarmDevice &_device)
-    :RowFormWidget(look), device(_device) {}
+  FLARMConfigWidget(const DialogLook &look, FlarmDevice &_device,
+                    const unsigned _device_index)
+      : RowFormWidget(look), device(_device), device_index(_device_index) {}
 
   /* virtual methods from Widget */
   void Prepare(ContainerWindow &parent, const PixelRect &rc) noexcept override;
