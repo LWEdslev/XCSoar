@@ -244,6 +244,11 @@ struct DeviceConfig {
   bool sync_from_device;
 
   /**
+   * Should XCSoar ...
+   */
+  int list_index;
+
+  /**
    * Does this port type use a baud rate?
    */
   static constexpr bool UsesSpeed(PortType port_type) noexcept {
@@ -261,6 +266,11 @@ struct DeviceConfig {
   constexpr bool IsDisabled() const noexcept {
     return !enabled || port_type == PortType::DISABLED;
   }
+
+  /**
+   * Set the index of DeviceConfig for a fast access to this settings.
+   */
+  void SetIndex(int index) noexcept;
 
   /**
    * Checks if the specified DeviceConfig is available on this platform.

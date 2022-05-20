@@ -203,6 +203,7 @@ DeviceConfig::Clear() noexcept
   sync_from_device = true;
   sync_to_device = true;
   k6bt = false;
+  list_index = -1;
 #ifndef NDEBUG
   dump_port = false;
 #endif
@@ -317,4 +318,11 @@ DeviceConfig::GetPortName(TCHAR *buffer, size_t max_size) const noexcept
   }
 
   gcc_unreachable();
+}
+
+
+void
+DeviceConfig::SetIndex(int index) noexcept
+{
+  list_index = index;
 }
