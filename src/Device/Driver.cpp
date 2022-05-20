@@ -136,3 +136,12 @@ AbstractDevice::DataReceived(std::span<const std::byte>, NMEAInfo &) noexcept
 {
   return false;
 }
+
+static constexpr unsigned standard_baudrates[] = {
+    1200, 2400,4800, 9600, 19200, 28800, 38400, 57600, 0};
+
+const unsigned *
+AbstractDevice::GetBaudrateList() noexcept
+{
+  return standard_baudrates;
+}

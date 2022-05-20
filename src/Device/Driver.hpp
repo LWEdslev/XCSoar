@@ -237,6 +237,8 @@ public:
    */
   virtual void OnCalculatedUpdate(const MoreData &basic,
                                   const DerivedInfo &calculated) = 0;
+
+  virtual const unsigned *GetBaudrateList() = 0;
 };
 
 /**
@@ -286,6 +288,8 @@ public:
 
   void OnCalculatedUpdate([[maybe_unused]] const MoreData &basic,
                           [[maybe_unused]] const DerivedInfo &calculated) override {}
+
+  const unsigned *GetBaudrateList() noexcept override;
 };
 
 /**
