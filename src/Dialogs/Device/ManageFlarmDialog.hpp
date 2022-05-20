@@ -27,4 +27,5 @@ class Device;
 struct FlarmVersion;
 
 void
-ManageFlarmDialog(Device &device, const FlarmVersion &version);
+ManageFlarmDialog(Device &device, const unsigned device_index,
+  const FlarmVersion &version);

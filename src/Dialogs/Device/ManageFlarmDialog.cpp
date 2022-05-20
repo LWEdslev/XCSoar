@@ -43,12 +43,14 @@ class ManageFLARMWidget final
   FlarmDevice &device;
   const FlarmVersion version;  // TODO: delete this! and call with DeviceInformation
   FLARM::DeviceInformation flarm_info;
+  const unsigned device_index;
 
 public:
   ManageFLARMWidget(const DialogLook &look, FlarmDevice &_device,
+                    const unsigned _device_index,
                     const FlarmVersion &version)
-//      : RowFormWidget(look), device(_device) /*, version(version)*/ {}
-      : RowFormWidget(look), device(_device), version(version) {}
+      : RowFormWidget(look), device(_device), device_index(_device_index),
+        version(version) {}
 
   /* virtual methods from Widget */
   void Prepare(ContainerWindow &parent, const PixelRect &rc) noexcept override;
@@ -94,7 +96,7 @@ ManageFLARMWidget::Prepare([[maybe_unused]] ContainerWindow &parent,
 
 
   AddButton(_("Setup"), [this](){
-    FLARMConfigWidget widget(GetLook(), device);
+    FLARMConfigWidget widget(GetLook(), device, device_index);
     DefaultWidgetDialog(UIGlobals::GetMainWindow(), GetLook(),
                         _T("FLARM"), widget);
   });
@@ -110,14 +112,14 @@ ManageFLARMWidget::Prepare([[maybe_unused]] ContainerWindow &parent,
   });
 }
 
-void
-ManageFlarmDialog(Device &device, const FlarmVersion &version)
-{
+void ManageFlarmDialog(Device &device, const unsigned device_index,
+                       const FlarmVersion &version) {
   WidgetDialog dialog(WidgetDialog::Auto{}, UIGlobals::GetMainWindow(),
                       UIGlobals::GetDialogLook(),
                       _T("FLARM"),
                       new ManageFLARMWidget(UIGlobals::GetDialogLook(),
-                                            (FlarmDevice &)device, version));
+                        (FlarmDevice &)device,
+                        device_index, version));
   dialog.AddButton(_("Close"), mrCancel);
   dialog.ShowModal();
 

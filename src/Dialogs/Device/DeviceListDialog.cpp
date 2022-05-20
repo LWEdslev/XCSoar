@@ -661,7 +661,7 @@ DeviceListWidget::ManageCurrent()
       version = basic.flarm.version;
     }
 
-    ManageFlarmDialog(*device, version);
+    ManageFlarmDialog(*device, descriptor.GetIndex(), version);
   } else if (descriptor.IsDriver(_T("LX"))) {
     DeviceInfo info, secondary_info;
 
