@@ -36,6 +36,10 @@ Copyright_License {
 #include "util/UTF8.hpp"
 #include "util/ConvertString.hpp"
 
+#ifdef _MSC_VER
+# include "event/Loop.hxx"
+#endif
+
 #include <span>
 #include <string>
 
@@ -89,7 +93,14 @@ SkyLinesTracking::Client::InternalClose() noexcept
 void
 SkyLinesTracking::Client::Close()
 {
-  BlockingCall(GetEventLoop(), [this](){ InternalClose(); });
+
+#ifdef _MSC_VER
+  EventLoop &loop = GetEventLoop();
+  loop.SetAlive(false);
+  BlockingCall(loop, [this](){ InternalClose(); });
+#else
+  BlockingCall(GetEventLoop(), [this]() { InternalClose(); });
+#endif
 }
 
 void

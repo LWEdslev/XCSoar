@@ -58,7 +58,13 @@ private:
 void
 BlockingCall(EventLoop &loop, std::function<void()> &&f)
 {
-	if (!loop.IsAlive() || loop.IsInside()) {
+#ifdef _MSC_VER
+  if (!loop.IsAlive()) {
+    // do nothing if the loop is not alive
+  } else if (loop.IsInside()) {
+#else
+  if (!loop.IsAlive() || loop.IsInside()) {
+#endif
 		/* we're already inside the loop - we can simply call
 		   the function */
 		f();
