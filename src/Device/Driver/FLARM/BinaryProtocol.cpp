@@ -301,9 +301,9 @@ FlarmDevice::BinaryReset(OperationEnvironment &env,
   SendStartByte();
   SendFrameHeader(header, env, timeout.GetRemainingOrZero());
 
- // TODO(August2111):
- // in case of 'bulk_baud_rate' after reset all looks fine ???
- if (config->baud_rate != config->bulk_baud_rate)
+  // TODO(August2111):
+  // in case of 'bulk_baud_rate' after reset all looks fine ???
+  if (config->baud_rate != config->bulk_baud_rate)
     port.SetBaudrate(config->baud_rate);
 }
 
