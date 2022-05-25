@@ -31,8 +31,15 @@ Copyright_License {
 #include "util/StringCompare.hxx"
 #include "NMEA/Checksum.hpp"
 
-void
-FlarmDevice::LinkTimeout()
+#if defined(AUG_TEST)
+#include "Interface.hpp"
+#include "Profile/Current.hpp"
+#include "Profile/DeviceConfig.hpp"
+#include "Profile/Map.hpp"
+#include "Profile/Profile.hpp"
+#endif
+
+void FlarmDevice::LinkTimeout()
 {
   mode = Mode::UNKNOWN;
 }

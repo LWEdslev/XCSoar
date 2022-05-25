@@ -53,6 +53,8 @@ class FlarmDevice: public AbstractDevice
     BINARY,
   };
 
+  const DeviceConfig *config = nullptr;  // Is only set if it is also defined
+
   Port &port;
 
   Mode mode = Mode::UNKNOWN;
@@ -64,13 +66,14 @@ class FlarmDevice: public AbstractDevice
    */
   DeviceSettingsMap<std::string> settings;
 
-  const DeviceConfig &config;
 
 public:
   FlarmDevice(const DeviceConfig &_config, Port &_port)
-    :config(_config), port(_port) {}
+    : port(_port) {
+      config = &_config;
+  }
   FlarmDevice(Port &_port)
-    :port(_port) {}
+      : port(_port) {}
 	
   /**
    * Write a setting to the FLARM.
