@@ -6,7 +6,8 @@ TARGETS = PC WIN64 \
 	ANDROID ANDROID7 ANDROID86 \
 	ANDROIDAARCH64 ANDROIDX64 \
 	ANDROIDFAT \
-	OSX64 IOS32 IOS64
+	OSX64 IOS32 IOS64\
+    OV_CUBIE2 OV_PI2 
 
 ifeq ($(TARGET),)
   ifeq ($(HOST_IS_UNIX),y)
@@ -59,6 +60,16 @@ USE_CROSSTOOL_NG := n
 TARGET_ARCH :=
 
 # virtual targets ("flavors")
+
+ifeq ($(TARGET),OV_CUBIE2)
+  TARGET_IS_OPENVARIO = y
+  override TARGET = UNIX
+endif
+
+ifeq ($(TARGET),OV_PI2)
+  TARGET_IS_OPENVARIO = y
+  override TARGET = PI2
+endif
 
 ifeq ($(TARGET),WIN64)
   X64 := y
@@ -441,6 +452,10 @@ ifeq ($(TARGET_IS_PI),y)
   ifneq ($(PI),)
     TARGET_CPPFLAGS += --sysroot=$(PI) -isystem $(PI)/usr/include/arm-linux-gnueabihf -isystem $(PI)/usr/include
   endif
+endif
+
+ifeq ($(TARGET_IS_OPENVARIO),y)
+  TARGET_CPPFLAGS += -DIS_OPENVARIO
 endif
 
 ifeq ($(HOST_IS_ARM)$(TARGET_IS_CUBIE),ny)

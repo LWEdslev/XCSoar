@@ -56,7 +56,16 @@ Copyright_License {
 #define GIT_SUFFIX
 #endif
 
-const TCHAR XCSoar_Version[] = _T(VERSION);
+#ifdef IS_OPENVARIO
+# undef TARGET
+# define TARGET  "OpenVario"
+#endif
+
+#ifdef IS_OPENVARIO
+const TCHAR XCSoar_Version[] = _T(VERSION "-OpenVario");
+#else
+const TCHAR XCSoar_Version[] = _T(VERSION) "";
+#endif
 const TCHAR XCSoar_VersionLong[] = _T(VERSION VERSION_SUFFIX);
 const TCHAR XCSoar_VersionString[] = _T(VERSION VERSION_SUFFIX "-" TARGET);
 const TCHAR XCSoar_VersionStringOld[] = _T(TARGET " " VERSION VERSION_SUFFIX);
