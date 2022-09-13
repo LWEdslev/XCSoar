@@ -325,7 +325,7 @@ File::IsCharDev(Path path) noexcept
 
 #endif // HAVE_POSIX
 
-#if defined(_WIN32) && defined(UNICODE)
+#if defined(_WIN32) && defined(_UNICODE)
 
 bool
 File::Exists(const char *path) noexcept
