@@ -80,7 +80,7 @@ WaypointLabelList::Add(const TCHAR *Name, PixelPoint p,
 
   auto &l = labels.append();
 
-  CopyString(l.Name, ARRAY_SIZE(l.Name), Name);
+  // ??? aug ??? CopyString(l.Name, ARRAY_SIZE(l.Name), Name);
   l.Pos = p;
   l.Mode = Mode;
   l.AltArivalAGL = AltArivalAGL;
