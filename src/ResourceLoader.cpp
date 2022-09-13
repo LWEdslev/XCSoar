@@ -41,12 +41,12 @@ ResourceLoader::Init(HINSTANCE hInstance)
   ResourceLoaderInstance = hInstance;
 }
 
-#else /* !WIN32 */
+#else // !USE_WIN32_RESOURCES
 
 #include "resource_data.h"
 #include "util/StringAPI.hxx"
 
-#endif /* !WIN32 */
+#endif //  USE_WIN32_RESOURCES
 
 ResourceLoader::Data
 ResourceLoader::Load(const TCHAR *name, [[maybe_unused]] const TCHAR *type)
