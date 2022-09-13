@@ -34,7 +34,7 @@ GetJsonString(boost::json::value json_value,
   StaticString<0x40> str;
   auto value = json_value.as_object().if_contains(key);
   if (value != nullptr)
-    str = UTF8ToWideConverter(value->get_string().c_str());
+    str = UTF8ToWideConverter(value->get_string().c_str()).c_str();
   else
     str.Format(_T("'%s' %s"), UTF8ToWideConverter(key.data()).c_str(),
                _("not found"));
