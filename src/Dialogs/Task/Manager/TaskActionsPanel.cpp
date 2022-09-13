@@ -129,10 +129,12 @@ TaskActionsPanel::OnOwnWeGlideClicked()
 inline void
 TaskActionsPanel::OnUserWeGlideClicked()
 {
+#ifdef _MSC_VER
   const auto task_file = WeGlide::DownloadTaskFile(WeGlide::User(1752)); // zum Test: Thomas Melde...
 // August2111:    if (WeGlide::DownloadTaskDialog()) {
   if (File::Exists(task_file))
     DirtyTaskListPanel();
+#endif
 }
 
 void
