@@ -187,7 +187,14 @@ public:
 	constexpr
 #endif
 	bool IsV4Mapped() const noexcept {
+#ifdef __MINGW__        
+// TODO(August2111): This is dangerous! In MinGW only forbidden, there are two IN6_IS_ADDR_V4MAPPED functions linked to the system!!
+//                   One is in ws32.lib
+// aug !!!!		return IN6_IS_ADDR_V4MAPPED(&address.sin6_addr);
+		return false;  // TODO(August2111): Only WorkAround!
+#else
 		return IN6_IS_ADDR_V4MAPPED(&address.sin6_addr);
+#endif
 	}
 
 	/**
