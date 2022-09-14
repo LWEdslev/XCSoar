@@ -40,10 +40,10 @@ class ManageFLARMWidget final
     Reboot,
   };
 
-  FlarmDevice &device;
-  const FlarmVersion version;  // TODO: delete this! and call with DeviceInformation
   FLARM::DeviceInformation flarm_info;
+  FlarmDevice &device;
   const unsigned device_index;
+  const FlarmVersion version; // TODO: delete this! and call with DeviceInformation
 
 public:
   ManageFLARMWidget(const DialogLook &look, FlarmDevice &_device,
