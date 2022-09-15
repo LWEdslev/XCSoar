@@ -230,7 +230,7 @@ struct Instance : CoInstance {
 
 namespace TIM {
 namespace PCMet {
-void DownloadImage([[maybe_unused]] uint32_t type) {  //TODO(August2111): type is unused?
+void DownloadImage([[maybe_unused]] uint32_t type) {  // TODO(August2111): type is unused?
 
 #if 1
 #ifdef _AUG_MSC // TODO(August2111)

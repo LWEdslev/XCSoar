@@ -73,14 +73,14 @@ protected:
 };
 
 void
-WeatherWidget::Update(const MoreData &basic) noexcept
+WeatherWidget::Update([[maybe_unused]]const MoreData &basic) noexcept  // TODO(August2111): basic is unused?
 {
   WeatherWindow &w = (WeatherWindow &)GetWindow();
 //  w.ReadBlackboard(basic.attitude);
   w.Invalidate();
 }
 
-#include "Input/InputEvents.hpp"
+#include "Input/InputEvents.hpp"  // TODO(August2111) move
 void
 WeatherWidget::InternetUpdate() noexcept
 {
