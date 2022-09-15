@@ -277,7 +277,7 @@ try {
                           env, std::chrono::seconds(1));
 } catch (const DeviceTimeout &) {
   return FLARM::MT_ERROR;
-#if MSC_AUG   // AUGUST2111
+#ifdef  _AUG_MSC   // AUGUST2111
 } catch (std::exception &e) {
   // overwrite the last message:
 #ifdef _DEBUG
