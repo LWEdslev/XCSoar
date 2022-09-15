@@ -46,10 +46,10 @@ public:
       : WidgetDialog(style, parent, look, caption, widget) {}
 
   // take focus setting from here, not the default!
-  void SetDefaultFocus() override {}
+  void SetDefaultFocus() noexcept override {}
 
 private:
-  bool OnAnyKeyDown(unsigned key_code) override;
+  bool OnAnyKeyDown(unsigned key_code) noexcept override;
 };
 
 
@@ -185,7 +185,7 @@ PatchWidget::ShowPatchDialog()
 }
 
 bool
-PatchDialog::OnAnyKeyDown(unsigned key_code)
+PatchDialog::OnAnyKeyDown(unsigned key_code) noexcept
 {
   switch (toupper(key_code)) {
   case 'Q':  // 'Quit

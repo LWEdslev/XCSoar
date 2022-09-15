@@ -46,7 +46,7 @@ public:
       : WidgetDialog(style, parent, look, caption, widget) {}
 
 private:
-  bool OnAnyKeyDown(unsigned key_code) override;
+  bool OnAnyKeyDown(unsigned key_code) noexcept override;
 };
 
 
@@ -110,7 +110,7 @@ UploadResponseWidget::ShowSuccessDialog()
 }
 
 bool
-UploadResponseDialog::OnAnyKeyDown(unsigned key_code)
+UploadResponseDialog::OnAnyKeyDown(unsigned key_code) noexcept
 {
   // any key is closing the dialog! 
   WndForm::SetModalResult(mrOK);

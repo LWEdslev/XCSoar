@@ -46,10 +46,10 @@ public:
       : WidgetDialog(style, parent, look, caption, widget) {}
 
   // take focus setting from here, not the default!
-  void SetDefaultFocus() override {}
+  void SetDefaultFocus() noexcept override {}
 
 private:
-  bool OnAnyKeyDown(unsigned key_code) override;
+  bool OnAnyKeyDown(unsigned key_code) noexcept override;
 };
 
 class DeleteWidget final : public RowFormWidget, DataFieldListener {
@@ -171,7 +171,9 @@ bool DeleteWidget::ShowDeleteDialog() {
   }
 }
 
-bool DeleteDialog::OnAnyKeyDown(unsigned key_code) {
+bool 
+DeleteDialog::OnAnyKeyDown(unsigned key_code) noexcept
+{
   switch (toupper(key_code)) {
   case 'Q': // 'Quit
   case 'X': // 'eXit

@@ -40,7 +40,7 @@ public:
       : WidgetDialog(style, parent, look, caption, widget) {}
 
 private:
-  bool OnAnyKeyDown(unsigned key_code) override;
+  bool OnAnyKeyDown(unsigned key_code) noexcept override;
 };
 
 
@@ -92,7 +92,7 @@ UserSelectionWidget::ShowSuccessDialog()
 }
 
 bool
-SelectionResponseDialog::OnAnyKeyDown(unsigned key_code)
+SelectionResponseDialog::OnAnyKeyDown(unsigned key_code) noexcept 
 {
   // any key is closing the dialog! 
   WndForm::SetModalResult(mrOK);

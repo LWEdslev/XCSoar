@@ -52,7 +52,7 @@ public:
       : WidgetDialog(style, parent, look, caption, widget) {}
 
 private:
-  bool OnAnyKeyDown(unsigned key_code) override;
+  bool OnAnyKeyDown(unsigned key_code) noexcept override;
 };
 
 
@@ -176,7 +176,7 @@ TaskDownloadWidget::ShowDialog()
 }
 
 bool
-TaskResponseDialog::OnAnyKeyDown(unsigned key_code)
+TaskResponseDialog::OnAnyKeyDown(unsigned key_code) noexcept
 {
   switch (tolower(key_code)) {
   case 'j':
