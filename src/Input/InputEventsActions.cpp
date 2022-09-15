@@ -752,7 +752,7 @@ InputEvents::eventExchangeFrequencies([[maybe_unused]] const TCHAR *misc)
 }
 
 void
-InputEvents::eventUploadIGCFile(const TCHAR *misc)
+InputEvents::eventUploadIGCFile([[maybe_unused]] const TCHAR *misc)
 {
   if (WeGlide::FlightUploadDialog()) {
       // success!
@@ -760,7 +760,7 @@ InputEvents::eventUploadIGCFile(const TCHAR *misc)
 }
 
 void
-InputEvents::eventPatchIGCFile(const TCHAR *misc)
+InputEvents::eventPatchIGCFile([[maybe_unused]] const TCHAR *misc)
 {
   if (WeGlide::FlightPatchDialog()) {
     // success!
@@ -771,12 +771,12 @@ InputEvents::eventPatchIGCFile(const TCHAR *misc)
 #include "Dialogs/Weather/PCMetDialog.hpp"
 
 
-void InputEvents::eventAugustTest(const TCHAR *misc) {
+void InputEvents::eventAugustTest([[maybe_unused]] const TCHAR *misc) {
   TIM::PCMet::DownloadImage(0);
 }
 
 void
-InputEvents::eventDeleteIGCFile(const TCHAR *misc)
+InputEvents::eventDeleteIGCFile([[maybe_unused]] const TCHAR *misc)
 {
   if (WeGlide::FlightDeleteDialog()) {
       // success!
@@ -784,7 +784,7 @@ InputEvents::eventDeleteIGCFile(const TCHAR *misc)
 }
 
 void 
-InputEvents::eventDownloadTask(const TCHAR *misc)
+InputEvents::eventDownloadTask([[maybe_unused]] const TCHAR *misc)
 {
   const auto settings = CommonInterface::GetComputerSettings();
   WeGlide::TaskDownloadDialog(settings.weglide.pilot, _T("Event Load Task"));
