@@ -26,7 +26,7 @@ Copyright_License {
 #else
 #include "ResourceId.hpp"
 
-#if defined(USE_GDI) || defined(ANDROID)
+#if defined(USE_GDI) || defined(ANDROID) || defined(USE_WIN32_RESOURCES)
 
 #define MAKE_RESOURCE(name, id) \
   static constexpr ResourceId name(id);
