@@ -185,7 +185,7 @@ public:
   void OnCancelMode() noexcept override;
 
 #ifdef _WIN32
-  bool OnCommand(unsigned id, unsigned code) noexcept override;
+  bool OnCommand(unsigned id, unsigned code) noexcept;
 #endif
 
   void SetKeyDownFunction(KeyDownFunction function) {
