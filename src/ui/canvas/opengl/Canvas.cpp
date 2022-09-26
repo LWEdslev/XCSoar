@@ -94,7 +94,13 @@ ClipText(const Font &font, tstring_view text,
   unsigned max_width = canvas_width - x;
   unsigned max_chars = max_width / font_width;
 
+#ifdef _AUG_MSC
+  // TODO(August2111): "error C2668: "WideToUTF8Converter::WideToUTF8Converter":
+  // Mehrdeutiger Aufruf einer überladenen Funktion" w/o MSC this isn't necessary!!!!
+  return text.substr(0, max_chars); // TODO(August2111)  EnableOpenGL! Achtung: Das stimmte wahrscheinlich nicht!
+#else  // _AUG_MSC
   return text.substr(0, TruncateStringUTF8(text, max_chars));
+#endif // _AUG_MSC
 }
 
 void
@@ -600,11 +606,11 @@ Canvas::CalcTextSize(tstring_view text) const noexcept
     return size;
 
   /* see if the TextCache can handle this request */
-  size = TextCache::LookupSize(*font, text2);
+  size = TextCache::LookupSize(*font, text2.c_str()); // TODO(August2111)  EnableOpenGL! Achtung: Das stimmte wahrscheinlich nicht!
   if (size.height > 0)
     return size;
 
-  return TextCache::GetSize(*font, text2);
+  return TextCache::GetSize(*font, text2.c_str()); // TODO(August2111)  EnableOpenGL! Achtung: Das stimmte wahrscheinlich nicht!
 }
 
 /**
@@ -632,7 +638,16 @@ Canvas::DrawText(PixelPoint p, tstring_view text) noexcept
   if (font == nullptr)
     return;
 
-  const std::string_view text3 = ClipText(*font, text2, p.x, size.width);
+//  const std::string_view text3 = ClipText(*font, text2, 0, size.width); //
+  //  TODO(August2111)  EnableOpenGL! Achtung: Das stimmte wahrscheinlich nicht!
+  const tstring_view textX = L"TEST";
+  // const std::string_view textX = "TEST";
+  const std::string_view text3 =
+      (const std::string_view) ""; // ClipText(*font, textX, (int)0, (unsigned
+                                   // int)size.width); // TODO(August2111)
+                                   // EnableOpenGL! Achtung: Das stimmte
+                                   // wahrscheinlich nicht!
+//  const std::string_view text3 = ClipText(*font, text2, p.x, size.width);
   if (text3.empty())
     return;
 
@@ -666,7 +681,10 @@ Canvas::DrawTransparentText(PixelPoint p, tstring_view text) noexcept
   if (font == nullptr)
     return;
 
-  const std::string_view text3 = ClipText(*font, text2, p.x, size.width);
+  const std::string_view text3 = "";
+/// ???      ClipText(*font, text2.c_str(), p.x,
+/// ???               size.width); // TODO(August2111)  EnableOpenGL! Achtung: Das
+/// ???                            // stimmte wahrscheinlich nicht!
   if (text3.empty())
     return;
 
@@ -698,7 +716,11 @@ Canvas::DrawClippedText(PixelPoint p, PixelSize size,
   if (font == nullptr)
     return;
 
-  const std::string_view text3 = ClipText(*font, text2, 0, size.width);
+//  const std::string_view text3 = ClipText(*font, text2, 0, size.width); // TODO(August2111)  EnableOpenGL! Achtung: Das stimmte wahrscheinlich nicht!
+  const tstring_view textX = L"TEST";
+  // const std::string_view textX = "TEST";
+  const std::string_view text3 = (const std::string_view) "";  // ClipText(*font, textX, (int)0, (unsigned int)size.width); // TODO(August2111)  EnableOpenGL! Achtung: Das
+                                 // stimmte wahrscheinlich nicht!
   if (text3.empty())
     return;
 

@@ -152,8 +152,15 @@ PCMet::DownloadOverlay(const OverlayInfo &info, BrokenDateTime now_utc,
                                    UTF8ToWideConverter(url.c_str() + sizeof(PCMET_FTP)));
 
   {
+#ifdef _AUG_MSC
+    // TODO(August2111): "error C2668: "WideToUTF8Converter::WideToUTF8Converter": Mehrdeutiger Aufruf einer überladenen Funktion"
+    // w/o MSC this isn't necessary!!!!  
+    const WideToUTF8Converter username(settings.ftp_credentials.username.c_str());
+    const WideToUTF8Converter password(settings.ftp_credentials.password.c_str());
+#else  // _AUG_MSC
     const WideToUTF8Converter username(settings.ftp_credentials.username);
     const WideToUTF8Converter password(settings.ftp_credentials.password);
+#endif // _AUG_MSC
 
     const auto ignored_response = co_await
       Net::CoDownloadToFile(curl, url,

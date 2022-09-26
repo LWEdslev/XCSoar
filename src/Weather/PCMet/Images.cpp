@@ -132,8 +132,16 @@ PCMet::DownloadLatestImage(const char *type, const char *area,
                            const PCMetSettings &settings,
                            CurlGlobal &curl, ProgressListener &progress)
 {
+#ifdef _AUG_MSC
+  // TODO(August2111): "error C2668: "WideToUTF8Converter::WideToUTF8Converter":
+  // Mehrdeutiger Aufruf einer überladenen Funktion" w/o MSC this isn't
+  // necessary!!!!
+  const WideToUTF8Converter username(settings.www_credentials.username.c_str());
+  const WideToUTF8Converter password(settings.www_credentials.password.c_str());
+#else  // _AUG_MSC
   const WideToUTF8Converter username(settings.www_credentials.username);
   const WideToUTF8Converter password(settings.www_credentials.password);
+#endif // _AUG_MSC
 
   char url[256];
   snprintf(url, sizeof(url),

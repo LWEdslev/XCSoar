@@ -171,7 +171,13 @@ OpenPortInternal(EventLoop &event_loop, Cares::Channel &cares,
     break;
 
   case DeviceConfig::PortType::TCP_CLIENT: {
+#ifdef _AUG_MSC
+    // TODO(August2111): "error C2668: "WideToUTF8Converter::WideToUTF8Converter": Mehrdeutiger Aufruf einer überladenen Funktion"
+    //  w/o MSC this isn't necessary!!!!
+    const WideToUTF8Converter ip_address(config.ip_address.c_str());
+#else  // _AUG_MSC
     const WideToUTF8Converter ip_address(config.ip_address);
+#endif // _AUG_MSC
     if (!ip_address.IsValid())
       throw std::runtime_error("No IP address configured");
 
