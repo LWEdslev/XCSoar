@@ -227,5 +227,6 @@ WaypointIconRenderer::Draw(const Waypoint &waypoint, const PixelPoint &point,
     DrawLandable(waypoint, point, reachable);
   else
     // non landable turnpoint
+    // DrawLandable(waypoint, point, reachable);
     GetWaypointIcon(look, waypoint, small_icons, in_task).Draw(canvas, point);
 }
