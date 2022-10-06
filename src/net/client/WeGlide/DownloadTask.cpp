@@ -185,7 +185,7 @@ DownloadUserTask()
 //==========================================================================================================
 //==========================================================================================================
 
-#include "WeGlideSettings.hpp"
+#include "Settings.hpp"
 #include "Interface.hpp"
 #include "LocalPath.hpp"
 #include "LogFile.hpp"

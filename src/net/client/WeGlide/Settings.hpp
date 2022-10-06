@@ -62,8 +62,9 @@ struct WeGlideSettings {
   WeGlide::User pilot;
 
   void SetDefaults() noexcept {
-    pilot_id = 0;
-    pilot_birthdate.Clear();
+    // pilot.id = 0;
+    // pilot.birthdate.Clear();
+    pilot.Clear();
 
     enabled = false;
     automatic_upload = true; // after enabling WeGlide!

@@ -22,7 +22,7 @@
 */
 
 #include "PatchFlight.hpp"
-#include "WeGlideSettings.hpp"
+#include "Settings.hpp"
 #include "HttpResponse.hpp"
 #include "lib/curl/CoStreamRequest.hxx"
 #include "lib/curl/Easy.hxx"

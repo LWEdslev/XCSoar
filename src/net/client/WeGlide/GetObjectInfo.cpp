@@ -22,11 +22,11 @@ Copyright_License {
 */
 
 #include "GetObjectInfo.hpp"
-#include "WeGlideSettings.hpp"
+#include "Settings.hpp"
 #include "HttpResponse.hpp"
 
 #include "UIGlobals.hpp"
-#include "Cloud/weglide/GetJsonString.hpp"
+#include "GetJsonString.hpp"
 #include "co/InvokeTask.hxx"
 #include "co/Task.hxx"
 #include "Dialogs/CoDialog.hpp"

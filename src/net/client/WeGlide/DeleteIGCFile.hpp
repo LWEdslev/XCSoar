@@ -23,8 +23,7 @@ Copyright_License {
 
 #pragma once
 
-#if 1
-#include "Cloud/weglide/WeGlideObjects.hpp"
+#include "WeGlideObjects.hpp"
 
 #include <cstdint>
 #include <tchar.h>
@@ -34,5 +33,3 @@ namespace WeGlide {
 bool DeleteIGCFile(const User &user, uint_least32_t flight_id) noexcept;
 
 } // namespace WeGlide
-
-#endif

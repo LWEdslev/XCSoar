@@ -23,7 +23,7 @@ Copyright_License {
 
 #pragma once
 
-#include "Cloud/weglide/WeGlideObjects.hpp"
+#include "WeGlideObjects.hpp"
 
 #include <cstdint>
 

@@ -22,7 +22,7 @@
 */
 
 #include "UploadFlight.hpp"
-#include "WeGlideSettings.hpp"
+#include "Settings.hpp"
 #include "HttpResponse.hpp"
 #include "net/http/Progress.hpp"
 #include "lib/curl/CoStreamRequest.hxx"

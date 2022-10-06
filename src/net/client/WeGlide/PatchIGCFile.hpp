@@ -24,7 +24,7 @@ Copyright_License {
 #pragma once
 
 #if 1
-#include "Cloud/weglide/WeGlideObjects.hpp"
+#include "WeGlideObjects.hpp"
 #include <boost/json/value.hpp>
 
 #include <cstdint>
