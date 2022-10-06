@@ -27,6 +27,8 @@ Copyright_License {
 #include "Internal.hpp"
 #include "Dialogs/Message.hpp"
 #include "Dialogs/Task/dlgTaskHelpers.hpp"
+#include "Dialogs/CoDialog.hpp"
+#include "Dialogs/Error.hpp"
 #include "Components.hpp"
 #include "Logger/ExternalLogger.hpp"
 #include "Simulator.hpp"
@@ -40,9 +42,13 @@ Copyright_License {
 #include "system/Path.hpp"
 #include "system/FileUtil.hpp"
 
-#include "Cloud/weglide/DownloadTask.hpp"
-#include "Cloud/weglide/WeGlideObjects.hpp"
+#include "net/client/WeGlide/DownloadTask.hpp"
+#include "net/client/WeGlide/WeGlideObjects.hpp"
 #include "Dialogs/Contest/WeGlide/TaskDownloadDialog.hpp"
+#include "Operation/PluggableOperationEnvironment.hpp"
+#include "net/http/Init.hpp"
+// #include "net/client/WeGlide/DownloadTask.hpp"
+#include "co/InvokeTask.hxx"
 
 TaskActionsPanel::TaskActionsPanel(TaskManagerDialog &_dialog,
                                    TaskMiscPanel &_parent,
@@ -109,8 +115,9 @@ TaskActionsPanel::OnDeclareClicked()
   ExternalLogger::Declare(decl, way_points.GetHome().get());
 }
 
+#if 1  // TODO(August2111)  Wofür?
 inline void
-TaskActionsPanel::OnOwnWeGlideClicked()
+TaskActionsPanel::OnOwnWeGlideClicked() noexcept
 {
   auto pilot =  CommonInterface::GetComputerSettings().weglide.pilot; // the preset value
 #ifdef _AUG_MSC  // TODO(August2111)
@@ -125,9 +132,10 @@ TaskActionsPanel::OnOwnWeGlideClicked()
 //  if (File::Exists(task_file))
 //    DirtyTaskListPanel();
 }
+#endif 
 
 inline void
-TaskActionsPanel::OnUserWeGlideClicked()
+TaskActionsPanel::OnUserWeGlideClicked() noexcept
 {
 #ifdef _MSC_VER
   const auto task_file = WeGlide::DownloadTaskFile(WeGlide::User(1752)); // zum Test: Thomas Melde...
@@ -135,6 +143,42 @@ TaskActionsPanel::OnUserWeGlideClicked()
   if (File::Exists(task_file))
     DirtyTaskListPanel();
 #endif
+}
+
+#if 0 // TODO(Augus2111): das hatte ich komplett anders gemacht! Begründung!!!
+static Co::InvokeTask DownloadWeGlideTask(std::unique_ptr<OrderedTask> &task,
+                                          CurlGlobal &curl,
+                                          const WeGlideSettings &settings,
+                                          const TaskBehaviour &task_behaviour,
+                                          const Waypoints *waypoints,
+                                          ProgressListener &progress) {
+  task = co_await WeGlide::DownloadDeclaredTask(curl, settings, task_behaviour,
+                                                waypoints, progress);
+}
+#endif
+
+inline void TaskActionsPanel::OnDownloadClicked() noexcept try {
+  const auto &settings = CommonInterface::GetComputerSettings();
+
+  std::unique_ptr<OrderedTask> task;
+  PluggableOperationEnvironment env;
+#if 0 // TODO(Augus2111): das hatte ich komplett anders gemacht! Begründung!!!
+  if (!ShowCoDialog(dialog.GetMainWindow(), GetLook(), _("Download"),
+                    DownloadWeGlideTask(task, *Net::curl, settings.weglide,
+                                        settings.task, &way_points, env),
+                    &env))
+    return;
+#endif
+  if (!task)
+    ShowMessageBox(_("No task"), _("Error"), MB_OK | MB_ICONEXCLAMATION);
+
+  active_task = task->Clone(settings.task);
+  *task_modified = true;
+  dialog.ResetTaskView();
+
+  dialog.SwitchToEditTab();
+} catch (const std::runtime_error &e) {
+  ShowError(std::current_exception(), _("Download"));
 }
 
 void
@@ -156,7 +200,7 @@ TaskActionsPanel::Prepare([[maybe_unused]] ContainerWindow &parent,
   AddButton(_("Own WeGlide Task"), [this]() { OnOwnWeGlideClicked(); });
   AddButton(_("User WeGlide Task"), [this]() { OnUserWeGlideClicked(); });
 
-  if (settings.weglide.pilot_id != 0)
+  if (settings.weglide.pilot.id != 0)
     AddButton(_("Download WeGlide task"),
               [this](){ OnDownloadClicked(); });
 

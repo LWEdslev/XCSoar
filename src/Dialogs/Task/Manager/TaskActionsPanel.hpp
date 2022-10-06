@@ -55,7 +55,11 @@ private:
   void OnNewTaskClicked();
   void OnDeclareClicked();
   void OnDownloadClicked() noexcept;
-  void OnUserWeGlideClicked() noexcept;
+  
+#if 1 // TODO(August2111)  Wofür?
+  void OnOwnWeGlideClicked() noexcept;
+#endif
+    void OnUserWeGlideClicked() noexcept;
 
   /* virtual methods from class Widget */
   void Prepare(ContainerWindow &parent, const PixelRect &rc) noexcept override;
