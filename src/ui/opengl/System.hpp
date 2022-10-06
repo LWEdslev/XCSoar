@@ -29,5 +29,9 @@ Copyright_License {
 #include <SDL_platform.h>
 #include <SDL_opengles2.h>
 #else
-#include <GLES2/gl2.h>
+#ifdef _WIN32
+# include <gl/GLU.h>
+#else
+# include <GLES2/gl2.h>
+#endif
 #endif

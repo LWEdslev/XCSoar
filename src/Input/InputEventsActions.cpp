@@ -550,11 +550,13 @@ InputEvents::eventNull([[maybe_unused]] const TCHAR *misc)
 void
 InputEvents::eventBeep([[maybe_unused]] const TCHAR *misc)
 {
-#ifdef _WIN32
+// #ifdef _WIN32
+#ifdef USE_GDI  // TODO(August2111): hat das was mit der GDI zu tun???? 
+  // .. erledigt sich das mit OpenGL????
   MessageBeep(MB_ICONEXCLAMATION);
 #else
   PlayResource(_T("IDR_WAV_CLEAR"));
-  #endif
+#endif
 }
 
 // Setup

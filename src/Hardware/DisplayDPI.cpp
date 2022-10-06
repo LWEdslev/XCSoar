@@ -148,8 +148,13 @@ Display::GetDPI([[maybe_unused]] const UI::Display &display, unsigned custom_dpi
 #endif
 
 
-#ifdef _WIN32
-  return display.GetDPI();
+#ifdef _WIN32  // August2111: 2022-09-19
+  //  return forced_dpi;  // falsch!!!
+# ifdef USE_GDI
+  return display.GetDPI();  // richtig!
+# else
+  return {96, 96};  // TODO(August211)!!!
+# endif
 #elif defined(USE_X11) || defined(MESA_KMS)
   return {
     MMToDPI(display.GetSize().width, display.GetSizeMM().width),

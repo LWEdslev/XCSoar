@@ -348,7 +348,7 @@ ListControl::SetOrigin(int i) noexcept
 
   origin = i;
 
-#ifdef USE_WINUSER
+#ifdef USE_GDI  // ???USE_WINUSER_NICHT_MEHR // TODO(August2111)
   if ((unsigned)abs(delta) < items_visible) {
     PixelRect rc = GetClientRect();
     rc.right = scroll_bar.GetLeft(GetSize());

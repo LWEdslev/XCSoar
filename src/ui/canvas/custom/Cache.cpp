@@ -42,6 +42,22 @@ Copyright_License {
 #include <cassert>
 #include <memory>
 
+#ifndef HAVE_POSIX
+char *strndup(const char *str, int chars) {
+  char *buffer;
+  int n;
+
+  buffer = (char *)malloc(chars + 1);
+  if (buffer) {
+    for (n = 0; ((n < chars) && (str[n] != 0)); n++)
+      buffer[n] = str[n];
+    buffer[n] = 0;
+  }
+
+  return buffer;
+}
+#endif
+
 /**
  * A key type for the Cache template class.  It can be operated in two
  * modes: the zero-allocation mode is used by default; it stores a
@@ -77,7 +93,12 @@ struct TextCacheKey {
   void Allocate() noexcept {
     assert(allocated == nullptr);
 
+#ifdef HAVE_POSIX
     allocated = strndup(text.data(), text.size());
+#else  // HAVE_POSIX
+    allocated = strndup(text.data(), text.size());
+#endif
+
     text = {allocated, text.size()};
   }
 
@@ -190,7 +211,7 @@ TextCache::GetSize(const Font &font, std::string_view text) noexcept
     return *cached;
 
 #ifdef UNICODE
-  PixelSize size = font.TextSize(UTF8ToWideConverter(text));
+  PixelSize size = font.TextSize(UTF8ToWideConverter(text.data()).c_str());    // TODO(August2111)  EnableOpenGL!
 #else
   PixelSize size = font.TextSize(text);
 #endif
@@ -244,18 +265,18 @@ TextCache::Get(const Font &font, std::string_view text) noexcept
 
 #if defined(USE_FREETYPE) || defined(USE_APPKIT) || defined(USE_UIKIT)
 #ifdef UNICODE
-  UTF8ToWideConverter text2(text);
+  UTF8ToWideConverter text2(text.data());  // TODO(August2111)  EnableOpenGL!
 #else
   std::string_view text2 = text;
 #endif
-  PixelSize size = font.TextSize(text2);
+  PixelSize size = font.TextSize(text2.c_str());  // TODO(August2111)  EnableOpenGL!
   size_t buffer_size = font.BufferSize(size);
   if (buffer_size == 0)
     return nullptr;
 
   std::unique_ptr<uint8_t[]> buffer{new uint8_t[buffer_size]};
 
-  font.Render(text2, size, buffer.get());
+  font.Render(text2.c_str(), size, buffer.get()); // TODO(August2111) EnableOpenGL!
 #ifdef ENABLE_OPENGL
   glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
   RenderedText rt(size, buffer.get());
