@@ -161,11 +161,12 @@ try {
   NarrowString<32> buffer;
 
 // TODO(August2111): was hat Max hier verbessert???
-// Max?  if (SaveValueEnum(Baud, baud)) {
-// Max?    buffer.UnsafeFormat("%u", baud);
-// Max?    device.SendSetting("BAUD", buffer, env);
-// Max?    changed = true;
-  if (SaveValue(Baud, baud)) {
+  // unbedingt kontrollieren, ob hier jetzt alles richtig gesetzt wird!
+  if (SaveValueEnum(Baud, baud)) {
+    buffer.UnsafeFormat("%u", baud);
+    device.SendSetting("BAUD", buffer, env);
+//    changed = true;
+// Aug?  if (SaveValueEnum(Baud, baud)) {
     // special behavior at BAUD rate: here are 4 steps needed:
     // * send command to Flarm
     // * save the value in users profile 

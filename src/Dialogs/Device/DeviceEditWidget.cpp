@@ -242,10 +242,10 @@ DeviceEditWidget::UpdateVisibilities() noexcept
       baud_rates = baud_rates_std;
       break;
     }
-    auto value = baud_rate_df->GetAsInteger();
+    auto value = baud_rate_df->GetValue();
     baud_rate_df->ClearChoices();
     FillBaudRates(*baud_rate_df, baud_rates);
-    baud_rate_df->SetAsInteger(value);
+    baud_rate_df->SetValue(value);
   }
   SetRowAvailable(BulkBaudRate, uses_speed &&
                   DeviceConfig::UsesDriver(type));
