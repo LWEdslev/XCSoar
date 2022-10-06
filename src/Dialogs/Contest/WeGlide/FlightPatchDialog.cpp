@@ -24,7 +24,7 @@ Copyright_License {
 #include "FlightPatchDialog.hpp"
 #include "Interface.hpp"
 #include "UIGlobals.hpp"
-#include "contest/weglide/PatchIGCFile.hpp"
+#include "net/client/WeGlide/PatchIGCFile.hpp"
 #include "Dialogs/WidgetDialog.hpp"
 #include "Dialogs/Error.hpp"
 #include "Form/DataField/Listener.hpp"
@@ -122,11 +122,11 @@ void
 PatchWidget::OnModified(DataField &df) noexcept
 {
   if (IsDataField(USER_ID, df)) {
-    user.id = df.GetAsInteger();
+    user.id = _ttoi(df.GetAsString()); // GetAsInteger();
   } else if (IsDataField(USER_TOKEN, df)) {
     user.token = df.GetAsString();
   } else if (IsDataField(FLIGHT_ID, df)) {
-    flight_id = df.GetAsInteger();
+    flight_id = _ttoi(df.GetAsString()); // GetAsInteger();
   }
   SetFocus(); // with check state of fields!
 }

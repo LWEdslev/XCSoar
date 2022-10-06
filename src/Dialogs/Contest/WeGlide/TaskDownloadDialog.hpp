@@ -23,7 +23,7 @@ Copyright_License {
 
 #pragma once
 
-#include "Cloud/weglide/WeGlideObjects.hpp"
+#include "net/client/WeGlide/WeGlideObjects.hpp"
 #include <tchar.h>
 
 // class OrderedTask;

@@ -33,7 +33,7 @@ Copyright_License {
 #include "Operation/PopupOperationEnvironment.hpp"
 #include "UIGlobals.hpp"
 #include "Widget/RowFormWidget.hpp"
-#include "contest/weglide/DeleteIGCFile.hpp"
+#include "net/client/WeGlide/DeleteIGCFile.hpp"
 #include "system/FileUtil.hpp"
 #include "ui/event/KeyCode.hpp"
 
@@ -111,11 +111,11 @@ bool DeleteWidget::SetFocus() noexcept {
 
 void DeleteWidget::OnModified(DataField &df) noexcept {
   if (IsDataField(USER_ID, df)) {
-    user.id = df.GetAsInteger();
+    user.id = _ttoi(df.GetAsString()); // GetAsInteger();df.GetAsInteger();
   } else if (IsDataField(USER_TOKEN, df)) {
     user.token = df.GetAsString();
   } else if (IsDataField(FLIGHT_ID, df)) {
-    flight_id = df.GetAsInteger();
+    flight_id = _ttoi(df.GetAsString()); // GetAsInteger();df.GetAsInteger();
   }
   SetFocus(); // with check state of fields!
 }

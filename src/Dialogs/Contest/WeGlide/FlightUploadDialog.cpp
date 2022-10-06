@@ -24,7 +24,7 @@ Copyright_License {
 #include "FlightUploadDialog.hpp"
 #include "Interface.hpp"
 #include "UIGlobals.hpp"
-#include "contest/weglide/UploadIGCFile.hpp"
+#include "net/client/WeGlide/UploadIGCFile.hpp"
 #include "Dialogs/WidgetDialog.hpp"
 #include "Dialogs/Error.hpp"
 #include "Form/DataField/Listener.hpp"
@@ -131,11 +131,11 @@ UploadWidget::OnModified(DataField &df) noexcept
   if (IsDataField(IGC_FILE, df)) {
     igcpath = static_cast<FileDataField &>(df).GetValue();
   } else if (IsDataField(USER_ID, df)) {
-    user.id = df.GetAsInteger();
+    user.id = _ttoi(df.GetAsString()); // GetAsInteger();
   } else if (IsDataField(USER_BIRTH, df)) {
     user.birthdate = static_cast<DataFieldDate &>(df).GetValue();
   } else if (IsDataField(AIRCRAFT_ID, df)) {
-    aircraft_id = df.GetAsInteger();
+    aircraft_id = _ttoi(df.GetAsString()); // GetAsInteger();df.GetAsInteger();
   }
   SetFocus(); // with check state of fields!
 }

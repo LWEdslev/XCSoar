@@ -25,10 +25,10 @@ Copyright_License {
 
 #include "LogFile.hpp"
 #include "UIGlobals.hpp"
-#include "Cloud/weglide/DownloadTask.hpp"
-#include "Cloud/weglide/GetObjectInfo.hpp"
-#include "Cloud/weglide/GetJsonString.hpp"
-#include "Cloud/weglide/WeGlideSettings.hpp"
+#include "net/client/WeGlide/DownloadTask.hpp"
+#include "net/client/WeGlide/GetObjectInfo.hpp"
+#include "net/client/WeGlide/GetJsonString.hpp"
+#include "net/client/WeGlide/Settings.hpp"
 #include "Dialogs/WidgetDialog.hpp"
 #include "Dialogs/Error.hpp"
 #include "Dialogs/Message.hpp"
@@ -101,7 +101,7 @@ void
 TaskDownloadWidget::OnModified(DataField &df) noexcept
 {
   TCHAR buffer[0x100];
-  user.id = df.GetAsInteger();
+  user.id = _ttoi(df.GetAsString()); // GetAsInteger();
   user = WeGlide::GetUserInfo(user.id);
 
   _stprintf(buffer, _T("%s (id: %u, club: %s)"), user.name.c_str(), user.id,
