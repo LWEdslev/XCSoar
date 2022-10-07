@@ -140,11 +140,13 @@ public:
 #ifdef _UNICODE
   WideToUTF8Converter(const wchar_t *_value) noexcept
     :value(ConvertWideToUTF8(_value)) {}
+#ifdef _AUG_MSC
 
   // TODO(August2111)  EnableOpenGL! Achtung!
   WideToUTF8Converter(std::wstring_view _value) noexcept
     :value(ConvertWideToUTF8(_value.data())) {}
   //===========================================
+#endif
 #else
   WideToUTF8Converter(const_pointer _value) noexcept
     :value(_value)
