@@ -30,6 +30,7 @@ Copyright_License {
 #include "Form/DataField/Listener.hpp"
 #include "Form/DataField/File.hpp"
 #include "Form/DataField/Date.hpp"
+#include "Form/DataField/Integer.hpp"
 #include "Language/Language.hpp"
 #include "Operation/Cancelled.hpp"
 #include "Operation/PopupOperationEnvironment.hpp"
@@ -122,11 +123,11 @@ void
 PatchWidget::OnModified(DataField &df) noexcept
 {
   if (IsDataField(USER_ID, df)) {
-    user.id = _ttoi(df.GetAsString()); // GetAsInteger();
+    user.id = static_cast<DataFieldInteger &>(df).GetValue();
   } else if (IsDataField(USER_TOKEN, df)) {
     user.token = df.GetAsString();
   } else if (IsDataField(FLIGHT_ID, df)) {
-    flight_id = _ttoi(df.GetAsString()); // GetAsInteger();
+    flight_id = static_cast<DataFieldInteger &>(df).GetValue();
   }
   SetFocus(); // with check state of fields!
 }

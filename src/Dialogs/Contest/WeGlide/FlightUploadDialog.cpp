@@ -30,6 +30,7 @@ Copyright_License {
 #include "Form/DataField/Listener.hpp"
 #include "Form/DataField/File.hpp"
 #include "Form/DataField/Date.hpp"
+#include "Form/DataField/Integer.hpp"
 #include "Language/Language.hpp"
 #include "Operation/Cancelled.hpp"
 #include "Operation/PopupOperationEnvironment.hpp"
@@ -131,11 +132,11 @@ UploadWidget::OnModified(DataField &df) noexcept
   if (IsDataField(IGC_FILE, df)) {
     igcpath = static_cast<FileDataField &>(df).GetValue();
   } else if (IsDataField(USER_ID, df)) {
-    user.id = _ttoi(df.GetAsString()); // GetAsInteger();
+    user.id = static_cast<DataFieldInteger &>(df).GetValue();
   } else if (IsDataField(USER_BIRTH, df)) {
     user.birthdate = static_cast<DataFieldDate &>(df).GetValue();
   } else if (IsDataField(AIRCRAFT_ID, df)) {
-    aircraft_id = _ttoi(df.GetAsString()); // GetAsInteger();df.GetAsInteger();
+    aircraft_id = static_cast<DataFieldInteger &>(df).GetValue();
   }
   SetFocus(); // with check state of fields!
 }

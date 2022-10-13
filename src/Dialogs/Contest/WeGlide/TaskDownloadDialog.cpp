@@ -33,6 +33,7 @@ Copyright_License {
 #include "Dialogs/Error.hpp"
 #include "Dialogs/Message.hpp"
 #include "Form/DataField/Listener.hpp"
+#include "Form/DataField/Integer.hpp"
 #include "Language/Language.hpp"
 #include "Operation/Cancelled.hpp"
 #include "Operation/PopupOperationEnvironment.hpp"
@@ -101,8 +102,8 @@ void
 TaskDownloadWidget::OnModified(DataField &df) noexcept
 {
   TCHAR buffer[0x100];
-  user.id = _ttoi(df.GetAsString()); // GetAsInteger();
-  user = WeGlide::GetUserInfo(user.id);
+  // user.id = static_cast<DataFieldInteger &>(df).GetValue();
+  user = WeGlide::GetUserInfo(static_cast<DataFieldInteger &>(df).GetValue());
 
   _stprintf(buffer, _T("%s (id: %u, club: %s)"), user.name.c_str(), user.id,
             user.club.c_str());
@@ -124,6 +125,7 @@ try {
              user.id, this); // Field 2
   AddSpacer();               // Field 3
 #if 1
+  // TODO(August2111): Die Nummer ('62') muss aus den Settings genommen werden!?!
   WeGlide::Aircraft aircraft = WeGlide::GetAircraftInfo(62);
   AddReadOnly(_("Aircraft"), nullptr, aircraft.name);        // Field 4
 #endif
