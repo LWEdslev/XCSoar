@@ -99,7 +99,8 @@ try { // TODO(August2111): Only Test!
         mode = Mode::BINARY;
 
         // Change to binary transfer baud rate
-        if (config && config->bulk_baud_rate != port.GetBaudrate()) {
+        if (config && config->bulk_baud_rate > 0 &&
+            config->bulk_baud_rate != port.GetBaudrate()) {
           SetBinaryBaudrate(env, std::chrono::milliseconds(1000),
                             config->bulk_baud_rate);
         }
