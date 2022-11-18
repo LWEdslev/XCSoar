@@ -64,6 +64,7 @@ set(_SOURCES
         Renderer/WaypointListRenderer.cpp
         Renderer/WaypointRenderer.cpp
         Renderer/WaypointRendererSettings.cpp
+        Renderer/WeatherRenderer.cpp
         Renderer/WindArrowRenderer.cpp
         Renderer/WindChartRenderer.cpp
 

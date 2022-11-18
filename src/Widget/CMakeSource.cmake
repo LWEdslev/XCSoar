@@ -27,7 +27,8 @@ set(_SOURCES
         Widget/ViewImageWidget.cpp
         Widget/Widget.cpp
         Widget/WindowWidget.cpp
-        
+        Widget/WeatherWidget.cpp
+
         Widget/ProgressWidget.cpp
         Widget/LargeTextWidget.cpp
         Widget/VScrollWidget.cpp
