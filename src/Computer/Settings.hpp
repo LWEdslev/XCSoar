@@ -177,7 +177,7 @@ struct CirclingSettings {
   }
 };
 
-enum AverageEffTime {
+enum class AverageEffTime : uint8_t{
   ae15seconds,
   ae30seconds,
   ae60seconds,
