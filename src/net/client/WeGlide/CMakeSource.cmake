@@ -1,8 +1,14 @@
 set(_SOURCES
-        UploadFlight.cpp
-        DownloadTask.cpp
-
         UploadIGCFile.cpp
+        PatchIGCFile.cpp
+        DeleteIGCFile.cpp
+
+        UploadFlight.cpp
+        PatchFlight.cpp
+        DeleteFlight.cpp
+        DownloadTask.cpp
+        GetJsonString.cpp
+        GetObjectInfo.cpp
 )
 
 set(SCRIPT_FILES
