@@ -64,7 +64,7 @@ l_igcfile_upload(lua_State *L)
         user.birthdate = {year, month, day};
       }
 #else
-      user.token = UTF8ToWideConverter(luaL_checkstring(L, 4));
+      user.token = UTF8ToWideConverter(luaL_checkstring(L, 4)).c_str();
 #endif
     }
     // Glider ID:
