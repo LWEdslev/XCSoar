@@ -266,9 +266,9 @@ def create_xcsoar(args):
     # else: arguments.append('-DCMAKE_TOOLCHAIN_FILE:PATH=\"' + src_dir.replace('\\','/') + '/.august/toolchains/mscv2019.toolchain\"')
     else:
       if toolchain == 'mingw':
-	  	arguments.append('-DCMAKE_TOOLCHAIN_FILE:PATH=\"' + src_dir.replace('\\','/') + '/build/cmake/toolchains/LinuxMinGW.toolchain\"')
+        arguments.append('-DCMAKE_TOOLCHAIN_FILE:PATH=\"' + src_dir.replace('\\','/') + '/build/cmake/toolchains/LinuxMinGW.toolchain\"')
       else:
-	    arguments.append('-DCMAKE_TOOLCHAIN_FILE:PATH=\"' + src_dir.replace('\\','/') + '/build/cmake/toolchains/LinuxGCC.toolchain\"')
+        arguments.append('-DCMAKE_TOOLCHAIN_FILE:PATH=\"' + src_dir.replace('\\','/') + '/build/cmake/toolchains/LinuxGCC.toolchain\"')
       print('!!! USER = ', my_env['USER'], '!!!')
 
     arguments.append('-DTOOLCHAIN=' + toolchain)
