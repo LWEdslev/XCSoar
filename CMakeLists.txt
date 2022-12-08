@@ -435,7 +435,7 @@ configure_file(
 list(APPEND SOURCE_FILES "${OUTPUT_FOLDER}/Data/XCSoar.rc")
 list(APPEND SCRIPT_FILES "${CMAKE_CURRENT_SOURCE_DIR}/Data/XCSoar.rc.in")
 
-if (MSVC)
+if (MSVC AND 0) # nur wenn tatsächlich MSVC compilierbar ist!
   list(APPEND SOURCE_FILES "Data/XCSoar.def")
 else()
 
