@@ -1,6 +1,6 @@
 set(TARGET_NAME "XCSoarAug-Linux")  # hardcoded yet
 
-message(STATUS "+++ System = Linux / GCC (${TOOLCHAIN})!")
+message(STATUS "+++ System = Linux / GCC (${TOOLCHAIN})  on ${CMAKE_HOST_SYSTEM_NAME} !")
 
 set(LIB_PREFIX "lib" )  # "lib")
 set(LIB_SUFFIX ".a")    # "a")
@@ -11,7 +11,12 @@ add_compile_definitions(BOOST_MATH_DISABLE_DEPRECATED_03_WARNING=ON)
 set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -std=c++20")
 # set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -fcoroutines")
 set(CMAKE_C_FLAGS    "${CMAKE_C_FLAGS}")
+
+set(UNIX ON)
 add_compile_definitions(__LINGCC__)
+
+    include_directories("/usr/include/x86_64-linux-gnu")
+    message(FATAL_ERROR "Stop????")
 
 #********************************************************************************
 if(AUGUST_SPECIAL)

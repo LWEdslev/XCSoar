@@ -1,6 +1,6 @@
 set(TARGET_NAME "XCSoarAug-MinGW")  # hardcoded yet
 
-message(STATUS "+++ System = WIN32 / MinGW (${TOOLCHAIN})!")
+message(STATUS "+++ System = WIN32 / MinGW (${TOOLCHAIN})  on ${CMAKE_HOST_SYSTEM_NAME} !!!")
 
 set(LIB_PREFIX "lib" )  # "lib")
 set(LIB_SUFFIX ".a")    # "a")

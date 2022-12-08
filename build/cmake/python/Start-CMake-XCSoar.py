@@ -34,8 +34,9 @@ if sys.platform.startswith('win'):
         'clang10', 'clang11', 'clang12', 'clang13', 'clang14', 'clang15' ]:
         toolchain = 'mgw112'  # standard toolchain on windows
 else:
-    if not toolchain in ['unix']:
-        toolchain = 'unix'  # standard toolchain on Linux
+    if not toolchain in ['unix', 'mingw']:
+        # toolchain = 'unix'  # standard toolchain on Linux
+        toolchain = 'mingw'  # standard toolchain on Linux
 print('Toolchain    = ', toolchain)
 
 arguments = []

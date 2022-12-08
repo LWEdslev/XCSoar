@@ -60,7 +60,8 @@ generator = {
            'mgw122' : 'MinGW Makefiles',
            # 'ninja' : 'MinGW Makefiles',
            'ninja' : 'Ninja',
-           'unix' : 'MinGW Makefiles',
+           'unix' : 'Unix Makefiles',
+           'mingw' : 'MinGW Makefiles',
            'clang10' : 'Clang',
            'clang11' : 'Clang',
            'clang12' : 'Clang',
@@ -95,6 +96,7 @@ compiler_setup = {
            # 'ninja' : gcc,
            'ninja' : clang,
            'unix' : gcc,
+           'mingw' : gcc,
            'clang10' : clang,
            'clang11' : clang,
            'clang12' : clang,
@@ -119,14 +121,19 @@ def create_xcsoar(args):
   toolchain = args[2]
 
   start_dir = os.path.dirname(filename)
+  if len(start_dir) > 0:
+      start_dir = start_dir.replace('build/cmake/python', '');
   if len(start_dir) == 0:
      # start_dir = ''
-     start_dir = os.getcwd()
+     start_dir = os.getcwd();
   # print('Filename: ', filename)  # 'CMakeXCSoar_Flaps5.py')
   # print('Start CMake Creation of ', project_name, ' / ', branch, ' / ', toolchain)
   print('Start CMake Creation of ', project_name, ' / ', branch, ' / ', toolchain)
   print('====================================\n')
-  print(os.getcwd())
+  print('CurrDir  :',os.getcwd())
+  print('StartDir :',start_dir)
+#  os.chdir(start_dir)
+#  print('CurrDir  :',os.getcwd())
   
   my_env = os.environ.copy()
   creation = 15
@@ -135,7 +142,7 @@ def create_xcsoar(args):
   # creation = 14  # ohne CMake!
   verbose = creation & 0x100
   print('creation-flag = ', str(creation)) # ohne CMake!
-  #  verbose = True
+  verbose = True
   if True: # False: # 
     i = 0
     for arg in args:   # sys.argv:
@@ -258,8 +265,10 @@ def create_xcsoar(args):
         arguments.append('-DCMAKE_TOOLCHAIN_FILE:PATH=\"' + program_dir + '/Android/android-ndk-r25b/build/cmake/android.toolchain.cmake\"')
     # else: arguments.append('-DCMAKE_TOOLCHAIN_FILE:PATH=\"' + src_dir.replace('\\','/') + '/.august/toolchains/mscv2019.toolchain\"')
     else:
-      # arguments.append('-DCMAKE_TOOLCHAIN_FILE:PATH=\"' + src_dir.replace('\\','/') + '/build/cmake/toolchains/LinuxMinGW.toolchain\"')
-      arguments.append('-DCMAKE_TOOLCHAIN_FILE:PATH=\"' + src_dir.replace('\\','/') + '/build/cmake/toolchains/LinuxGCC.toolchain\"')
+      if toolchain == 'mingw':
+	  	arguments.append('-DCMAKE_TOOLCHAIN_FILE:PATH=\"' + src_dir.replace('\\','/') + '/build/cmake/toolchains/LinuxMinGW.toolchain\"')
+      else:
+	    arguments.append('-DCMAKE_TOOLCHAIN_FILE:PATH=\"' + src_dir.replace('\\','/') + '/build/cmake/toolchains/LinuxGCC.toolchain\"')
       print('!!! USER = ', my_env['USER'], '!!!')
 
     arguments.append('-DTOOLCHAIN=' + toolchain)
@@ -288,8 +297,8 @@ def create_xcsoar(args):
           if sys.platform.startswith('win'):
             myprocess = subprocess.call(my_cmd, env = my_env, shell = False)
           else:
-            myrocess = os.system(my_cmd)
-        # myprocess = subprocess.call(my_cmd)
+            myprocess = subprocess.call(my_cmd, env = my_env, shell = False)
+            # myprocess = os.system(my_cmd)
       except:
         print('error on "subprocess.call"')
       if myprocess != 0:
@@ -332,7 +341,8 @@ def create_xcsoar(args):
       if sys.platform.startswith('win'):
         myprocess = subprocess.call(my_cmd, env = my_env, shell = False)
       else:
-        myprocess = os.system(my_cmd)
+        myprocess = subprocess.call(my_cmd, env = my_env, shell = False)
+        # myprocess = os.system(my_cmd)
       if myprocess != 0:
         creation = 0
         print('cmd with failure!')
@@ -356,7 +366,8 @@ def create_xcsoar(args):
       if sys.platform.startswith('win'):
         myprocess = subprocess.call(my_cmd, env = my_env, shell = False)
       else:
-        myprocess = os.system(my_cmd)
+        myprocess = subprocess.call(my_cmd, env = my_env, shell = False)
+        # myprocess = os.system(my_cmd)
       if myprocess != 0:
         creation = 0
         print('cmd with failure!')
