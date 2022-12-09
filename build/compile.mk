@@ -112,8 +112,7 @@ ifeq ($(IWYU),y)
 endif
 
 $(ABI_OUTPUT_DIR)/%$(OBJ_SUFFIX): %.cxx | $(ABI_OUTPUT_DIR)/%/../dirstamp $(compile-depends)
-	@$(NQ)echo "  CXX 2    $@"
-	echo $(Q)$(WRAPPED_CXX) $< -c -o $@ $(cxx-flags) -v 
+	@$(NQ)echo "  CXX    $@"
 	$(Q)$(WRAPPED_CXX) $< -c -o $@ $(cxx-flags) -v
 ifeq ($(IWYU),y)
 	$(Q)iwyu $< $(cxx-flags)
