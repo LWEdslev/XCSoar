@@ -2,26 +2,14 @@
 SET(CMAKE_SYSTEM_NAME Windows)
 
 # which compilers to use for C and C++
-if (1)
- SET(CMAKE_C_COMPILER gcc)
- SET(CMAKE_CXX_COMPILER g++)
- SET(CMAKE_RC_COMPILER windres)
- # here is the target environment located
-###  SET(CMAKE_FIND_ROOT_PATH  /usr/bin/gcc /usr/lib )  
-elseif(0)
- SET(CMAKE_C_COMPILER i686-w64-mingw32-gcc)
- SET(CMAKE_CXX_COMPILER i686-w64-mingw32-g++)
- SET(CMAKE_RC_COMPILER i686-w64-mingw32-windres)
- # here is the target environment located
- SET(CMAKE_FIND_ROOT_PATH  /usr/i686-w64-mingw32 )  #  /home/august/mingw-install
-else()
  SET(CMAKE_C_COMPILER x86_64-w64-mingw32-gcc)
  SET(CMAKE_CXX_COMPILER x86_64-w64-mingw32-g++)
+
  SET(CMAKE_RC_COMPILER x86_64-w64-mingw32-windres)
  # here is the target environment located
- SET(CMAKE_FIND_ROOT_PATH  /usr/lib/gcc/x86_64-w64-mingw32/10-win32 ) 
+ SET(CMAKE_FIND_ROOT_PATH  /usr/bin ) 
+ # SET(CMAKE_FIND_ROOT_PATH  /usr/lib/gcc/x86_64-w64-mingw32/10-win32 ) 
  # SET(CMAKE_FIND_ROOT_PATH  /usr/x86_64-w64-mingw32 )  #  /home/august/mingw-install
-endif()
 
 
 # adjust the default behaviour of the FIND_XXX() commands:
@@ -32,5 +20,6 @@ endif()
 #set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 #set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 
+# because cross compiling no compiler check
 SET (CMAKE_C_COMPILER_WORKS 1)
 SET (CMAKE_CXX_COMPILER_WORKS 1)

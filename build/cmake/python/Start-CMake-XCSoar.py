@@ -17,15 +17,15 @@ if len(sys.argv) > 1:
   project = sys.argv[1]
 else:
   project = "XCSoarAug"
+
 if len(sys.argv) > 2:
   toolchain = sys.argv[2]
+else:
+  toolchain = "msvc2022"
+  
 if len(sys.argv) > 3:
   creation_flag = sys.argv[3]
-else:
-  toolchain = "msvc2019"
-
-print('Project Name = ', project)
-
+  
 # os.system("pause")
 
 
@@ -37,7 +37,8 @@ else:
     if not toolchain in ['unix', 'mingw']:
         # toolchain = 'unix'  # standard toolchain on Linux
         toolchain = 'mingw'  # standard toolchain on Linux
-print('Toolchain    = ', toolchain)
+
+print('Project Name = ', project, 'toolchain = ', toolchain)
 
 arguments = []
 arguments.append('XCSoarAug')   # project_name

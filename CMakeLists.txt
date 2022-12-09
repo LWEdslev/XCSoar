@@ -77,6 +77,7 @@ add_subdirectory(Data)
 add_subdirectory(po)
 
 if(UNIX)
+ set(ENABLE_OPENGL ON)  # better outside????
   # moved to build/cmake/LinuxGCC.cmake
 elseif (MSVC OR 1)  # 1 = always..
 # if (MSVC AND 0)  # 0 = never..
@@ -117,7 +118,7 @@ set(XCSOAR_LIB_TYPE STATIC)  # SHARED)
 if (CMAKE_TOOLCHAIN_FILE)
   message(STATUS "CMAKE_TOOLCHAIN_FILE = '${CMAKE_TOOLCHAIN_FILE}'")
   # Die Variablen aus dem Toolchain-File Sind zwar hier nicht abrufbar, aber wirken auf Compiler uww.??? 
-  # message(STATUS "CMAKE_SYSTEM_NAME = '${CMAKE_SYSTEM_NAME}'")
+  message(STATUS "CMAKE_SYSTEM_NAME = '${CMAKE_SYSTEM_NAME}'")
   # message(STATUS "CMAKE_CXX_COMPILER = '${CMAKE_CXX_COMPILER}'")
   # message(STATUS "CMAKE_C_COMPILER = '${CMAKE_C_COMPILER}'")
 endif()
@@ -141,11 +142,18 @@ add_subdirectory(3rd_party)
 set(SRC "${PROJECTGROUP_SOURCE_DIR}/src")
 include(CMakeSource.cmake)
 
-if (WIN32 AND MSVC)
+if (0)
+  include(build/cmake/LinuxMinGW.cmake)
+
+elseif (WIN32 AND MSVC)
   include(build/cmake/WinMSVC.cmake)
 elseif(WIN32 AND (CMAKE_CXX_COMPILER_ID STREQUAL "Clang"))
   include(build/cmake/WinClang.cmake)
   set(CLANG ON)
+elseif(${CMAKE_HOST_SYSTEM_NAME}' MATCHES 'Linux') # August2111: nur Test
+  include(build/cmake/LinuxMinGW.cmake)
+elseif(WIN32 AND MINGW AND (${CMAKE_HOST_SYSTEM_NAME}' MATCHES 'Linux'))
+  include(build/cmake/LinuxMinGW.cmake)
 elseif(WIN32 AND MINGW)
   include(build/cmake/WinMinGW.cmake)
 elseif(WIN32 AND CLANG)
@@ -155,43 +163,6 @@ elseif(WIN32 AND NINJA)
 elseif(UNIX)
   message(STATUS "+++ System = LINUX / GCC(?) (${TOOLCHAIN})!")
   include(build/cmake/LinuxGCC.cmake)
-      
-
-###       # no lib structure, this is failing on GCC  (serial order)???
-###       # set(XCSOAR_LIB_TYPE WITHOUT)
-###       if(MINGW)
-###          set(ENABLE_OPENGL OFF)  # das ist hier MinGWCrossCompiling für Windows! 
-###          message(FATAL_ERROR "Stop MinGW")
-###       else()
-###          set(ENABLE_OPENGL OFF)
-###       endif()   
-
-#set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -std=c++20")
-#      if (ON) # 2020-05-20: inserted on pcderad0633 regarding missing 'tchar.h'
-#        # add_compile_definitions(HAVE_MSVCRT)
-## 2022-11-21 verborgen!:        add_compile_definitions(_UNICODE)
-#        add_compile_definitions(STRICT)
-#      endif()
-#      
-#      if (OFF)  # maybe on some PCs???
-#         # used in util/ByteOrder.hxx and in (boost) f.e. predef/other/endian.h
-#      	 add_compile_definitions(__LITTLE_ENDIAN=1)  # have to be defined!
-#      	 add_compile_definitions(__BIG_ENDIAN=2)
-#      endif()
-#
-#      include_directories("${PROJECTGROUP_SOURCE_DIR}/temp/data")  # temporary data!
-#      include_directories("${PROJECTGROUP_SOURCE_DIR}/src/unix")   # temporary data!
-#
-#      # we are in UNIX!
-##      set(CMAKE_CXX_STANDARD_LIBRARIES "-static-libgcc -static-libstdc++ -lwsock32 -lws2_32 ${CMAKE_CXX_STANDARD_LIBRARIES}")
-##      set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static -static-libstdc++ -Wl,-Bstatic,--whole-archive -lwinpthread -Wl,--no-whole-archive -v")
-#      set(CMAKE_CXX_STANDARD_LIBRARIES "-static-libgcc -static-libstdc++ ${CMAKE_CXX_STANDARD_LIBRARIES}")
-#      set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static -static-libstdc++ -Wl,-Bstatic,--whole-archive -Wl,--no-whole-archive -v")
-#      # message(FATAL_ERROR "+++ Jetzt bin ich im Linux: !")
-#     set(SSL_LIB )  # empty ?
-#     set(CRYPTO_LIB )  #empty ?
-#     # 22.08.2022: set (CARES_LIB ${LINK_LIBS}/c-ares/${XCSOAR_CARES_VERSION}/lib/${TOOLCHAIN}/cares.lib)
-
 elseif(ANDROID)
     message(STATUS "+++ System = ANDROID / ${ANDROID_ABI}!")
 else()
@@ -209,7 +180,7 @@ endif()  ### MSVC
 message(STATUS "+++ Lib Pre- and Suffix: '${LIB_PREFIX}' -- '${LIB_SUFFIX}' !")
 
 
-include_directories("${PROJECTGROUP_SOURCE_DIR}/src/io") # only regarding Logfile!
+include_directories("${SRC}/io") # only regarding Logfile!
 include_directories("${OUTPUT_FOLDER}/include")
 
 #3rd party components
@@ -251,10 +222,9 @@ file(READ "VERSION.txt" XCSOAR_VERSION)
 string(STRIP ${XCSOAR_VERSION} XCSOAR_VERSION)
 add_compile_definitions("XCSOAR_VERSION=\"${XCSOAR_VERSION}\"")
 
-# USE_MEMORY_CANVAS
-# USE_GDI
-
 if(ENABLE_OPENGL)
+    add_compile_definitions(ENABLE_OPENGL)
+if (0)
     # set(FreeGLUT_DIR ${LINK_LIBS}/glut/freeglut-3.2.1/lib/msvc2019/cmake/FreeGLUT)
     # find_package(FreeGLUT REQUIRED)
     set(OpenGL_GL_PREFERENCE LEGACY)
@@ -272,7 +242,6 @@ if(ENABLE_OPENGL)
     
     get_target_property(GLU_IMPORTED_LIBNAME OpenGL::GLU IMPORTED_LIBNAME)
     message(STATUS "glu imported libname: ${GLU_IMPORTED_LIBNAME}")
-    add_compile_definitions(ENABLE_OPENGL)
     add_compile_definitions(USE_WIN32_RESOURCES) #  USE_WINUSER) # USE_WINUSER entspricht USE_GDI!
     # add_compile_definitions(USE_WINUSER)
 
@@ -293,6 +262,8 @@ if(ENABLE_OPENGL)
   if (MSVC)
   #  message(FATAL_ERROR "OpenGL-Stop!  OpenGL_INCLUDE_DIR = ${OpenGL_INCLUDE_DIR}")
   endif()
+  set(OPENGL_DEFINED ON)
+endif() # 0/1
 else()
 # Kein OpenGL!!!!!!!!!!!!!!
 ##    if (USE_MEMORY_CANVAS)
@@ -598,7 +569,7 @@ if(MSVC)
   target_link_options(${TARGET_NAME} PUBLIC "/SUBSYSTEM:WINDOWS")
 endif()
 
-if(ENABLE_OPENGL)
+if(OPENGL_DEFINED)
     target_link_libraries(${TARGET_NAME}
         PRIVATE   # PUBLIC
         OpenGL::GL

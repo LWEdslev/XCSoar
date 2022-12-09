@@ -26,7 +26,7 @@ def gcc(toolchain, env):
   global prev_batch
   global program_dir
   if sys.platform.startswith('win'):
-     cmake_generator ='MinGW Makefiles'
+     cmake_generator ='\"MinGW Makefiles\"'
      return program_dir.replace('/', '\\') + '\\MinGW\\' + toolchain + '\\bin;' + env['PATH']
   else:
      # cmake_generator ='Unix Makefiles'  # normal Unix
@@ -213,6 +213,7 @@ def create_xcsoar(args):
   
   try:
     myprocess = subprocess.Popen([cmake_exe, '--version'], env = my_env)
+    myprocess.wait()
   except:
     print('"cmake" not callable!')
     creation = 0
@@ -231,7 +232,7 @@ def create_xcsoar(args):
     print(prev_batch)
   #========================================================================
   if creation & 1:
-    print('... and now starts with cmake')
+    print('Python Step 1 - Configure CMake')
     if os.path.isfile(build_dir+ '/CMakeCache.txt'):
       os.remove(build_dir+ '/CMakeCache.txt')
     arguments = []
@@ -248,7 +249,8 @@ def create_xcsoar(args):
     arguments.append(src_dir)  # curr_dir.replace('\\', '/'))
     arguments.append('-B')
     arguments.append(build_dir)
-    arguments.append('-G "' + cmake_generator + '"') 
+    arguments.append('-G') 
+    arguments.append(cmake_generator) 
     arguments.append('--debug-trycompile')
 
     if is_windows and toolchain.startswith('clang'):
@@ -266,9 +268,9 @@ def create_xcsoar(args):
     # else: arguments.append('-DCMAKE_TOOLCHAIN_FILE:PATH=\"' + src_dir.replace('\\','/') + '/.august/toolchains/mscv2019.toolchain\"')
     else:
       if toolchain == 'mingw':
-        arguments.append('-DCMAKE_TOOLCHAIN_FILE:PATH=\"' + src_dir.replace('\\','/') + '/build/cmake/toolchains/LinuxMinGW.toolchain\"')
+        arguments.append('-DCMAKE_TOOLCHAIN_FILE:PATH=' + src_dir.replace('\\','/') + '/build/cmake/toolchains/LinuxMinGW.toolchain')
       else:
-        arguments.append('-DCMAKE_TOOLCHAIN_FILE:PATH=\"' + src_dir.replace('\\','/') + '/build/cmake/toolchains/LinuxGCC.toolchain\"')
+        arguments.append('-DCMAKE_TOOLCHAIN_FILE:PATH=' + src_dir.replace('\\','/') + '/build/cmake/toolchains/LinuxGCC.toolchain')
       print('!!! USER = ', my_env['USER'], '!!!')
 
     arguments.append('-DTOOLCHAIN=' + toolchain)
@@ -296,9 +298,11 @@ def create_xcsoar(args):
       try:
           if sys.platform.startswith('win'):
             myprocess = subprocess.call(my_cmd, env = my_env, shell = False)
+            myprocess.wait()
           else:
-            myprocess = subprocess.call(my_cmd, env = my_env, shell = False)
-            # myprocess = os.system(my_cmd)
+            myprocess = subprocess.call(arguments, env = my_env) #, shell = False)
+            myprocess.wait()
+            ### myprocess = os.system(my_cmd)
       except:
         print('error on "subprocess.call"')
       if myprocess != 0:
@@ -313,7 +317,7 @@ def create_xcsoar(args):
 
   #========================================================================
   if creation & 2:
-  # Build with make
+    print('Python Step 2 - Build with cmake')
     arguments = []
     arguments.append(cmake_exe)  # 'cmake')
 #    arguments.append('-S')
@@ -339,10 +343,14 @@ def create_xcsoar(args):
       print('========================================')
       # myprocess = subprocess.call(my_cmd, env = my_env, shell = False)
       if sys.platform.startswith('win'):
-        myprocess = subprocess.call(my_cmd, env = my_env, shell = False)
+        # myprocess = subprocess.call(my_cmd, env = my_env, shell = False)
+        myprocess = subprocess.Popen(arguments, env = my_env, shell = False)
+        myprocess.wait()
       else:
-        myprocess = subprocess.call(my_cmd, env = my_env, shell = False)
-        # myprocess = os.system(my_cmd)
+        # myprocess = subprocess.call(arguments, env = my_env)  #, shell = False)
+        myprocess = subprocess.Popen(arguments, env = my_env, shell = False)
+        myprocess.wait()
+       # myprocess = os.system(my_cmd)
       if myprocess != 0:
         creation = 0
         print('cmd with failure!')
@@ -352,7 +360,7 @@ def create_xcsoar(args):
   
   #========================================================================
   if creation & 0x04:
-    #Install
+    print('Python Step 3 - Install')
     arguments = []
     arguments.append(cmake_exe)  # 'cmake')
     arguments.append('--install')
@@ -366,8 +374,9 @@ def create_xcsoar(args):
       if sys.platform.startswith('win'):
         myprocess = subprocess.call(my_cmd, env = my_env, shell = False)
       else:
-        myprocess = subprocess.call(my_cmd, env = my_env, shell = False)
+        myprocess = subprocess.call(arguments, env = my_env, shell = False)
         # myprocess = os.system(my_cmd)
+      myprocess.wait()
       if myprocess != 0:
         creation = 0
         print('cmd with failure!')
@@ -377,6 +386,7 @@ def create_xcsoar(args):
 
   #========================================================================
   if creation & 0x08:   # ==>Run
+    print('Python Step 4 - Execute XCSoar')
     if toolchain.startswith('msvc'):
       build_dir = build_dir + '/Release'
       # build_dir = build_dir + '/Debug'
@@ -402,7 +412,9 @@ def create_xcsoar(args):
           if sys.platform.startswith('win'):
             myprocess = subprocess.call(my_cmd, env = my_env, shell = False)
           else:
-            myprocess = os.system(my_cmd)
+            myprocess = subprocess.call(arguments, env = my_env, shell = False)
+            # myprocess = os.system(my_cmd)
+          myprocess.wait()
           if not myprocess in [0, 1]:
             creation = 0
             print('cmd with failure: ', myprocess, '!')
