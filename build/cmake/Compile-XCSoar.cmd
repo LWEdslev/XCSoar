@@ -12,7 +12,9 @@ set TOOLCHAIN=mgw122
 REM 
 set TOOLCHAIN=clang15
 
-python build/cmake/Start-CMake-XCSoar.py  xcsoar %TOOLCHAIN%  14
+echo %CD%
+PATH=%CD%;%CD%\build\cmake\python;%PATH%
+python build/cmake/python/Start-CMake-XCSoar.py  xcsoar %TOOLCHAIN%  14
 
 pause
 
