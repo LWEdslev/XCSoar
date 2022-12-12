@@ -597,7 +597,7 @@ foreach(translation ${TRANSLATIONS})
             COMMAND ${CMAKE_COMMAND} -E copy_if_different ${PROJECTGROUP_SOURCE_DIR}/src/_Deprecated/${translation}.mo.c ${CMAKE_CURRENT_BINARY_DIR}/po/${translation}.mo.c
         )
 #    if(NOT MSVC)
-#            list(APPEND SOURCE_FILES "${OUTPUT_FOLDER}/data/${translation}.mo.c")
+#            list(APPEND SOURCE_FILES "${OUTPUT_FOLDER}/Data/${translation}.mo.c")
 #    endif()
 endforeach()
 
