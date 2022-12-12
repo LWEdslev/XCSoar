@@ -7,6 +7,7 @@ set(TARGET_NAME po-Files)
 # include(CMakeSource.cmake)
 # organize the files in subdirectories
 
+if (1)  #MSVC)
 find_program(PYTHON_APP NAMES python REQUIRED)
 
 set (SOURCE_FILES)
@@ -31,7 +32,7 @@ if (1)  # only if a po_file changed...
             COMMAND ${PYTHON_APP} ${MSGFMT} --output-file=${_mo_file} ${po_file}
             COMMAND ${PYTHON_APP} tools/python/bin2c.py ${_mo_file} ${output_dir}
             WORKING_DIRECTORY  ${PROJECTGROUP_SOURCE_DIR}
-            COMMENT "${lang_name} ==> ${out_file}"
+            COMMENT "${lang_name} ==> ${out_file} (from ${po_file})"
             DEPENDS ${po_file}
         )
         list(APPEND MO_C_FILES ${out_file})
@@ -56,4 +57,8 @@ set_target_properties(${TARGET_NAME} PROPERTIES
 
 add_dependencies(${TARGET_NAME}  Data)
 
+
+else(MSVC)
+  message(STATUS "Up to now on Linux no Tools/i18n/msgfmt.py!")
+endif(MSVC)
 
