@@ -186,7 +186,7 @@ def create_xcsoar(args):
     third_party = binary_dir + '/3rd_Party'  # Windows!
     install_dir = program_dir + '/Install/' + project_name
 
-  with_call = 1
+  with_call = 0
   toolset = None
 
   python_exe = ''
@@ -410,9 +410,11 @@ def create_xcsoar(args):
         
           # myprocess = subprocess.call(my_cmd, env = my_env, cwd = build_dir, shell = False)
           if sys.platform.startswith('win'):
-            myprocess = subprocess.call(my_cmd, env = my_env, shell = False)
+            # myprocess = subprocess.call(my_cmd, env = my_env, shell = False)
+            myprocess = subprocess.Popen(arguments, env = my_env, shell = False)
           else:
-            myprocess = subprocess.call(arguments, env = my_env, shell = False)
+            myprocess = subprocess.Popen(arguments, env = my_env, shell = False)
+            # myprocess = subprocess.call(arguments, env = my_env, shell = False)
             # myprocess = os.system(my_cmd)
           myprocess.wait()
           if not myprocess in [0, 1]:
