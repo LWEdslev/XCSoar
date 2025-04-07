@@ -49,7 +49,7 @@ DrawFlarmTraffic(Canvas &canvas, const WindowProjection &projection,
                 mode, projection.GetScreenRect());
     }
 
-    if (!fading && traffic.climb_rate_avg30s >= 0.1) {
+    if (!fading) {
       // If average climb data available draw it to the canvas
 
       // Draw the average climb value above the icon
@@ -59,6 +59,14 @@ DrawFlarmTraffic(Canvas &canvas, const WindowProjection &projection,
       TextInBox(canvas,
                 FormatUserVerticalSpeed(traffic.climb_rate_avg30s, false),
                 sc_av, mode,
+                projection.GetScreenRect());
+
+                
+      auto sc_alt = sc;
+      TCHAR label_alt[100];
+      sc_alt.y += Layout::Scale(20);
+      FormatRelativeUserAltitude(traffic.relative_altitude, label_alt, false);
+      TextInBox(canvas, label_alt, sc_alt, mode,
                 projection.GetScreenRect());
     }
   }
