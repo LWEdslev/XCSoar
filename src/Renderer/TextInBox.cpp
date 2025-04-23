@@ -54,18 +54,28 @@ TextInBoxMoveInView(PixelRect &rc, const PixelRect &map_rc) noexcept
 void
 RenderShadowedText(Canvas &canvas, const char *text,
                    PixelPoint p,
-                   bool inverted) noexcept
+                   bool inverted, 
+                   bool vibrant) noexcept
 {
   canvas.SetBackgroundTransparent();
 
-  canvas.SetTextColor(inverted ? COLOR_BLACK : COLOR_WHITE);
+  if (vibrant) {
+    canvas.SetTextColor(COLOR_MAGENTA)
+  } else {
+    canvas.SetTextColor(inverted ? COLOR_BLACK : COLOR_WHITE);
+  }
+  
   const int offset = canvas.GetFontHeight() / 12u;
   canvas.DrawText({p.x + offset, p.y + offset}, text);
   canvas.DrawText({p.x - offset, p.y + offset}, text);
   canvas.DrawText({p.x + offset, p.y - offset}, text);
   canvas.DrawText({p.x - offset, p.y - offset}, text);
 
-  canvas.SetTextColor(inverted ? COLOR_WHITE : COLOR_BLACK);
+  if (vibrant) {
+    canvas.SetTextColor(COLOR_BLACK);
+  } else {
+    canvas.SetTextColor(inverted ? COLOR_WHITE : COLOR_BLACK);
+  }
   canvas.DrawText(p, text);
 }
 
@@ -131,9 +141,11 @@ TextInBox(Canvas &canvas, const char *text, PixelPoint p,
     canvas.SetTextColor(COLOR_BLACK);
     canvas.DrawOpaqueText(p, rc, text);
   } else if (mode.shape == LabelShape::OUTLINED) {
-    RenderShadowedText(canvas, text, p, false);
+    RenderShadowedText(canvas, text, p, false, false);
   } else if (mode.shape == LabelShape::OUTLINED_INVERTED) {
-    RenderShadowedText(canvas, text, p, true);
+    RenderShadowedText(canvas, text, p, true, false);
+  } else if (mode.shape == LabelShape::VIBRANT) {
+    RenderShadowedText(canvas, text, p, false, true);
   } else {
     canvas.SetBackgroundTransparent();
     canvas.SetTextColor(COLOR_BLACK);

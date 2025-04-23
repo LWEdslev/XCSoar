@@ -12,4 +12,5 @@ enum class LabelShape : uint8_t {
   OUTLINED_INVERTED,
   ROUNDED_WHITE,
   ROUNDED_BLACK,
+  VIBRANT,
 };

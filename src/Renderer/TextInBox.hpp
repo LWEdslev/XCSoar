@@ -14,7 +14,7 @@ class LabelBlock;
 void
 RenderShadowedText(Canvas &canvas, const char *text,
                    PixelPoint p,
-                   bool inverted) noexcept;
+                   bool inverted, bool vibrant) noexcept;
 
 struct TextInBoxMode {
   enum Alignment : uint8_t {
