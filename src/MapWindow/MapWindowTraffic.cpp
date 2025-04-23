@@ -48,7 +48,7 @@ DrawFlarmTraffic(Canvas &canvas, const WindowProjection &projection,
 
   // Draw the average climb value above the icon
   auto sc_av = sc;
-  sc_av.y += Layout::Scale(5);
+  sc_av.y += Layout::Scale(10);
 
   TextInBox(canvas,
             FormatUserVerticalSpeed(traffic.climb_rate_avg30s, false),
