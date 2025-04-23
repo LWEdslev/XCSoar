@@ -14,7 +14,7 @@ on:
       - '.github/workflows/build-translation.yml'
       - '.readthedocs.yaml'
     branches:
-      - master
+      - other-master
       # - dev-branch
     tags:
       - 'v*'
@@ -31,7 +31,7 @@ on:
       - '.github/workflows/build-translation.yml'
       - '.readthedocs.yaml'
     branches:
-      - master
+      - other-master
       # - dev-branch
 
 env:
@@ -269,44 +269,7 @@ jobs:
             target_test: true
             target_upload: true
             target_container: debian:bookworm-slim
-          
-          - os: macos-13
-            target: OSX64
-            target_bin: OpenSoar
-            target_final: OpenSoar
-            target_ext: ''
-            target_test: true
-            target_upload: true
-            # w/o container
-
-          - os: macos-14
-            target: MACOS
-            target_bin: OpenSoar
-            target_final: OpenSoar
-            target_ext: ''
-            target_test: true
-            target_upload: false
-            # w/o container
-          
-          - os: macos-14
-            target: IOS64
-            target_bin: OpenSoar
-            target_final: OpenSoar
-            target_ext: ''
-            target_test: false
-            target_upload: false
-            # w/o container
-        # exclude:
-          #### needs long time.. 
-          - os: ubuntu-24.04
-            target: KOBO
-            target_bin: OpenSoar
-            target_final: KoboRoot
-            target_ext: .tgz
-            target_test: false
-            target_upload: true
-            target_container: debian:bookworm-slim
-  
+         
     steps:
       - name: Check Git Variables
         # if: contains(env.BUILD_TARGETS, ${{ matrix.target }})
