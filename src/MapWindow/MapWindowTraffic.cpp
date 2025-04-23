@@ -58,7 +58,7 @@ DrawFlarmTraffic(Canvas &canvas, const WindowProjection &projection,
             
   auto sc_alt = sc;
   char label_alt[100];
-  sc_alt.y += Layout::Scale(10);
+  sc_alt.y += Layout::Scale(16);
   FormatRelativeUserAltitude(traffic.relative_altitude, label_alt, false);
   TextInBox(canvas, label_alt, sc_alt, mode,
             projection.GetScreenRect());
