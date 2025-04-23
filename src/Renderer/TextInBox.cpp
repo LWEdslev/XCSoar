@@ -60,7 +60,7 @@ RenderShadowedText(Canvas &canvas, const char *text,
   canvas.SetBackgroundTransparent();
 
   if (vibrant) {
-    canvas.SetTextColor(COLOR_MAGENTA)
+    canvas.SetTextColor(COLOR_MAGENTA);
   } else {
     canvas.SetTextColor(inverted ? COLOR_BLACK : COLOR_WHITE);
   }
