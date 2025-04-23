@@ -14,8 +14,7 @@ on:
       - '.github/workflows/build-translation.yml'
       - '.readthedocs.yaml'
     branches:
-     # - master
-      - dev-branch
+      - other-master
     tags:
       - 'v*'
 
