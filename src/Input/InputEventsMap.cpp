@@ -189,14 +189,9 @@ InputEvents::sub_SetZoom(double value)
     Message::AddMessage(_("Auto. zoom off"));
   }
 
-  auto vmin = CommonInterface::GetComputerSettings().polar.glide_polar_task.GetVMin();
-  auto scale_2min_distance = vmin * 12;
   const double scale_100m = 10;
   const double scale_1600km = 1600*100;
-  auto minreasonable = displayMode == DisplayMode::CIRCLING
-    ? scale_100m
-    : std::max(scale_100m, scale_2min_distance);
-
+  auto minreasonable = scale_100m;
   value = std::clamp(value, minreasonable, scale_1600km);
   map_window->SetMapScale(value);
   map_window->QuickRedraw();
