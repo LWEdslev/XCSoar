@@ -158,6 +158,55 @@ MapWindow::RenderGlide(Canvas &canvas) noexcept
     DrawGlideThroughTerrain(canvas);
 }
 
+
+void
+MapWindow::DrawDistanceRings(Canvas &canvas, PixelPoint aircraft_pos) noexcept
+{
+  auto proj = VisibleProjection();
+  double width_meters = proj.GetScreenWidthMeters();
+  int width_pixels = proj.GetScreenSize().width;
+  double meters_per_pixel = width_meters / width_pixels;
+  double largest_dim_meters = std::max(width_meters, proj.GetScreenSize().height * meters_per_pixel);
+  double largest_dim_km = largest_dim_meters / 1000.0;
+
+  if (largest_dim_km >= 60) {
+    return;
+  }
+
+  double delta_m; // space between the rings in meters
+  if (largest_dim_km < 2) {
+    delta_m = 200.0;
+  } else if (largest_dim_km < 10) {
+    delta_m = 1000.0;
+  } else if (largest_dim_km < 20) {
+    delta_m = 2000.0;
+  } else {
+    delta_m = 5000.0;
+  }
+
+  Color color = COLOR_BLACK;
+  canvas.SelectNullPen();
+  canvas.SelectHollowBrush();
+  canvas.Select(Pen(1, color));
+  canvas.SetTextColor(color);
+
+  auto cos_45_degrees = 0.7; // approx. cos(45 deg)
+  auto label_pos = aircraft_pos;
+  for (double radius = delta_m; radius < largest_dim_meters; radius += delta_m) {
+    int radius_pixels = (int)(radius / meters_per_pixel);
+
+    double value = radius / 1000;
+    std::string label = (value == std::floor(value)) ? std::format("{}km", (int)value) : std::format("{:.1f}km", value);
+
+    PixelSize padding = canvas.CalcTextSize(label);
+    label_pos.x = aircraft_pos.x + (radius_pixels * cos_45_degrees);
+    label_pos.y = aircraft_pos.y + (radius_pixels * cos_45_degrees) + padding.height;
+    canvas.DrawCircle(aircraft_pos, radius_pixels);
+    canvas.DrawText(label_pos, label);
+  }
+}
+
+
 void
 MapWindow::Render(Canvas &canvas, const PixelRect &rc) noexcept
 {
@@ -276,12 +325,19 @@ MapWindow::Render(Canvas &canvas, const PixelRect &rc) noexcept
   DrawFLARMTraffic(canvas, aircraft_pos);
 
   //////////////////////////////////////////////// own aircraft
-  // Finally, draw you!
-  if (basic.location_available)
-    AircraftRenderer::Draw(canvas, GetMapSettings(), look.aircraft,
-                           basic.attitude.heading - render_projection.GetScreenAngle(),
-                           aircraft_pos);
+  if (basic.location_available) {
+    auto map_settings = GetMapSettings();
+    
+    if (map_settings.distance_rings_enabled)
+      DrawDistanceRings(canvas, aircraft_pos);
+    
 
+    // Finally, draw you!
+    AircraftRenderer::Draw(canvas, map_settings, look.aircraft,
+    basic.attitude.heading - render_projection.GetScreenAngle(),
+    aircraft_pos);
+  }
+    
   //////////////////////////////////////////////// important overlays
   // Draw intersections on top of aircraft
   airspace_renderer.DrawIntersections(canvas, render_projection);
