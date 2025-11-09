@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xcsoar\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-07 05:19+0100\n"
+"POT-Creation-Date: 2025-11-09 12:47+0000\n"
 "PO-Revision-Date: 2023-01-13 12:50+0000\n"
 "Last-Translator: DongWon Yoo <comicman.kr@gmail.com>\n"
 "Language-Team: Korean <https://hosted.weblate.org/projects/xcsoar/"
@@ -783,7 +783,7 @@ msgstr "수동"
 #: src/Dialogs/Settings/Panels/LayoutConfigPanel.cpp:140
 #: src/Dialogs/Settings/Panels/PagesConfigPanel.cpp:187
 #: src/Dialogs/Settings/Panels/PagesConfigPanel.cpp:379
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:67
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:68
 #: src/InfoBoxes/Panel/MacCreadySetup.cpp:35
 #: src/Dialogs/Device/Vega/HardwareParameters.hpp:13
 #, no-c-format
@@ -812,19 +812,19 @@ msgid "Start"
 msgstr "시작"
 
 #: src/Menu/ExpandMacros.cpp:302
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:73
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:74
 #, no-c-format
 msgid "Long"
 msgstr "긴 항적"
 
 #: src/Menu/ExpandMacros.cpp:305
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:74
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:75
 #, no-c-format
 msgid "Short"
 msgstr "짧은 항적"
 
 #: src/Menu/ExpandMacros.cpp:308
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:75
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:76
 #, no-c-format
 msgid "Full"
 msgstr "모든 항적"
@@ -841,10 +841,10 @@ msgstr "모든 항적"
 #: src/Dialogs/Settings/Panels/LoggerConfigPanel.cpp:45
 #: src/Dialogs/Settings/Panels/RouteConfigPanel.cpp:111
 #: src/Dialogs/Settings/Panels/RouteConfigPanel.cpp:141
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:65
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:72
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:115
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:122
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:66
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:73
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:116
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:123
 #: src/Dialogs/Settings/Panels/TerrainDisplayConfigPanel.cpp:217
 #: src/Dialogs/Settings/Panels/TerrainDisplayConfigPanel.cpp:247
 #: src/Dialogs/Device/Vega/HardwareParameters.hpp:11
@@ -860,7 +860,7 @@ msgstr "끄기"
 #: src/Dialogs/Settings/Panels/InterfaceConfigPanel.cpp:173
 #: src/Dialogs/Settings/Panels/LayoutConfigPanel.cpp:144
 #: src/Dialogs/Settings/Panels/LoggerConfigPanel.cpp:43
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:66
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:67
 #: src/Dialogs/Settings/Panels/TerrainDisplayConfigPanel.cpp:248
 #: src/Dialogs/Device/Vega/HardwareParameters.hpp:12
 #, no-c-format
@@ -1051,7 +1051,7 @@ msgstr "타스크 없음"
 #: src/Dialogs/Traffic/FlarmTrafficDetails.cpp:116
 #: src/Dialogs/StatusPanels/FlightStatusPanel.cpp:71
 #: src/Dialogs/Waypoint/dlgWaypointEdit.cpp:82
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:96
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:97
 #: src/Dialogs/Settings/Panels/UnitsConfigPanel.cpp:166
 #, no-c-format
 msgid "Altitude"
@@ -2783,12 +2783,12 @@ msgid "Should XCSoar accept wind estimates from other instruments?"
 msgstr "외부의 피토관(풍속측정)계기를 XCSoar에 연결할 것인지 선택하시오."
 
 #: src/Dialogs/Settings/WindSettingsPanel.cpp:53
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:150
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:156
 msgid "Trail drift"
 msgstr "항적보정"
 
 #: src/Dialogs/Settings/WindSettingsPanel.cpp:54
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:151
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:157
 msgid ""
 "Determines whether the snail trail is drifted with the wind when displayed "
 "in circling mode. Switched Off, the snail trail stays uncompensated for wind "
@@ -3486,8 +3486,8 @@ msgstr "파일"
 
 #: src/Dialogs/ReplayDialog.cpp:50
 msgid ""
-"Name of file to replay. May be an IGC file (.igc) or a raw NMEA log file "
-"(.nmea). Leave blank to run the demo."
+"Name of file to replay. May be an IGC file (.igc) or a raw NMEA log file (."
+"nmea). Leave blank to run the demo."
 msgstr ""
 "다시보기 파일을 선택: 지원파일은 (.igc), (.nmea), 데이터가 없으면 데모를 실행"
 "한다."
@@ -5596,7 +5596,7 @@ msgid "The height above terrain that the glider must clear during final glide."
 msgstr "골 러시 비행중 지형을 피해 안전한 고도를 유지하기 위한 최소고도."
 
 #: src/Dialogs/Settings/Panels/SafetyFactorsConfigPanel.cpp:60
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:101
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:102
 #, no-c-format
 msgid "Simple"
 msgstr "심플(간단)"
@@ -5701,8 +5701,8 @@ msgid ""
 "Primary waypoints files.  Supported file types are Cambridge/WinPilot files "
 "(.dat), Zander files (.wpz) or SeeYou files (.cup)."
 msgstr ""
-"주 웨이포인트 파일을 선택하시오. 지원 파일은 Cambridge/WinPilot files "
-"(.dat), Zander files (.wpz), SeeYou files (.cup)."
+"주 웨이포인트 파일을 선택하시오. 지원 파일은 Cambridge/WinPilot files (."
+"dat), Zander files (.wpz), SeeYou files (.cup)."
 
 #: src/Dialogs/Settings/Panels/SiteConfigPanel.cpp:60
 msgid "Watched waypoints"
@@ -5739,8 +5739,8 @@ msgstr "공역선택"
 #: src/Dialogs/Settings/Panels/SiteConfigPanel.cpp:80
 msgid ""
 "List of active airspace files. Use the Add and Remove buttons to activate or "
-"deactivate airspace files respectively. Supported file types are: Openair "
-"(.txt /.air), and Tim Newport-Pearce (.sua)."
+"deactivate airspace files respectively. Supported file types are: Openair (."
+"txt /.air), and Tim Newport-Pearce (.sua)."
 msgstr ""
 
 #: src/Dialogs/Settings/Panels/SiteConfigPanel.cpp:87
@@ -5752,29 +5752,29 @@ msgid ""
 "The name of the file containing information about registered FLARM devices."
 msgstr "등록 된 FLARM 장치에 대한 정보가 포함 된 파일의 이름."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:65
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:66
 #, no-c-format
 msgid "Disable display of ground track line."
 msgstr "대지라인을 표시하지 않음."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:66
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:67
 #, no-c-format
 msgid "Always display ground track line."
 msgstr "대지라인을 표시."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:67
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:68
 #, no-c-format
 msgid ""
 "Display ground track line if there is a significant difference to plane "
 "heading."
 msgstr "대지라인과 비행라인에 차이가 클 경우 표시."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:80
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:81
 #, no-c-format
 msgid "Vario #1"
 msgstr "바리오 #1"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:80
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:81
 #, no-c-format
 msgid ""
 "Within lift areas lines get displayed green and thicker, while sinking lines "
@@ -5783,24 +5783,24 @@ msgstr ""
 "상승할 때는 녹색 굵은 선, 하강할 때는 갈색의 얆은 선, 고도변화가 없을 때는 회"
 "색선으로 표시한다."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:83
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:84
 #, no-c-format
 msgid "Vario #1 (with dots)"
 msgstr "바리오 #1 (하강점)"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:83
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:88
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:84
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:89
 #, no-c-format
 msgid ""
 "The same colour scheme as the previous, but with dotted lines while sinking."
 msgstr "위 설정과 같으나 하강은 점( . )으로 표시한다."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:85
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:86
 #, no-c-format
 msgid "Vario #2"
 msgstr "바리오 #2"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:85
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:86
 #, no-c-format
 msgid ""
 "The climb colour for this scheme is orange to red, sinking is displayed as "
@@ -5809,17 +5809,17 @@ msgstr ""
 "상승할 때는 빨간색 선, 하강할 때는 파란색 선, 고도변화가 없을 때는 노란색 선"
 "으로 표시한다."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:88
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:89
 #, no-c-format
 msgid "Vario #2 (with dots)"
 msgstr "바리오 #2 (하강점)"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:91
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:92
 #, no-c-format
 msgid "Vario-scaled dots and lines"
 msgstr "바리오 크기에 따라 선과 점으로 표시"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:92
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:93
 #, no-c-format
 msgid ""
 "Vario-scaled dots with lines. Orange to red = climb. Light blue to dark blue "
@@ -5828,173 +5828,183 @@ msgstr ""
 "상승 규모에 따라 점과 선으로 표시되며, 상승은 오렌지색, 하강은 진한 파란색, "
 "변화가 없을시 노란색 선으로 표시된다. 상승/하강크기가 크면 선이 굵어진다."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:95
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:96
 #, no-c-format
 msgid "Vario E-ink"
 msgstr "바리오 무음"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:95
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:96
 #, no-c-format
 msgid ""
 "E-ink friendly color scheme, lighter and thicker dots means lift while "
 "darker and thinner means sink."
 msgstr ""
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:96
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:97
 #, no-c-format
 msgid "The colour scheme corresponds to the height."
 msgstr "고도변화에 따라 색으로 표현된다."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:102
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:103
 #, no-c-format
 msgid "Simplified line graphics, black with white contours."
 msgstr "간단하게 선으로 표현된 글라이더."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:103
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:104
 #, no-c-format
 msgid "Simple (large)"
 msgstr "큰 글라이더"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:104
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:105
 #, no-c-format
 msgid "Enlarged simple graphics."
 msgstr "큰 글라이더"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:105
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:106
 #, no-c-format
 msgid "Detailed"
 msgstr "상세한 글라이더"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:106
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:107
 #, no-c-format
 msgid "Detailed rendered aircraft graphics."
 msgstr "상세하게 그려진 글라이더."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:107
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:108
 #, no-c-format
 msgid "HangGlider"
 msgstr "행글라이더"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:108
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:109
 #, no-c-format
 msgid "Simplified hang glider as line graphics, white with black contours."
 msgstr "행글라이더"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:109
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:110
 #, no-c-format
 msgid "ParaGlider"
 msgstr "패러글라이더"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:110
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:111
 #, no-c-format
 msgid "Simplified para glider as line graphics, white with black contours."
 msgstr "패러글라이더"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:115
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:116
 #, no-c-format
 msgid "No wind arrow is drawn."
 msgstr "풍향을 표시하지 않는다."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:116
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:117
 #, no-c-format
 msgid "Arrow head"
 msgstr "화살표 머리"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:116
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:117
 #, no-c-format
 msgid "Draws an arrow head only."
 msgstr "화살표 머리만 표시한다."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:117
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:118
 #, no-c-format
 msgid "Full arrow"
 msgstr "화살표 전체표시"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:117
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:118
 #, no-c-format
 msgid "Draws an arrow head with a dashed arrow line."
 msgstr "화살표를 모두 표시한다."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:122
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:123
 #, no-c-format
 msgid "No SkyLines traffic is drawn."
 msgstr "스카이라인 트래픽을 표시하지 않음."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:123
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:124
 #, no-c-format
 msgid "Symbol"
 msgstr "심볼"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:123
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:124
 #, no-c-format
 msgid "Draws the SkyLines symbol only."
 msgstr "스카이라인 기호만 그린다."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:124
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:125
 #, no-c-format
 msgid "Symbol and Name"
 msgstr "심볼과 이름"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:124
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:125
 #, no-c-format
 msgid "Draws the SkyLines symbol with name."
 msgstr "스카이라인 기호와 이름을 표시한다."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:134
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:135
 msgid "Ground track"
 msgstr "대지라인"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:135
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:136
 msgid "Display the ground track as a grey line on the map."
 msgstr "비행항적을 대지위에 회색선으로 표시한다."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:138
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:139
 msgid "FLARM traffic"
 msgstr "FLARM 트래픽"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:138
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:139
 msgid "This enables the display of FLARM traffic on the map window."
 msgstr "FLARM 트래픽(Flarm을 설정한 다른 기체)을 지도에 표시한다."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:141
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:142
 msgid "Fade traffic"
 msgstr "FLARM 트래픽"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:141
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:142
 msgid "Keep showing traffic for a while after it has disappeared."
 msgstr ""
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:144
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:145
+#, fuzzy
+msgid "Distance rings"
+msgstr "거리"
+
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:145
+#, fuzzy
+msgid "Show distance rings around the glider on the map."
+msgstr "FAI트라이앵글로 비행한 영역을 지도에 표시한다."
+
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:150
 msgid "Trail length"
 msgstr "항적길이"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:145
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:151
 msgid ""
 "Determines whether and how long a snail trail is drawn behind the glider."
 msgstr "지도에서 보이는 비행항적의 길이를 선택할 수 있다."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:157
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:163
 msgid "Trail type"
 msgstr "항적유형(색상)"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:158
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:164
 msgid "Sets the type of the snail trail display."
 msgstr "비행항적의 표시색 및 모양을 선택할 수 있다."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:161
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:167
 msgid "Trail scaled"
 msgstr "항적굵기변화(바리오)"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:162
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:168
 msgid ""
 "If set to ON the snail trail width is scaled according to the vario signal."
 msgstr "비행기록선이 고도변화에 따라 굵기가 다르게 보인다."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:166
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:172
 msgid "Detour cost markers"
 msgstr "포인트 우회 마커"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:167
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:173
 msgid ""
 "If the aircraft heading deviates from the current waypoint, markers are "
 "displayed at points ahead of the aircraft. The value of each marker is the "
@@ -6005,26 +6015,26 @@ msgstr ""
 "의 선과 값은 웨이포인트까지의 직선 거리의 백분율로 해당 포인트에 도착하는 데 "
 "필요한 추가 거리를 표시한다."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:173
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:179
 msgid "Aircraft symbol"
 msgstr "기체아이콘"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:177
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:183
 #: src/InfoBoxes/Content/Factory.cpp:919
 #, no-c-format
 msgid "Wind arrow"
 msgstr "바람(화살표)"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:177
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:183
 msgid "Determines the way the wind arrow is drawn on the map."
 msgstr ""
 "지도위에 바람(풍향/풍속)에 대한 정보를 표시할 화살표 모양을 선택하시오."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:181
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:187
 msgid "SkyLines traffic mode"
 msgstr "스카이라인 트래픽 모드"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:182
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:188
 msgid ""
 "Show the SkyLines traffic symbols/names on the map, downloaded from the "
 "SkyLines server."
@@ -6065,9 +6075,9 @@ msgid ""
 "Maximum height based on start height reference (AGL or MSL) while starting "
 "the task. Set to 0 for no limit."
 msgstr ""
-"스타트 지점의 최고고도(AGL:Altitude Above Ground Level:대지고도 혹은 "
-"MSL:Mean Sea Level 평균해발고도)를 설정한다. 제한이 없는 경우 0 로 설정한다"
-"(시작포인트 고도가 특정고도 이하로 규정되었을 때 필요하다)."
+"스타트 지점의 최고고도(AGL:Altitude Above Ground Level:대지고도 혹은 MSL:"
+"Mean Sea Level 평균해발고도)를 설정한다. 제한이 없는 경우 0 로 설정한다(시작"
+"포인트 고도가 특정고도 이하로 규정되었을 때 필요하다)."
 
 #: src/Dialogs/Settings/Panels/TaskRulesConfigPanel.cpp:69
 msgid "Start max. height margin"
@@ -7004,8 +7014,8 @@ msgstr "서버에 저장된 열의 위치를 확인하고 표시한다."
 
 #: src/Dialogs/Settings/Panels/WeatherConfigPanel.cpp:67
 msgid ""
-"Show thermal locations downloaded from Thermal Information Map "
-"(thermalmap.info)."
+"Show thermal locations downloaded from Thermal Information Map (thermalmap."
+"info)."
 msgstr ""
 "Thermal Information Map(thermalmap.info)에서 다운로드한 써멀의 위치를 표시한"
 "다."
@@ -9841,7 +9851,7 @@ msgid ""
 msgstr "최종고도차: 최종골 포인트 도착고도를 현재고도에서 계산한 고도차이."
 
 #: src/InfoBoxes/Content/Alternate.cpp:58
-#, fuzzy, c++-format
+#, fuzzy
 msgid "Altn {}"
 msgstr "예비1"
 

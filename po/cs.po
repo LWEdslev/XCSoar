@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xcsoar\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-07 05:19+0100\n"
+"POT-Creation-Date: 2025-11-09 12:47+0000\n"
 "PO-Revision-Date: 2024-09-09 08:09+0000\n"
 "Last-Translator: Miroslav Burdych <mirek.burdych@gmail.com>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/xcsoar/"
@@ -780,7 +780,7 @@ msgstr "Ručně"
 #: src/Dialogs/Settings/Panels/LayoutConfigPanel.cpp:140
 #: src/Dialogs/Settings/Panels/PagesConfigPanel.cpp:187
 #: src/Dialogs/Settings/Panels/PagesConfigPanel.cpp:379
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:67
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:68
 #: src/InfoBoxes/Panel/MacCreadySetup.cpp:35
 #: src/Dialogs/Device/Vega/HardwareParameters.hpp:13
 #, no-c-format
@@ -809,19 +809,19 @@ msgid "Start"
 msgstr "Start"
 
 #: src/Menu/ExpandMacros.cpp:302
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:73
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:74
 #, no-c-format
 msgid "Long"
 msgstr "Dlouhá"
 
 #: src/Menu/ExpandMacros.cpp:305
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:74
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:75
 #, no-c-format
 msgid "Short"
 msgstr "Krátká"
 
 #: src/Menu/ExpandMacros.cpp:308
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:75
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:76
 #, no-c-format
 msgid "Full"
 msgstr "Celá"
@@ -838,10 +838,10 @@ msgstr "Celá"
 #: src/Dialogs/Settings/Panels/LoggerConfigPanel.cpp:45
 #: src/Dialogs/Settings/Panels/RouteConfigPanel.cpp:111
 #: src/Dialogs/Settings/Panels/RouteConfigPanel.cpp:141
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:65
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:72
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:115
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:122
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:66
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:73
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:116
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:123
 #: src/Dialogs/Settings/Panels/TerrainDisplayConfigPanel.cpp:217
 #: src/Dialogs/Settings/Panels/TerrainDisplayConfigPanel.cpp:247
 #: src/Dialogs/Device/Vega/HardwareParameters.hpp:11
@@ -857,7 +857,7 @@ msgstr "Vyp"
 #: src/Dialogs/Settings/Panels/InterfaceConfigPanel.cpp:173
 #: src/Dialogs/Settings/Panels/LayoutConfigPanel.cpp:144
 #: src/Dialogs/Settings/Panels/LoggerConfigPanel.cpp:43
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:66
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:67
 #: src/Dialogs/Settings/Panels/TerrainDisplayConfigPanel.cpp:248
 #: src/Dialogs/Device/Vega/HardwareParameters.hpp:12
 #, no-c-format
@@ -1048,7 +1048,7 @@ msgstr "Chybí úloha"
 #: src/Dialogs/Traffic/FlarmTrafficDetails.cpp:116
 #: src/Dialogs/StatusPanels/FlightStatusPanel.cpp:71
 #: src/Dialogs/Waypoint/dlgWaypointEdit.cpp:82
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:96
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:97
 #: src/Dialogs/Settings/Panels/UnitsConfigPanel.cpp:166
 #, no-c-format
 msgid "Altitude"
@@ -2829,12 +2829,12 @@ msgid "Should XCSoar accept wind estimates from other instruments?"
 msgstr "Má XCSoar přijímat odhad větru z externích zařízení?"
 
 #: src/Dialogs/Settings/WindSettingsPanel.cpp:53
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:150
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:156
 msgid "Trail drift"
 msgstr "Snos stopy"
 
 #: src/Dialogs/Settings/WindSettingsPanel.cpp:54
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:151
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:157
 msgid ""
 "Determines whether the snail trail is drifted with the wind when displayed "
 "in circling mode. Switched Off, the snail trail stays uncompensated for wind "
@@ -3535,11 +3535,11 @@ msgstr "Soubor"
 
 #: src/Dialogs/ReplayDialog.cpp:50
 msgid ""
-"Name of file to replay. May be an IGC file (.igc) or a raw NMEA log file "
-"(.nmea). Leave blank to run the demo."
+"Name of file to replay. May be an IGC file (.igc) or a raw NMEA log file (."
+"nmea). Leave blank to run the demo."
 msgstr ""
-"Název souboru k přehrání. Může být IGC soubor (.igc), raw NMEA log soubor "
-"(.nmea), nebo pokud necháte prázdné, spustí demo."
+"Název souboru k přehrání. Může být IGC soubor (.igc), raw NMEA log soubor (."
+"nmea), nebo pokud necháte prázdné, spustí demo."
 
 #: src/Dialogs/ReplayDialog.cpp:56
 msgid "Rate"
@@ -5715,7 +5715,7 @@ msgid "The height above terrain that the glider must clear during final glide."
 msgstr "Výška nad terénem, kterou kluzák musí překonat během dokluzu."
 
 #: src/Dialogs/Settings/Panels/SafetyFactorsConfigPanel.cpp:60
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:101
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:102
 #, no-c-format
 msgid "Simple"
 msgstr "Zjednodušeně"
@@ -5865,8 +5865,8 @@ msgstr "Vyber prostor"
 #: src/Dialogs/Settings/Panels/SiteConfigPanel.cpp:80
 msgid ""
 "List of active airspace files. Use the Add and Remove buttons to activate or "
-"deactivate airspace files respectively. Supported file types are: Openair "
-"(.txt /.air), and Tim Newport-Pearce (.sua)."
+"deactivate airspace files respectively. Supported file types are: Openair (."
+"txt /.air), and Tim Newport-Pearce (.sua)."
 msgstr ""
 
 #: src/Dialogs/Settings/Panels/SiteConfigPanel.cpp:87
@@ -5879,29 +5879,29 @@ msgid ""
 msgstr ""
 "Název souboru, obsahujícího informace o registrovaných zařízeních FLARM."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:65
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:66
 #, no-c-format
 msgid "Disable display of ground track line."
 msgstr "Zakáže zobrazení pozemní stopy."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:66
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:67
 #, no-c-format
 msgid "Always display ground track line."
 msgstr "Vždy zobrazí pozemní stopu."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:67
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:68
 #, no-c-format
 msgid ""
 "Display ground track line if there is a significant difference to plane "
 "heading."
 msgstr "Zobrazí pozemní stopu, pokud je výrazný rozdíl od plánovaného kurzu."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:80
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:81
 #, no-c-format
 msgid "Vario #1"
 msgstr "Vário #1"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:80
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:81
 #, no-c-format
 msgid ""
 "Within lift areas lines get displayed green and thicker, while sinking lines "
@@ -5910,25 +5910,25 @@ msgstr ""
 "V oblasti stoupání se čáry budou zobrazovat v zelené barvě a silněji, v "
 "oblasti klesání hnědě a slaběji. Nulové stoupání je zobrazeno jako šedá čára."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:83
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:84
 #, no-c-format
 msgid "Vario #1 (with dots)"
 msgstr "Vário #1 (s tečkami)"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:83
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:88
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:84
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:89
 #, no-c-format
 msgid ""
 "The same colour scheme as the previous, but with dotted lines while sinking."
 msgstr ""
 "Stejné barevné schéma jako předchozí, ale tečkované čáry v oblasti klesání."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:85
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:86
 #, no-c-format
 msgid "Vario #2"
 msgstr "Vário #2"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:85
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:86
 #, no-c-format
 msgid ""
 "The climb colour for this scheme is orange to red, sinking is displayed as "
@@ -5937,17 +5937,17 @@ msgstr ""
 "Barva stoupání je v tomto schématu označena od oranžové po červenou, klesání "
 "od světle po tmavě modrou. Nulové stoupání je vyznačeno žlutou čarou."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:88
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:89
 #, no-c-format
 msgid "Vario #2 (with dots)"
 msgstr "Vário #2 (s tečkami)"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:91
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:92
 #, no-c-format
 msgid "Vario-scaled dots and lines"
 msgstr "Váriem zvětšené tečky a linky"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:92
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:93
 #, no-c-format
 msgid ""
 "Vario-scaled dots with lines. Orange to red = climb. Light blue to dark blue "
@@ -5957,12 +5957,12 @@ msgstr ""
 "schématu označeno od oranžové po červenou, klesání od světle po tmavě "
 "modrou. Nulové stoupání je vyznačeno žlutou čarou."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:95
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:96
 #, no-c-format
 msgid "Vario E-ink"
 msgstr "Vário e-ink"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:95
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:96
 #, no-c-format
 msgid ""
 "E-ink friendly color scheme, lighter and thicker dots means lift while "
@@ -5971,164 +5971,174 @@ msgstr ""
 "Barevné schéma přátelské k e-ink. Světlejší a silnější body značí stoupání, "
 "zatímco tmavší a tenčí body klesání."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:96
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:97
 #, no-c-format
 msgid "The colour scheme corresponds to the height."
 msgstr "Barevné schéma odpovídá výšce."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:102
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:103
 #, no-c-format
 msgid "Simplified line graphics, black with white contours."
 msgstr "Zjednodušená grafika černých čar s bílými konturami."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:103
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:104
 #, no-c-format
 msgid "Simple (large)"
 msgstr "Zjednodušeně (velký)"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:104
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:105
 #, no-c-format
 msgid "Enlarged simple graphics."
 msgstr "Zjednodušená velká grafika."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:105
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:106
 #, no-c-format
 msgid "Detailed"
 msgstr "Podrobně"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:106
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:107
 #, no-c-format
 msgid "Detailed rendered aircraft graphics."
 msgstr "Podrobně vykreslená grafika letadla."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:107
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:108
 #, no-c-format
 msgid "HangGlider"
 msgstr "Závěsný kluzák"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:108
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:109
 #, no-c-format
 msgid "Simplified hang glider as line graphics, white with black contours."
 msgstr "Zjednodušená silueta závěsného kluzáku, bílá s černou konturou."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:109
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:110
 #, no-c-format
 msgid "ParaGlider"
 msgstr "Padákový kluzák"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:110
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:111
 #, no-c-format
 msgid "Simplified para glider as line graphics, white with black contours."
 msgstr "Zjednodušená silueta padákového kluzáku, bílá s černou konturou."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:115
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:116
 #, no-c-format
 msgid "No wind arrow is drawn."
 msgstr "Šipka větru nebude zobrazena."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:116
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:117
 #, no-c-format
 msgid "Arrow head"
 msgstr "Šipka"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:116
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:117
 #, no-c-format
 msgid "Draws an arrow head only."
 msgstr "Zobrazí pouze hlavu šipky."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:117
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:118
 #, no-c-format
 msgid "Full arrow"
 msgstr "Plná šipka"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:117
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:118
 #, no-c-format
 msgid "Draws an arrow head with a dashed arrow line."
 msgstr "Zobrazí hlavu šipky s čárkovanou čárou."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:122
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:123
 #, no-c-format
 msgid "No SkyLines traffic is drawn."
 msgstr "SkyLines provoz nebude zobrazen."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:123
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:124
 #, no-c-format
 msgid "Symbol"
 msgstr "Symbol"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:123
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:124
 #, no-c-format
 msgid "Draws the SkyLines symbol only."
 msgstr "Zobrazí pouze symbol."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:124
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:125
 #, no-c-format
 msgid "Symbol and Name"
 msgstr "Symbol a jméno"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:124
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:125
 #, no-c-format
 msgid "Draws the SkyLines symbol with name."
 msgstr "Zobrazí symbol spolu se jménem."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:134
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:135
 msgid "Ground track"
 msgstr "Pozemní stopa"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:135
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:136
 msgid "Display the ground track as a grey line on the map."
 msgstr "Zobrazí pozemní stopu, jako šedou linku na mapě."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:138
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:139
 msgid "FLARM traffic"
 msgstr "FLARM provoz"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:138
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:139
 msgid "This enables the display of FLARM traffic on the map window."
 msgstr "Tato volba zobrazí FLARM provoz na mapě."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:141
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:142
 msgid "Fade traffic"
 msgstr "Blednutí provozu"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:141
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:142
 msgid "Keep showing traffic for a while after it has disappeared."
 msgstr ""
 "Po určitou dobu pokračuje v zobrazení symbolu provozu i když není detekován."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:144
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:145
+#, fuzzy
+msgid "Distance rings"
+msgstr "Vzdál."
+
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:145
+#, fuzzy
+msgid "Show distance rings around the glider on the map."
+msgstr "Zobrazí oblasti FAI trojúhelníku na mapu plánování úlohy."
+
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:150
 msgid "Trail length"
 msgstr "Délka stopy"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:145
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:151
 msgid ""
 "Determines whether and how long a snail trail is drawn behind the glider."
 msgstr "Určuje zobrazení a délku pozemní stopy kluzáku v mapě."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:157
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:163
 msgid "Trail type"
 msgstr "Typ stopy"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:158
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:164
 msgid "Sets the type of the snail trail display."
 msgstr "Nastavuje typ zobrazení pozemní stopy."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:161
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:167
 msgid "Trail scaled"
 msgstr "Stopa v měřítku"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:162
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:168
 msgid ""
 "If set to ON the snail trail width is scaled according to the vario signal."
 msgstr ""
 "Pokud je zapnuto, šíře pozemní stopy je proporcionální vzhledem k rychlosti "
 "stoupání."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:166
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:172
 msgid "Detour cost markers"
 msgstr "Značky mimo trasu"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:167
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:173
 msgid ""
 "If the aircraft heading deviates from the current waypoint, markers are "
 "displayed at points ahead of the aircraft. The value of each marker is the "
@@ -6139,25 +6149,25 @@ msgstr ""
 "zobrazí se před letadlem značky. Číslo vyjadřuje procentuální prodloužení "
 "trati vzhledem k přímé vzdálenosti k traťovému bodu."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:173
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:179
 msgid "Aircraft symbol"
 msgstr "Symbol kluzáku"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:177
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:183
 #: src/InfoBoxes/Content/Factory.cpp:919
 #, no-c-format
 msgid "Wind arrow"
 msgstr "Šipka větru"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:177
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:183
 msgid "Determines the way the wind arrow is drawn on the map."
 msgstr "Určuje způsob, jakým je šipka větru zobrazena na mapě."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:181
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:187
 msgid "SkyLines traffic mode"
 msgstr "SkyLines provoz"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:182
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:188
 msgid ""
 "Show the SkyLines traffic symbols/names on the map, downloaded from the "
 "SkyLines server."
@@ -7159,8 +7169,8 @@ msgstr "Získává a zobrazuje pozici st. proudů od dalších uživatelů."
 
 #: src/Dialogs/Settings/Panels/WeatherConfigPanel.cpp:67
 msgid ""
-"Show thermal locations downloaded from Thermal Information Map "
-"(thermalmap.info)."
+"Show thermal locations downloaded from Thermal Information Map (thermalmap."
+"info)."
 msgstr ""
 "Zobrazí pozice stoupavých proudů, stažených z Thermal Information Map "
 "(thermalmap.info)."
@@ -10086,7 +10096,6 @@ msgid ""
 msgstr "Výška příletu nad cílový bod trati relativně k bezpečné výšce příletu."
 
 #: src/InfoBoxes/Content/Alternate.cpp:58
-#, c++-format
 msgid "Altn {}"
 msgstr "Altn {}"
 

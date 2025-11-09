@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xcsoar\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-07 05:19+0100\n"
+"POT-Creation-Date: 2025-11-09 12:47+0000\n"
 "PO-Revision-Date: 2021-07-20 10:35+0000\n"
 "Last-Translator: Sébastien Celles <s.celles@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/xcsoar/"
@@ -181,8 +181,8 @@ msgid ""
 "A 90-degree sector with 'infinite' length sides. Cross any edge, scored from "
 "corner point."
 msgstr ""
-"90stopniowy sektor z nieskończonymi bokami. Przekrocz dowolną "
-"krawędź,punktowane od narożnika."
+"90stopniowy sektor z nieskończonymi bokami. Przekrocz dowolną krawędź,"
+"punktowane od narożnika."
 
 #: src/Task/TypeStrings.cpp:61
 #, no-c-format
@@ -794,7 +794,7 @@ msgstr "Ręcznie"
 #: src/Dialogs/Settings/Panels/LayoutConfigPanel.cpp:140
 #: src/Dialogs/Settings/Panels/PagesConfigPanel.cpp:187
 #: src/Dialogs/Settings/Panels/PagesConfigPanel.cpp:379
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:67
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:68
 #: src/InfoBoxes/Panel/MacCreadySetup.cpp:35
 #: src/Dialogs/Device/Vega/HardwareParameters.hpp:13
 #, no-c-format
@@ -823,19 +823,19 @@ msgid "Start"
 msgstr "Start"
 
 #: src/Menu/ExpandMacros.cpp:302
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:73
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:74
 #, no-c-format
 msgid "Long"
 msgstr "Długi"
 
 #: src/Menu/ExpandMacros.cpp:305
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:74
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:75
 #, no-c-format
 msgid "Short"
 msgstr "Krótki"
 
 #: src/Menu/ExpandMacros.cpp:308
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:75
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:76
 #, no-c-format
 msgid "Full"
 msgstr "Pełny"
@@ -852,10 +852,10 @@ msgstr "Pełny"
 #: src/Dialogs/Settings/Panels/LoggerConfigPanel.cpp:45
 #: src/Dialogs/Settings/Panels/RouteConfigPanel.cpp:111
 #: src/Dialogs/Settings/Panels/RouteConfigPanel.cpp:141
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:65
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:72
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:115
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:122
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:66
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:73
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:116
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:123
 #: src/Dialogs/Settings/Panels/TerrainDisplayConfigPanel.cpp:217
 #: src/Dialogs/Settings/Panels/TerrainDisplayConfigPanel.cpp:247
 #: src/Dialogs/Device/Vega/HardwareParameters.hpp:11
@@ -871,7 +871,7 @@ msgstr "Nie"
 #: src/Dialogs/Settings/Panels/InterfaceConfigPanel.cpp:173
 #: src/Dialogs/Settings/Panels/LayoutConfigPanel.cpp:144
 #: src/Dialogs/Settings/Panels/LoggerConfigPanel.cpp:43
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:66
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:67
 #: src/Dialogs/Settings/Panels/TerrainDisplayConfigPanel.cpp:248
 #: src/Dialogs/Device/Vega/HardwareParameters.hpp:12
 #, no-c-format
@@ -1062,7 +1062,7 @@ msgstr "Brak trasy"
 #: src/Dialogs/Traffic/FlarmTrafficDetails.cpp:116
 #: src/Dialogs/StatusPanels/FlightStatusPanel.cpp:71
 #: src/Dialogs/Waypoint/dlgWaypointEdit.cpp:82
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:96
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:97
 #: src/Dialogs/Settings/Panels/UnitsConfigPanel.cpp:166
 #, no-c-format
 msgid "Altitude"
@@ -2849,12 +2849,12 @@ msgid "Should XCSoar accept wind estimates from other instruments?"
 msgstr "Czy XCSoar ma przyjmować kalkulacje wiatru z innych przyrządów?"
 
 #: src/Dialogs/Settings/WindSettingsPanel.cpp:53
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:150
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:156
 msgid "Trail drift"
 msgstr "Dryf śladu"
 
 #: src/Dialogs/Settings/WindSettingsPanel.cpp:54
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:151
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:157
 msgid ""
 "Determines whether the snail trail is drifted with the wind when displayed "
 "in circling mode. Switched Off, the snail trail stays uncompensated for wind "
@@ -3557,8 +3557,8 @@ msgstr "Plik"
 
 #: src/Dialogs/ReplayDialog.cpp:50
 msgid ""
-"Name of file to replay. May be an IGC file (.igc) or a raw NMEA log file "
-"(.nmea). Leave blank to run the demo."
+"Name of file to replay. May be an IGC file (.igc) or a raw NMEA log file (."
+"nmea). Leave blank to run the demo."
 msgstr ""
 "Nazwa pliku do odtworzenia. Może to być plik w formacie IGC(.igc), dane "
 "NMEA(.nmea), a jeśli pozostawisz puste, zostanie uruchomiony tryb demo."
@@ -5736,7 +5736,7 @@ msgstr ""
 "Minimalna wysokość nad terenem jaką szybowiec musi utrzymać podczas dolotu."
 
 #: src/Dialogs/Settings/Panels/SafetyFactorsConfigPanel.cpp:60
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:101
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:102
 #, no-c-format
 msgid "Simple"
 msgstr "Prosty"
@@ -5848,8 +5848,8 @@ msgid ""
 "Primary waypoints files.  Supported file types are Cambridge/WinPilot files "
 "(.dat), Zander files (.wpz) or SeeYou files (.cup)."
 msgstr ""
-"Główny plik punktów tras. Wspierane typy plików to: Cambridge/WinPilot "
-"(.dat), pliki Zander(.wpz) lub SeeYou(.cup)"
+"Główny plik punktów tras. Wspierane typy plików to: Cambridge/WinPilot (."
+"dat), pliki Zander(.wpz) lub SeeYou(.cup)"
 
 #: src/Dialogs/Settings/Panels/SiteConfigPanel.cpp:60
 msgid "Watched waypoints"
@@ -5864,8 +5864,8 @@ msgid ""
 msgstr ""
 "Plik punktów tras zawierający specjalne punkty dla których zawsze mają "
 "miejsce dodatkowe obliczenia takie jak  wysokość przybycia na wyświetlaczu "
-"mapy. Użyteczne dla punktów trasy takich jak znane pewne źródła termiki "
-"(np.elektrownie) lub przełęcze górskie."
+"mapy. Użyteczne dla punktów trasy takich jak znane pewne źródła termiki (np."
+"elektrownie) lub przełęcze górskie."
 
 #: src/Dialogs/Settings/Panels/SiteConfigPanel.cpp:71
 #, fuzzy
@@ -5888,8 +5888,8 @@ msgstr "Wybierz Strefę"
 #: src/Dialogs/Settings/Panels/SiteConfigPanel.cpp:80
 msgid ""
 "List of active airspace files. Use the Add and Remove buttons to activate or "
-"deactivate airspace files respectively. Supported file types are: Openair "
-"(.txt /.air), and Tim Newport-Pearce (.sua)."
+"deactivate airspace files respectively. Supported file types are: Openair (."
+"txt /.air), and Tim Newport-Pearce (.sua)."
 msgstr ""
 
 #: src/Dialogs/Settings/Panels/SiteConfigPanel.cpp:87
@@ -5901,17 +5901,17 @@ msgid ""
 "The name of the file containing information about registered FLARM devices."
 msgstr "Nazwa pliku zawierającego cyfrowe dane o elewacji terenu."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:65
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:66
 #, no-c-format
 msgid "Disable display of ground track line."
 msgstr "Wyłącz pokazywanie drogi lotu."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:66
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:67
 #, no-c-format
 msgid "Always display ground track line."
 msgstr "Zawsze ukryj linię drogi lotu."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:67
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:68
 #, no-c-format
 msgid ""
 "Display ground track line if there is a significant difference to plane "
@@ -5920,12 +5920,12 @@ msgstr ""
 "Wyświetla rzeczywistą linię drogi, jeżeli różni się ona w istotny sposób od "
 "kursu szybowca."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:80
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:81
 #, no-c-format
 msgid "Vario #1"
 msgstr "Wario - grubość linii"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:80
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:81
 #, no-c-format
 msgid ""
 "Within lift areas lines get displayed green and thicker, while sinking lines "
@@ -5934,25 +5934,25 @@ msgstr ""
 "W noszeniu linia zielona, grubsza, a w duszeniu brązowa i cienka. Zerowe "
 "noszenie w kolorze szarym."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:83
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:84
 #, no-c-format
 msgid "Vario #1 (with dots)"
 msgstr "Wario - grubość linii z kropkami"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:83
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:88
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:84
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:89
 #, no-c-format
 msgid ""
 "The same colour scheme as the previous, but with dotted lines while sinking."
 msgstr ""
 "Taki sam schemat kolorów jak wyżej, lecz w duszeniu linia punktowa (kropki)."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:85
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:86
 #, no-c-format
 msgid "Vario #2"
 msgstr "Wario - kolory linii"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:85
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:86
 #, no-c-format
 msgid ""
 "The climb colour for this scheme is orange to red, sinking is displayed as "
@@ -5961,17 +5961,17 @@ msgstr ""
 "W noszeniu linia pomarańczowa do czerwonej, a w duszeniu jasnoniebieska do "
 "ciemnoniebieskiej. Zerowe noszenie w kolorze żółtym."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:88
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:89
 #, no-c-format
 msgid "Vario #2 (with dots)"
 msgstr "Wario - kolory linii z kropkami"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:91
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:92
 #, no-c-format
 msgid "Vario-scaled dots and lines"
 msgstr "Kropki i linie skalowane wariometrem"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:92
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:93
 #, no-c-format
 msgid ""
 "Vario-scaled dots with lines. Orange to red = climb. Light blue to dark blue "
@@ -5981,175 +5981,185 @@ msgstr ""
 "wznoszenie.  Kolory od jasno- do ciemno-niebieskiego = duszenie. Żółta linia "
 "= zerowe noszenie."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:95
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:96
 #, no-c-format
 msgid "Vario E-ink"
 msgstr "Wyciszanie Wario"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:95
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:96
 #, no-c-format
 msgid ""
 "E-ink friendly color scheme, lighter and thicker dots means lift while "
 "darker and thinner means sink."
 msgstr ""
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:96
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:97
 #, no-c-format
 msgid "The colour scheme corresponds to the height."
 msgstr "Schemat kolorów odpowiada wysokości lotu."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:102
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:103
 #, no-c-format
 msgid "Simplified line graphics, black with white contours."
 msgstr "Uproszczona linie grafiki, czarne z białym konturem."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:103
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:104
 #, no-c-format
 msgid "Simple (large)"
 msgstr "Prosty (duży)"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:104
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:105
 #, no-c-format
 msgid "Enlarged simple graphics."
 msgstr "Powiększony, prosty symbol szybowca."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:105
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:106
 #, no-c-format
 msgid "Detailed"
 msgstr "Szczegółowy"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:106
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:107
 #, no-c-format
 msgid "Detailed rendered aircraft graphics."
 msgstr "Szczegółowy symbol szybowca."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:107
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:108
 #, no-c-format
 msgid "HangGlider"
 msgstr "Lotnia"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:108
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:109
 #, no-c-format
 msgid "Simplified hang glider as line graphics, white with black contours."
 msgstr "Szkic lotni, biały z czarnym konturem."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:109
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:110
 #, no-c-format
 msgid "ParaGlider"
 msgstr "Paralotnia"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:110
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:111
 #, no-c-format
 msgid "Simplified para glider as line graphics, white with black contours."
 msgstr "Szkic paraglide'a, biały z czarnym konturem."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:115
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:116
 #, no-c-format
 msgid "No wind arrow is drawn."
 msgstr "Strzałka wiatru jest ukryta."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:116
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:117
 #, no-c-format
 msgid "Arrow head"
 msgstr "Grot strzałki"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:116
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:117
 #, no-c-format
 msgid "Draws an arrow head only."
 msgstr "Rysuje tylko główkę strzałki."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:117
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:118
 #, no-c-format
 msgid "Full arrow"
 msgstr "Strzałka"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:117
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:118
 #, no-c-format
 msgid "Draws an arrow head with a dashed arrow line."
 msgstr "Rysuje główkę strzałki z przerywaną linią strzałki."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:122
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:123
 #, no-c-format
 msgid "No SkyLines traffic is drawn."
 msgstr "Strzałka wiatru jest ukryta."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:123
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:124
 #, no-c-format
 msgid "Symbol"
 msgstr ""
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:123
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:124
 #, no-c-format
 msgid "Draws the SkyLines symbol only."
 msgstr ""
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:124
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:125
 #, no-c-format
 msgid "Symbol and Name"
 msgstr ""
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:124
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:125
 #, no-c-format
 msgid "Draws the SkyLines symbol with name."
 msgstr ""
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:134
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:135
 msgid "Ground track"
 msgstr "Linia drogi"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:135
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:136
 msgid "Display the ground track as a grey line on the map."
 msgstr "Rysuj drogę lotu na mapie szarą linią."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:138
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:139
 msgid "FLARM traffic"
 msgstr "FLARM traffic"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:138
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:139
 msgid "This enables the display of FLARM traffic on the map window."
 msgstr "To włącza wyświetlanie ruchu FLARM w oknie mapy."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:141
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:142
 msgid "Fade traffic"
 msgstr "FLARM traffic"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:141
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:142
 msgid "Keep showing traffic for a while after it has disappeared."
 msgstr ""
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:144
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:145
+#, fuzzy
+msgid "Distance rings"
+msgstr "Odległość"
+
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:145
+#, fuzzy
+msgid "Show distance rings around the glider on the map."
+msgstr "Pokaż na mapie obszary trójkąta FAI."
+
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:150
 msgid "Trail length"
 msgstr "Długość śladu"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:145
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:151
 msgid ""
 "Determines whether and how long a snail trail is drawn behind the glider."
 msgstr "Określa czy i jak długo ślad jest rysowany za szybowcem."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:157
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:163
 msgid "Trail type"
 msgstr "Typ śladu"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:158
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:164
 msgid "Sets the type of the snail trail display."
 msgstr "Określa rodzaj wyświetlanego śladu."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:161
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:167
 msgid "Trail scaled"
 msgstr "Ślad skalowany"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:162
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:168
 msgid ""
 "If set to ON the snail trail width is scaled according to the vario signal."
 msgstr ""
 "Jeżeli ustawisz na włącz to szerokość śladu będzie skalowana do wartości "
 "vario."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:166
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:172
 msgid "Detour cost markers"
 msgstr "Markery dod. odległości"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:167
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:173
 msgid ""
 "If the aircraft heading deviates from the current waypoint, markers are "
 "displayed at points ahead of the aircraft. The value of each marker is the "
@@ -6161,25 +6171,25 @@ msgstr ""
 "do przelecenia, wymagana do osiągnięcia Punktu Trasy, jako %procent "
 "odległości po prostej do aktualnego docelowego Puntu Trasy."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:173
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:179
 msgid "Aircraft symbol"
 msgstr "Symbol szybowca"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:177
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:183
 #: src/InfoBoxes/Content/Factory.cpp:919
 #, no-c-format
 msgid "Wind arrow"
 msgstr "Wskaźnik WIATRU"
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:177
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:183
 msgid "Determines the way the wind arrow is drawn on the map."
 msgstr "Określa sposób w jaki strzałka wiatru jest rysowana na mapie."
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:181
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:187
 msgid "SkyLines traffic mode"
 msgstr ""
 
-#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:182
+#: src/Dialogs/Settings/Panels/SymbolsConfigPanel.cpp:188
 msgid ""
 "Show the SkyLines traffic symbols/names on the map, downloaded from the "
 "SkyLines server."
@@ -7162,8 +7172,8 @@ msgstr "Pobierz i wyświetlaj pozycje kominów zarejestrowanych przez innych."
 
 #: src/Dialogs/Settings/Panels/WeatherConfigPanel.cpp:67
 msgid ""
-"Show thermal locations downloaded from Thermal Information Map "
-"(thermalmap.info)."
+"Show thermal locations downloaded from Thermal Information Map (thermalmap."
+"info)."
 msgstr ""
 
 #: src/Dialogs/Settings/Panels/WeGlideConfigPanel.cpp:70
@@ -7586,8 +7596,8 @@ msgid ""
 "values rotate the range line counterclockwise."
 msgstr ""
 "W zadaniu AAT tę wartość można użyć do wskazania puntów docelowych w "
-"sektorze AAT. Wartości dodatnie obracają linię zasięgu w kierunku "
-"wsk.zegara, ujemne w kierunku przeciwnym do kierunku ruchu wskazówek zegara."
+"sektorze AAT. Wartości dodatnie obracają linię zasięgu w kierunku wsk."
+"zegara, ujemne w kierunku przeciwnym do kierunku ruchu wskazówek zegara."
 
 #: src/Dialogs/Task/TargetDialog.cpp:372
 msgid "ETE"
@@ -10156,7 +10166,7 @@ msgstr ""
 "uwzgl. zapasu bezpieczeństwa dHbezp przy nastawie MacCready'ego MC Ustaw."
 
 #: src/InfoBoxes/Content/Alternate.cpp:58
-#, fuzzy, c++-format
+#, fuzzy
 msgid "Altn {}"
 msgstr "Lądow.1"
 
@@ -11510,8 +11520,8 @@ msgstr "XCSoar"
 #~ "Select your PNA model to make full use of its hardware capabilities. If "
 #~ "it is not included, use Generic type."
 #~ msgstr ""
-#~ "Określ model swojego PNA aby w pełni wykorzystać możliwości "
-#~ "hardware.Jeśli nie jest wymieniony użyj GENERIC TYPE."
+#~ "Określ model swojego PNA aby w pełni wykorzystać możliwości hardware."
+#~ "Jeśli nie jest wymieniony użyj GENERIC TYPE."
 
 #~ msgid "Auto. blank"
 #~ msgstr "Wymazanie automatyczne"
