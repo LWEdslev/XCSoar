@@ -190,7 +190,10 @@ struct MapSettings {
 
   /** Show 95% distance rule helpers on map and infoboxes */
   bool show_95_percent_rule_helpers;
-
+  
+  /** Show distance rings */
+  bool distance_rings_enabled;
+  
   void SetDefaults() noexcept;
 };
 

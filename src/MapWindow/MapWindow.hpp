@@ -297,7 +297,7 @@ protected:
   void DrawTerrainAbove(Canvas &canvas) noexcept;
   void DrawFLARMTraffic(Canvas &canvas, PixelPoint aircraft_pos) const noexcept;
   void DrawGLinkTraffic(Canvas &canvas) const noexcept;
-
+  void DrawDistanceRings(Canvas &canvas, PixelPoint aircraft_pos) noexcept;
   // thread, main functions
   /**
    * Renders all the components of the moving map

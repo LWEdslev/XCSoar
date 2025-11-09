@@ -15,6 +15,7 @@ enum ControlIndex {
   DISPLAY_TRACK_BEARING,
   ENABLE_FLARM_MAP,
   FADE_TRAFFIC,
+  DISTANCE_RINGS,
   TRAIL_LENGTH,
   TRAIL_DRIFT,
   TRAIL_TYPE,
@@ -141,6 +142,11 @@ SymbolsConfigPanel::Prepare([[maybe_unused]] ContainerWindow &parent,
   AddBoolean(_("Fade traffic"), _("Keep showing traffic for a while after it has disappeared."),
              settings_map.fade_traffic);
 
+ AddBoolean(_("Distance rings"), _("Show distance rings around the glider on the map."),
+              settings_map.distance_rings_enabled);
+
+
+
   AddEnum(_("Trail length"),
           _("Determines whether and how long a snail trail is drawn behind the glider."),
           trail_length_list,
@@ -200,6 +206,8 @@ SymbolsConfigPanel::Save(bool &_changed) noexcept
 
   changed |= SaveValue(FADE_TRAFFIC, ProfileKeys::FadeTraffic,
                        settings_map.fade_traffic);
+
+  changed |= SaveValue(DISTANCE_RINGS, ProfileKeys::DistanceRings, settings_map.distance_rings_enabled);
 
   changed |= SaveValueEnum(TRAIL_LENGTH, ProfileKeys::SnailTrail, settings_map.trail.length);
 
