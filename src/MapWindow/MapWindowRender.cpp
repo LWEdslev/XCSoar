@@ -197,13 +197,12 @@ MapWindow::DrawDistanceRings(Canvas &canvas, PixelPoint aircraft_pos) noexcept
     int radius_pixels = (int)(radius / meters_per_pixel);
 
     double value = radius / 1000;
-    char buffer[32];
+    TCHAR label[32];
     if (value == std::floor(value)) {
-      StringFormat(buffer, sizeof(buffer), "%dkm", (int)value);
+      StringFormat(label, sizeof(label), _T("%dkm"), (int)value);
     } else {
-      StringFormat(buffer, sizeof(buffer), "%.1fkm", value);
+      StringFormat(label, sizeof(label), _T("%.1fkm"), value);
     }
-    std::string label(buffer);
 
     PixelSize padding = canvas.CalcTextSize(label);
     label_pos.x = aircraft_pos.x + (radius_pixels * cos_45_degrees);
