@@ -55,12 +55,16 @@ jobs:
       - name: Parse changelog
         if: startsWith(github.ref, 'refs/tags/v')
         run: |
-          TAG=$(echo "${{ github.ref }}" | cut -f3 -d '/')
+          TAG="${GITHUB_REF##*/}"
           echo "TAG=$TAG" >> $GITHUB_ENV
-          echo "::set-output name=TAG::$TAG"
-          echo 'CHANGELOGENTRY<<EOF' >> $GITHUB_ENV
-          ./tools/changelog.sh "$TAG" >> $GITHUB_ENV
-          echo 'EOF' >> $GITHUB_ENV
+          echo "TAG=$TAG" >> $GITHUB_OUTPUT
+
+          {
+            echo "CHANGELOGENTRY<<EOF"
+            ./tools/changelog.sh "$TAG"
+            echo "EOF"
+          } >> $GITHUB_ENV
+
           case "$TAG" in
             *-rc*)
               echo "PRERELEASE=true" >> $GITHUB_ENV
